@@ -1,0 +1,10 @@
+.navbar-brand{
+    @keyframes rotate_animation {
+    to { transform: rotate(360deg); }
+    }
+    #simple1nobackGear {
+        animation: rotate_animation 1s linear infinite;
+        animation-play-state: paused;
+        animation-delay: calc(var(--scroll) * -1s);
+    }
+}

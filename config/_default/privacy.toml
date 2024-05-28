@@ -1,0 +1,15 @@
+[privacy]
+# Disable trackers for embedded content using these shortcodes.
+# Does not affect content delivery afaik.
+[privacy.disqus]
+    disable = true
+[privacy.googleAnalytics]
+    disable = true
+[privacy.instagram]
+    disable = true
+[privacy.twitter]
+    disable = true
+[privacy.vimeo]
+    disable = true
+[privacy.youtube]
+    disable = true

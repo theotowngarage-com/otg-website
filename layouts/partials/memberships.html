@@ -1,0 +1,53 @@
+<section class="site-memberships" id="memberships">
+    <div class="container">
+        <div class="row" style="display: flex; width: 100%">
+            <div class="col-12">
+                <div class="section-title">
+                    <h2 class="text-dark">{{ .Title }}</h2>
+                </div>
+                <div class="site-project-single-description">
+                    {{ .Content }}
+                </div>
+            </div>
+        {{ with .Site.Data.memberships }}
+            {{ range .membership_items }}
+            <div class="site-memberships-item col-lg-3 col-md-4 mx-auto">
+                <div class="price-table">
+                    <div class="price-table-header">
+                        <h3 class="price-table-heading">{{ .title }}</h3>
+                    </div>
+                    <div class="price-table-price">
+                        <span class="price-table-currency"> {{ .currency }} </span>
+                        <span class="price-table-integer-part"> {{ .price }} </span>
+                        <span class="price-table-period typo-excluded"> {{ .occurence }} </span>
+                    </div>
+                    <ul class="price-table-features-list">
+                        {{ range .features }}
+                        <li>
+                            <div class="price-table-feature-inner">
+                                {{ with .icon }}
+                                <i aria-hidden="true" class="fas {{ . }}"></i>
+                                {{ end }}
+                                <span>{{ .txt }}</span>
+                            </div>
+                        </li>
+                        {{ end }}
+                    </ul>
+
+                    <div class="price-table-footer">
+                        <a class="btn btn-sm btn-primary btn-sm-rounded" href="{{ .subscribe_link}}" target="_blank"
+                            rel="nofollow">
+                            {{ if isset . "button_txt" }}
+                            {{ .button_txt }}
+                            {{ else }}
+                            Subscribe
+                            {{ end }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {{ end}}
+        {{ end}}
+        </div>
+    </div>
+</section>

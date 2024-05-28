@@ -1,0 +1,47 @@
+<head>
+  <meta charset="utf-8" />
+  <title>{{ .Title }}</title>
+  {{/*  TODO : description  */}}
+  {{ with .Description }}
+  <meta name="description" content="{{ . }}" />
+  {{ end }}
+  {{ "<!-- mobile responsive meta -->" | safeHTML }}
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  {{ with .Site.Params.author }}
+  <meta name="author" content="{{ . }}">
+  {{ end }}
+  {{ hugo.Generator }}
+  
+  {{/*  (resources.Get "css/bootstrap.css")  */}}
+  {{- $css := slice 
+    (resources.Get "css/font-awesome.css")
+    (resources.Get "scss/style.scss" | resources.ToCSS | resources.ExecuteAsTemplate "_style.css" . )
+  }}
+  {{ if hugo.IsProduction }} 
+    {{/* 
+      I cannot really explain this but... by concatenating all the css before minify and postprocess,
+      we reduce the css size from 200 KB to 34 KB (at time of writing)
+    */}}
+    {{ $css = $css | resources.Concat "_main.css" | resources.PostCSS | minify | fingerprint | resources.PostProcess }}
+    <link
+      rel="stylesheet"
+      href="{{ $css.RelPermalink }}"
+      integrity="{{ $css.Data.Integrity }}"
+    />
+  {{ else }}
+    {{ range $css }}
+      {{/*  Uncomment the `with` statement for 1:1 benchmark of concatenating the css files */}}
+      {{/*  {{ with . | resources.PostCSS | minify | fingerprint | resources.PostProcess }}  */}}
+        <link
+          rel="stylesheet"
+          href="{{ .RelPermalink }}"
+          integrity="{{ .Data.Integrity }}"
+        />
+      {{/*  {{ end }}  */}}
+    {{ end }}
+  {{ end }}
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="{{ "images/favicon.png" | absURL }}" type="image/x-icon" />
+  <link rel="icon" href="{{ "images/favicon.png" | absURL }}" type="image/x-icon" />
+</head>

@@ -1,0 +1,20 @@
+html{
+  scroll-behavior: smooth;
+}
+
+body {
+  background: $body-color;
+}
+
+.nav-anchor {
+  // Needs to be placed inside an element with { position: relative; }
+  position: absolute;
+  left: 0px;
+  top: -$navbar-padding; /* given the fixed header is 50px tall, and you want 15px padding */
+  @include desktop{
+    top: calc(-$navbar-padding - 22px);
+  }
+  @include tablet{
+    top: -$navbar-padding;
+  }
+}

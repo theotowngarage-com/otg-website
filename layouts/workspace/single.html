@@ -1,0 +1,51 @@
+{{ define "main" }}
+
+<section class="site-project-single-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <div class="site-project-single">
+          <h1>
+            {{ .Title }}
+          </h1>
+          <div class="site-project-single-description">
+            {{ .Content }}
+          </div>
+          <div class="site-project-single-image">
+            {{ range .Resources.Match "images/*" }}
+            <img src="{{ .Permalink }}" alt="project image">
+            {{ end }}
+          </div>
+
+          {{/* partial "gallery.html" .Resources */}}
+          <div class="site-project-single-action">
+          {{ with .PrevInSection }}
+            <a href="{{.Permalink}}" class="previous">
+              <img src="{{ "images/to-top.svg" | absURL }}" alt="previous project">
+              <span class="link-area">
+                <span data-text="Previous">
+                  {{.Title}}
+                </span>
+              </span>
+            </a>
+          {{ end }}
+          {{ with .NextInSection }}
+            <a href="{{.Permalink}}" class="next">
+              <span class="link-area">
+                <span data-text="Next">
+                  {{.Title}}
+                </span>
+              </span>
+              <img src="{{ "images/to-top.svg" | absURL }}" alt="next project">
+            </a>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{/* partial "call-to-action.html" . */}}
+
+{{ end }}

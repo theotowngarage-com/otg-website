@@ -1,0 +1,26 @@
+
+# All available Hugo versions are listed here: https://gitlab.com/pages/hugo/container_registry
+# image: registry.gitlab.com/pages/hugo/hugo_extended:latest
+image: registry.gitlab.com/alexloss/hugo/hugo_npm_extended
+#image: klakegg/hugo:0.107.0
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+
+test:
+  script:
+  - npm ci
+  - hugo
+  except:
+  - master
+
+pages:
+  script:
+  - npm ci
+  - hugo --environment production
+  - find public -type f -regex '.*\.\(htm\|html\|txt\|text\|js\|css\|svg\)$' -exec brotli -f -k {} \;
+  artifacts:
+    paths:
+    - public
+  only:
+  - master

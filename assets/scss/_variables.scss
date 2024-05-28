@@ -1,0 +1,31 @@
+//site color variables
+$body-color: #fff;
+$primary-color: #49C1BD;
+$secondary-color: #435352;
+$text-color: #9D9EA5;
+$text-color-dark: #00113E;
+$text-color-light: #e4e4e7;
+$site-ease: cubic-bezier(0.36, 0.03, 0, 0.91);
+$gray: #F7F9FF;
+$dark-gray: #646569;
+
+// solid colors
+$white: #fff;
+$black: #000;
+
+// Font Variables
+$primary-font: 'Josefin Sans', sans-serif;
+$secondary-font: 'Montserrat', sans-serif;
+
+$navbar-padding: 80px;
+$section-padding: 60px;
+$section-padding-mobile: 45px;
+
+$link-decoration: white 1px solid underline;
+
+// overrule bootstrap
+// creates issues in calendar
+:root {
+    --bs-link-color-rgb: $text-color-dark;
+    --bs-link-hover-color-rgb: $black;
+}

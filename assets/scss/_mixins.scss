@@ -1,0 +1,73 @@
+@mixin mobile-xs{
+  @media(max-width:400px){
+    @content;
+  }
+}
+@mixin mobile{
+  @media(max-width:575px){
+    @content;
+  }
+}
+@mixin tablet{
+  @media(max-width:767px){
+    @content;
+  }
+}
+@mixin desktop{
+  @media(max-width:991px){
+    @content;
+  }
+}
+@mixin desktop-lg{
+  @media(max-width:1200px){
+    @content;
+  }
+}
+
+@mixin desktop-xl{
+  @media(max-width:1400px){
+    @content;
+  }
+}
+
+@mixin desktop-4k{
+  @media(min-width:2000px){
+    @content;
+  }
+}
+
+
+@mixin size($size){
+  width: $size; height: $size;
+}
+
+// creates a transition between 2 pictures when you hover over an element
+@mixin bkg-img-transition( $bkg1, $bkg2, $transTime:1s ){
+  position: relative;
+  z-index: 100; 
+  &:before, &:after {
+    background-position: center center;
+    background-size: cover;  
+    content: '';    
+    display: block;
+    height: 100%;
+    position: absolute;
+    top: 0; left: 0;    
+    width: 100%;    
+    transition: opacity $transTime;
+  }
+  &:before {    
+    z-index: -101;
+    background-image: url("#{$bkg1}");    
+  }
+  &:after {    
+    z-index: -100;
+    opacity: 0;
+    background-image: url("#{$bkg2}");    
+  }
+  &:hover {
+     &:after{
+       opacity: 1; 
+     }
+  }  
+}

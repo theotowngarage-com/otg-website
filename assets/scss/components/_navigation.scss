@@ -1,0 +1,68 @@
+.site-navigation {
+  .navbar-brand {
+    padding: 0;
+    margin: auto 0;
+    height: 3.5rem;
+  }
+  padding: 15px;
+  background: $white;
+  // Uncomment to make the navbar sticky
+  // position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: all 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  @include desktop{
+    background: $white;
+    margin: 10px;
+    border-radius: 5px;
+    top: 0;
+    width: calc(100% - 20px);
+    box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.09);
+  }
+  @include mobile{
+    padding: 15px;
+  }
+  .navbar-brand{
+    padding: 0;
+    margin: auto 0;
+    height: 3.5rem;
+    img{
+      max-width: 78px;
+    }
+    svg{
+      max-height: 3.5rem;;
+      max-width: 8rem;
+      margin: auto;
+    }
+  }
+  // .navbar-collapse {
+  //   flex-direction: row-reverse;
+  // }
+  .nav-item{
+    @include desktop{
+      text-align: center;
+    }
+    .nav-link{
+      font-family: $secondary-font;
+      color: $black;
+      transition: all .3s ease;
+      padding: 15px 18px;
+      position: relative;
+    }
+    .nav-link.btn:hover {
+      // small hack to keep the coloring of the primary button
+      color: $text-color-light
+    }
+    &:last-child{
+      margin-left: 15px;
+    }
+  }
+  &.nav-bg{
+    padding: 12px 0;
+    box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.09);
+    @include mobile{
+      padding: 15px;
+    }
+  }
+}

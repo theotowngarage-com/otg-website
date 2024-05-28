@@ -1,0 +1,34 @@
+[params]
+    languageIcon  = ":uk:"
+
+
+    [params.events]
+        datefmt   = "Mon Jan 2. 15:04"#":date_short"
+        title     = "Upcoming events"
+        subtitle  = "Crafting experiences and character."
+
+    # Banner Section
+    [params.banner]
+        enable                = true
+        background_image      = "images/backgrounds/angle_grinder_progressive.avif"
+        background_image_2    = "images/backgrounds/lio.webp"
+        logo                  = "images/logo.svg"
+        down_arrow            = "images/arrow-down.svg"
+    [params.banner_txt]
+        heading               = "Your very own makerspace"
+        # tagline               = "we have the tools, the space, the greatest community!"
+        primary_button        = "JOIN US"
+        primary_button_url    = "memberships"
+        # secondary_button      = "JOIN US"
+        # secondary_button_url  = "contact"
+  [params.call_to_action]
+    background_image    = "images/backgrounds/cta-background.jpg"
+    title               = "JOIN US!"
+    primary_button      = "Memberships"
+    primary_button_url  = "memberships"
+    #secondary_button    = "Not Convinced"
+    #secondary_button_url = "portfolio"
+  [params.gallery]
+    enable = true
+    title = "WHAT WE DO HERE"
+    path_match = "images/gallery/*"

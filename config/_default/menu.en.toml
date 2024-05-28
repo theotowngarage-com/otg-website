@@ -1,0 +1,11 @@
+# Navbar Menus
+
+[[nav]]
+    name    = "About Us"
+    url     = "about"
+    weight  = 3
+# The last item is highlighted
+[[nav]]
+    name    = "Memberships"
+    url     = "memberships"
+    weight  = 5

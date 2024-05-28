@@ -1,0 +1,123 @@
+baseURL       = "https://theotowngarage.com/"
+title         = "The O'Town Garage"
+defaultContentLanguage = 'en'
+summarylength = 25
+enableEmoji   = true
+# Merge sub configs
+_merge = "deep"
+enableRobotsTXT = "true"
+
+# Site Params
+#   Notes: it seems that, if you need to change 1 value in the params for a language,
+#          then you have to define all the values in the [params.X], including 
+#          sub trees like [params.X.Y] - As well as the other way around. If 
+#          modifying [params.X.Y], then you have to copy all of [params.X]
+[params]
+  logo = "/images/logo.svg"
+  dateFormat = "26 FEB 1994"
+  # Meta data
+  description = ""
+  author = "Axel Soll"
+  # Google Analitycs
+  googleAnalitycsID = "Your ID"
+  # We're using formspree.io for form handling, paste your formspree url below
+  formspreeFormUrl  = "https://formspree.io/abcdefgh"
+
+  # Contact Form
+  [params.contactForm]
+    placeholder_first_name        = "First Name"
+    placeholder_last_name         = "Last Name"
+    placeholder_email             = "Email"
+    placeholder_project_type      = "Subject"
+    placeholder_about_the_project = "What event do you want to create?"
+    send_message                  = "Send Message"
+
+    [[params.contactForm.projectType]]
+      value = "membership"
+      title  = "Membership"
+    [[params.contactForm.projectType]]
+      value = "project"
+      title  = "Project ideas"
+    [[params.contactForm.projectType]]
+      value = "other"
+      title  = "Other"
+
+  # Banner Section
+  [params.banner]
+    enable                = true
+    background_image      = "images/backgrounds/angle_grinder_progressive.avif"
+    logo                  = "images/logo.svg"
+    down_arrow            = "images/arrow-down.svg"
+  [params.banner_txt]
+    heading               = "For creatives who want to make their ideas reality"
+    # tagline               = "we have the tools, the space, the greatest community!"
+    primary_button        = "JOIN US"
+    primary_button_url    = "memberships"
+    # secondary_button      = "JOIN US"
+    # secondary_button_url  = "contact"
+
+  [params.events]
+    datefmt   = "Monday, Dec 3"
+    title     = "Events"
+    subtitle  = "Crafting experiences and character."
+
+  [params.calendar]
+    enable              = true
+    title               = "Calendar"
+    subtitle            = "Come see what we do"
+    ics                 = "https://calendar.google.com/calendar/ical/info%40theotowngarage.com/public/basic.ics"
+    # ics                 = "http://theotowngarage.com/?plugin=all-in-one-event-calendar&controller=ai1ec_exporter_controller&action=export_events&no_html=true"
+  [params.call_to_action]
+    background_image    = "images/backgrounds/cta-background.jpg"
+    title               = "JOIN US!"
+    primary_button      = "Submit Query"
+    primary_button_url  = "contact"
+    secondary_button    = "Not Convinced"
+    secondary_button_url = "portfolio"
+  [params.footer]
+    # Footer Contact Info
+    [params.footer.contactInfo]
+      title   = "Contact Info"
+      address = "Havnegade 57,<br>5000 Odense"
+      phone   = "+45 42 76 93 98"
+      email   = "info@theotowngarage.com"
+      # Footer Sitemap
+      [params.footer.sitemap]
+        title   = "Sitemap"
+        [[params.footer.sitemap.link]]
+          name = "About Us"
+          url  = "about"
+        [[params.footer.sitemap.link]]
+          name = "Memberships"
+          url  = "memberships"
+        [[params.footer.sitemap.link]]
+          name = "Website Gitlab repo"
+          url  = "https://gitlab.com/alexloss/otg-website/"
+      # Footer Social Media
+      [params.footer.social]
+        title   = "Social Media"
+        [[params.footer.social.link]]
+          name = "Facebook"
+          url  = "https://www.facebook.com/theotowngarage/"
+        [[params.footer.social.link]]
+          name = "Instagram"
+          url  = "https://www.instagram.com/theotowngarage/?hl=da"
+        [[params.footer.social.link]]
+          name = "LinkedIn"
+          url  = "https://www.linkedin.com/company/the-o-town-garage/"
+      # Footer Service
+      [params.footer.service]
+        title       = "We do stuff:"
+        description = "teach and learn<br>valuable cultural content<br>innovative prototypes"
+
+[build]
+  # writestats tells Hugo to write a hugo_stats.json file to the project root as part of the build.
+  # It includes all tags, classes, and ids from your *.html templates.
+  # See https://purgecss.com/guides/hugo.html
+  writeStats = true
+
+[sitemap]
+  # SEO feature to tell the search engines the layout of the site
+  changefreq = "monthly"
+  filename = "sitemap.xml"
+  priority = 0.8

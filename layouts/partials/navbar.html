@@ -1,0 +1,53 @@
+<nav class="navbar navbar-expand-md site-navigation">
+  <div class="container container-fluid">
+    <a class="navbar-brand" href="{{ .Site.BaseURL }}">
+      {{ if strings.HasSuffix .Site.Params.logo "svg" }}
+        <!-- Inject the SVG element -->
+        {{ readFile "static/images/logo.svg" | safeHTML }}
+      {{ else }}
+        <img class="avatar-img" src="{{ .Site.Params.logo | absURL }}" alt="{{ .Site.Title }}" />
+      {{ end }}
+    </a>
+    <!-- burger menu -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <ul class="navbar-nav">
+        {{$menu := (.Site.Menus.nav)}} 
+        {{$len := (len $menu)}} 
+        {{ range $index, $element := $menu }} 
+          {{ if eq (add $index 1) $len }}
+          <li class="nav-item">
+            <a
+              class="nav-link btn btn-sm btn-primary btn-sm-rounded"
+              href="{{ .URL | absURL }}"
+            >
+              <span class="btn-area">
+                <span data-text="{{ .Name }}">
+                  {{ .Name }}
+                </span>
+              </span>
+            </a>
+          </li>
+          {{ else }}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ .URL | absURL }}">{{ .Name }}</a>
+          </li>
+          {{ end }} 
+        {{ end }}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Scrolling will trigger logo animation
+  window.addEventListener('scroll', () => {
+    document.body.style.setProperty('--scroll', window.scrollY / (document.body.offsetHeight - window.innerHeight));
+  }, false);
+</script>
+{{ if not .Params.no_nav_offset }}
+<div class="nav-offset"></div>
+{{ end }}

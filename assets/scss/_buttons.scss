@@ -1,0 +1,19 @@
+.btn{
+  font-family: $secondary-font;
+  border: none;
+  padding: 20px 45px;
+  &:focus{
+    box-shadow: none;
+  }
+  @include desktop{
+    // only applies in desktop window size
+    padding: 17px 40px;
+  }
+  &:hover{
+    // Add style when hovering
+  }
+  &:visited{
+    // Add style for when the link was already visited
+  }
+}
+
