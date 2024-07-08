@@ -1,0 +1,17 @@
+title   : "Our values"
+values :
+  - name  : "Learn"
+    icon: "images/icons/award.svg"
+    description: "Learn how to use tools, from small electronic gadgets, 3d printed accessories to big industrial machinery. We have people with a lot of experience in different fields, and they would gladly share their knowledge."
+
+  - name  : "Make"
+    icon: "images/icons/ruler&pen.svg"
+    description: "No matter if you need a drill, a welder, 3D printer or a sewing machine, our garage is equipt for people who love to build things. We also welcome if you already have an equipment - or an idea for one - to bring into the garage."
+
+  - name  : "Meet"
+    icon: "images/icons/people.svg"
+    description: "No matter what background you have, we want to represent a mixture of different kinds of people in our community. In here you will also meet members that will greet you with open arms and a lot of motivation to learn and share."
+
+  - name  : "Share"
+    icon: "images/icons/calendar.svg"
+    description: "By creating workshops and projects it will be possible for members to both learn something new or host their own workshop or event. We welcome new and creative ideas, so don’t hesitate to reach us, if you have an idea on your mind."
