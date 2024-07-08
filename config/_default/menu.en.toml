@@ -2,10 +2,10 @@
 
 [[nav]]
     name    = "About Us"
-    url     = "about"
+    url     = "/#about"
     weight  = 3
 # The last item is highlighted
 [[nav]]
     name    = "Memberships"
-    url     = "memberships"
+    url     = "/#memberships"
     weight  = 5

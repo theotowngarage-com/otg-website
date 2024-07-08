@@ -1,20 +1,21 @@
+{{ with .Site.Data.memberships }}
 <section class="site-memberships" id="memberships">
     <div class="container">
         <div class="row" style="display: flex; width: 100%">
             <div class="col-12">
                 <div class="section-title">
-                    <h2 class="text-dark">{{ .Title }}</h2>
+                    <h2>{{ .title }}</h2>
+                    <h4>{{ .subtitle }}</h4>
                 </div>
                 <div class="site-project-single-description">
                     {{ .Content }}
                 </div>
             </div>
-        {{ with .Site.Data.memberships }}
             {{ range .membership_items }}
             <div class="site-memberships-item col-lg-3 col-md-4 mx-auto">
                 <div class="price-table">
                     <div class="price-table-header">
-                        <h3 class="price-table-heading">{{ .title }}</h3>
+                        <p class="price-table-heading">{{ .title }}</p>
                     </div>
                     <div class="price-table-price">
                         <span class="price-table-currency"> {{ .currency }} </span>
@@ -47,7 +48,7 @@
                 </div>
             </div>
             {{ end}}
-        {{ end}}
         </div>
     </div>
 </section>
+{{ end}}
