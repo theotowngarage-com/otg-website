@@ -1,0 +1,14 @@
+{{ with .Site.Data.bento_gallery }}
+<section class="site-bento-gallery">
+    <div class="container">
+        <div class="grid">
+            <div class="text1 grid-2-1"><p>{{ .txt1 | safeHTML }}</p></div>
+            <div class="img1 grid-1-2"><img src="{{ .img2 | absURL }}"/></div>
+            <div class="img2 grid-2-1"><img src="{{ .img1 | absURL }}"/></div>
+            <div class="img3 grid-2-1"><img src="{{ .img3 | absURL }}"/></div>
+            <div class="text2 grid-2-1"><p>{{ .txt2 | safeHTML }}</p></div>
+            <div class="img4 grid-1-2"><img src="{{ .img4 | absURL }}"/></div>
+        </div>
+    </div>
+</section>
+{{ end}}
