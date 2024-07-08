@@ -1,0 +1,30 @@
+.site-events{
+    padding: $section-padding 0;
+    details {
+        margin: 32px 0;
+
+        & > summary {
+            display: flex;
+            background: $primary-color;
+            border-radius: $border-radius;
+            height: 70px;
+            list-style-type: none; // hack for an svg icon
+            p,svg {
+                margin: auto 20px;
+            }
+            svg {
+                align-self: flex-end;
+                margin-left: auto;
+            }
+        }
+        & > summary,p {
+            margin: 32px 0;
+        }
+    }
+    details[open] summary svg g{
+        // Only rotates the arrow inside the svg.
+        // Expects only one <g> group in the svg.
+        transform: rotate(-90deg);
+        transform-origin: 50% 50%;
+    }
+}
