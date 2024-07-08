@@ -7,3 +7,9 @@ events:
   - summary: "Make your own packaging workshop"
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eleifend tristique consequat. In diam ante, feugiat aliquam aliquet at, sodales ac ligula."
 
+invitation:
+  title: Would you like to host a workshop with us?
+  description: Write to us about your idea
+  link: mailto:info@theotowngarage.com
+  link_text: info@theotowngarage.com
+  image: images/icons/messages.svg

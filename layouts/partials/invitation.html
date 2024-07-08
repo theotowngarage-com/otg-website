@@ -1,0 +1,16 @@
+{{/*  Include this partial inside a <div class="container"></div>  */}}
+<div class="container invitation">
+    {{ with .context.invitation }}
+    {{/*  This div allows to center the gray square  */}}
+    <div class="iconography col-md-4">
+        <div> 
+            <img src="{{ .image }}"/>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-8">
+        <h3>{{ .title }}</h3>
+        <p>{{ .description }}</p>
+        <a href="{{ .link | absURL }}">{{ .link_text }}</a>
+    </div>
+    {{ end }}
+</div>

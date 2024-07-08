@@ -1,0 +1,19 @@
+.invitation {
+    padding: $section-padding 0;
+    display: flex;
+    .iconography {
+        & > div {
+            width: 216px;
+            height: 216px;
+            background-color: $primary-color;
+            margin: auto;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            img {
+                width: 82px;
+                height: 82px;
+            }
+        }
+    }
+}
