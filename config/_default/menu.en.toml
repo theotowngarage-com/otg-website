@@ -3,7 +3,15 @@
 [[nav]]
     name    = "About Us"
     url     = "/#about"
+    weight  = 2
+[[nav]]
+    name    = "Events"
+    url     = "/#events"
     weight  = 3
+[[nav]]
+    name    = "Code of Conduct"
+    url     = "/#coc"
+    weight  = 4
 # The last item is highlighted
 [[nav]]
     name    = "Memberships"
