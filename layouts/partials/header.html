@@ -22,7 +22,7 @@
       I cannot really explain this but... by concatenating all the css before minify and postprocess,
       we reduce the css size from 200 KB to 34 KB (at time of writing)
     */}}
-    {{ $css = $css | resources.Concat "_main.css" | resources.PostCSS | minify | fingerprint | resources.PostProcess }}
+    {{ $css = $css | resources.Concat "_main.css" | minify | fingerprint | resources.PostProcess }}
     <link
       rel="stylesheet"
       href="{{ $css.RelPermalink }}"
