@@ -51,8 +51,8 @@ enableRobotsTXT = "true"
   [params.banner_txt]
     heading               = "For creatives who want to make their ideas reality"
     # tagline               = "we have the tools, the space, the greatest community!"
-    primary_button        = "JOIN US"
-    primary_button_url    = "memberships"
+    primary_button        = "Become a member"
+    primary_button_url    = "/#memberships"
     # secondary_button      = "JOIN US"
     # secondary_button_url  = "contact"
 

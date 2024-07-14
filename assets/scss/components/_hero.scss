@@ -1,81 +1,80 @@
 .site-hero{
-  position: relative;
-  height: 100vh;
-  // Avoid absurdly small hero landing section
-  min-height: 600px;
-  background-size: cover;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  @include bkg-img-transition(
-    "{{ $.Site.Params.banner.background_image | absURL }}",
-    "{{ $.Site.Params.banner.background_image | absURL }}",
-    // "{{ $.Site.Params.banner.background_image_2 | absURL }}",
-  );
-  @include mobile{
-    padding: $section-padding-mobile 0;
+  background-color: $primary-color;
+  
+  .container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    max-width: 1478px;
   }
-  &-content{
-    svg{
-      margin-bottom: 10vh;
-      width: 80%;
-      height: auto;
-      // avoid navbar overlapping with logo
-      max-height: Max(calc(100vh - 400px), 200px);
-      path {
-        stroke: #fff;
-        stroke-width: .5px;
-        stroke-linejoin: round;
+  
+  .grid { 
+    
+    display: grid;
+    height: 662px;
+    width: 1478px;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    gap: 16px;
+    padding: 24px 0;
+    border-radius: 8px;
+    
+    .bento-bg-img {
+      width: 100%;
+      height: 100%;
+      border-radius: $border-radius;
+    }
+    & > div {
+      background-size: cover;
+      background-position: center center;
+      isolation: isolate;
+      z-index: 1;
+      position: relative;
+      border-radius: $border-radius;
+      display: flex;
+    }
+
+    p {
+      font-family:'Roboto';
+      font-size: 24px;
+      color: $text-color;
+      align-self: flex-end;
+      margin-left: 8px;
+      margin-bottom: 8px;
+    }
+    .bento-text1 {
+      h2 {
+        color: $secondary-color;
+      }
+      p {
+        color: $secondary-color;
       }
     }
-    h1, h2, h3, h4, h5, h6{
-      color: $text-color-dark;
-      background-color: white;
+    .gradient {
+      position: absolute;
+      background: linear-gradient(rgba(#d9d9d9, 0), rgba(#d9d9d9, 0), rgba(#1e1e1e, 0.8));
+      width: 100%;
+      height: 100%;
+      border-radius: $border-radius;
     }
-    h1{
-      margin-bottom: Min(60px, 20vh);
-      @include desktop-lg{
-        font-size: 50px;
-        margin-bottom: Min(50px, 20vh);
-      }
-      @include mobile{
-        font-size: 40px;
-      }
+    .bento-bg::after {
+      mix-blend-mode: color;
+      background: $secondary-color;
+      content: '';
+      width: 100%;
+      height: 100%;
+      border-radius: $border-radius;
     }
-    &-buttons{
-      margin: 0;
-      padding: 0;
-      li{
-        display: inline-block;
-        @include mobile{
-          display: block;
-        }
-        &:not(:last-child){
-          margin-right: 30px;
-          @include mobile{
-            margin-right: 0;
-            margin-bottom: 20px;
-          }
-        }
-        .btn{
-          font-weight: 600;
-          @include mobile{
-            width: 90%;
-            margin: 0 auto;
-            display: block;
-          }
-        }
+    .bento-bg:hover {
+      &::after {
+        mix-blend-mode: none;
+        background: none;
       }
-    }
-  }
-  &-scroll{
-    position: absolute;
-    left: 50%;
-    bottom: 70px;
-    transform: translateX(-50%);
-    @media screen and (max-height: 900px) {
-      // avoid arrow overlapping buttons
-      display: none;
+      .gradient {
+        background: none;
+      }
     }
   }
 }
