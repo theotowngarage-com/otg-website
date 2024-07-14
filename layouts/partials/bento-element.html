@@ -1,0 +1,10 @@
+{{/*  This is a single element in a bento grid
+    
+    Expected arguments: Page, width, height
+
+*/}}
+<div class style="grid-column: span {{ .width }}; grid-row: span {{ .height }};">
+    {{ with .context }}
+    <p>Salmon</p>
+    {{ end }}
+</div>

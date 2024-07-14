@@ -1,25 +1,25 @@
 <section class="site-hero">
   <div class="container">
     <div class="grid">
-
-      <div class="bento-bg" style="grid-column: span 2; grid-row: span 5; background-image: url(/images/bento/3d-print.png)">
+      {{ with "images/bento/3d-print.png" }}
+      <div class="bento-bg" style="grid-column: span 2; grid-row: span 5; background-image: url({{ absURL . }});">
         <div class="gradient"></div>
         <p style="position: absolute; bottom: 0">3D Print</p>
       </div>
-      <!--<div style="grid-column: span 2; grid-row: span 5; background-image: url(/images/bento/3d-print.png)">
-        <div class="bento-bg-img"><div class="gradient"></div></div>
-        <p style="position: absolute; width: 100%; bottom: 0">3D Print</p>
-      </div>-->
-
-      <div class="bento-bg" style="grid-column: span 5; grid-row: span 3; background-image: url(/images/bento/Laser-cutter.png)">
+      {{ end }}
+      {{ with "images/bento/Laser-cutter.png" }}
+      <div class="bento-bg" style="grid-column: span 5; grid-row: span 3; background-image: url({{ absURL . }});">
         <div class="gradient"></div>
         <p style="position: absolute; width: 100%; bottom: 0">CnC router and Laser cutter</p>
       </div>
+      {{ end }}
 
-      <div class="bento-bg" style="grid-column: span 3; grid-row: span 3; background-image: url(/images/bento/sewing.png);">
+      {{ with "images/bento/sewing.png" }}
+      <div class="bento-bg" style="grid-column: span 3; grid-row: span 3; background-image: url({{ absURL . }});">
         <div class="gradient"></div>
         <p style="position: absolute; width: 100%; bottom: 0">Sewing</p>
       </div>
+      {{ end }}
 
       <div class="bento-text1" style="grid-column: span 8; grid-row: span 5; background: white">
         <h2>Your very own Makerspace</h2>
@@ -31,20 +31,26 @@
         {{ end }}
       </div>
 
-      <div class="bento-bg" style="grid-column: span 2; grid-row: span 6; background-image: url(/images/bento/woodworking.png);">
+      {{ with "images/bento/woodworking.png" }}
+      <div class="bento-bg" style="grid-column: span 2; grid-row: span 6; background-image: url({{ absURL . }});">
         <div class="gradient"></div>
         <p style="position: absolute; width: 100%; bottom: 0">Wood Work</p>
       </div>
+      {{ end }}
 
-      <div class="bento-bg" style="grid-column: span 3; grid-row: span 3; background-image: url(/images/bento/weld.png);">
+      {{ with "images/bento/weld.png" }}
+      <div class="bento-bg" style="grid-column: span 3; grid-row: span 3; background-image: url({{ absURL . }});">
         <div class="gradient"></div>
         <p style="position: absolute; width: 100%; bottom: 0">Metal Work</p>
       </div>
+      {{ end }}
 
-      <div class="bento-bg" style="grid-column: span 5; grid-row: span 3; background-image: url(/images/bento/solder.png);">
+      {{ with "images/bento/solder.png" }}
+      <div class="bento-bg" style="grid-column: span 5; grid-row: span 3; background-image: url({{ absURL . }});">
         <div class="gradient"></div>
         <p style="position: absolute; width: 100%; bottom: 0">Electronics</p>
       </div>
+      {{ end }}
 
     </div>
   </div>
