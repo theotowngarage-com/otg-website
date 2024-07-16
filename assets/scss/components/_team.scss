@@ -1,0 +1,36 @@
+.site-team{
+  padding: 100px 0;
+  &-member{
+    padding: 95px 30px 30px;
+    margin: 50px 0 30px;
+    &-image{
+      object-fit: cover;
+      width: 216px; height: 216px;
+      border-radius: $border-radius;
+    }
+    &-content{
+      h3{
+        color: $primary-color;
+        margin-top: 27px;
+        margin-bottom: 10px;
+      }
+      p{
+        color: $text-color-dark;
+        margin-bottom: 20px;
+      }
+    }
+    &-social{
+      margin: 0;
+      padding: 0;
+      li{
+        display: inline-block;
+        a{
+          color: $text-color-dark;
+        }
+        &:not(:last-child){
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}

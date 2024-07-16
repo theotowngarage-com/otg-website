@@ -1,0 +1,37 @@
+title   : Team that makes the difference.
+members  :
+  - image       : images/team/axel.png
+    name        : AXEL SOLL
+    designation : Chairman
+    # medium      : https://www.medium.com/
+    linkedin    : https://www.linkedin.com/in/axel-soll/
+    github      : https://github.com/amrsoll
+    gitlab      : https://gitlab.com/alexloss
+    # instagram   : https://www.instagram.com/
+
+  - image       : images/team/ida.png
+    name        : IDA SERUP
+    designation : Treasurer
+    # medium      : https://www.medium.com/
+    # linkedin    : https://www.linkedin.com/
+    # instagram   : https://www.instagram.com/
+
+  - image       : images/team/michal.png
+    name        : MICHAŁ MIŁKOWSKI
+    designation : Maintenance
+    linkedin    : https://www.linkedin.com/in/michalmilkowski/
+    github      : https://github.com/myinternetofthings
+
+  - image       : images/team/benedikte.jpg
+    name        : BENEDIKTE HOECK
+    designation : Public Relations
+    # medium      : https://www.medium.com/
+    # linkedin    : https://www.linkedin.com/
+    # instagram   : https://www.instagram.com/
+
+  - image       : images/team/iustinian.png
+    name        : IUSTINIAN (JUSTIN) OLARU  
+    designation : Event Coordinator
+    # medium      : https://www.medium.com/
+    # linkedin    : https://www.linkedin.com/
+    # instagram   : https://www.instagram.com/
