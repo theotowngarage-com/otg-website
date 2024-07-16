@@ -1,4 +1,4 @@
-.site-hero{
+.site-bento-workspace{
   background-color: $primary-color;
   
   .container {
@@ -8,6 +8,7 @@
     align-items: center;
     justify-content: center;
     max-width: 1478px;
+    flex-wrap: wrap;
   }
   
   .grid { 

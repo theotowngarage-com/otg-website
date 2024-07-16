@@ -1,6 +1,6 @@
-<section class="site-hero">
+<section class="site-bento-workspace">
   <div class="container">
-    <div class="grid">
+    <div class="grid col-md-12">
       {{ with "images/bento/3d-print.png" }}
       <div class="bento-bg" style="grid-column: span 2; grid-row: span 5; background-image: url({{ absURL . }});">
         <div class="gradient"></div>
@@ -54,7 +54,7 @@
 
     </div>
     {{ with .Site.Params.banner_txt }}
-      <a class="btn btn-sm btn-primary btn-sm-rounded" href="{{ absURL .primary_button_url }}">
+      <a class="btn btn-sm btn-primary btn-sm-rounded col-md-12" href="{{ absURL .primary_button_url }}">
         {{ .primary_button }}
       </a>
     {{ end }}
