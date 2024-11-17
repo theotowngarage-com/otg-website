@@ -9,6 +9,7 @@
           <h2>{{ .Params.heading }}</h2>
         </div>
         <div class="site-workspace-wrapper">
+          {{ range where (where .Site.RegularPages "Type" "workspace") "File.Dir" "workspace/" }}
           {{ range .Pages.ByWeight }}
           <div class="site-workspace-item">
               <a href="#{{ .Params.id }}">
@@ -23,6 +24,7 @@
                 <h4>{{ .Params.heading }}</h4>
               </a>
             </div>
+          {{ end }}
           {{ end }}
         </div>
       </div>

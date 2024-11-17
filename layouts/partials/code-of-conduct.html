@@ -1,0 +1,14 @@
+{{ with .Site.Data.code_of_conduct }}
+  <section class="code_of_conduct" >
+    <div class="container">
+      <h2> {{ .title }} </h2>
+      <h3>{{ .subtitle }}</h3>
+      <p>{{ .description }}</p>
+      <!-- open in new tab -->
+      <a class="btn btn-sm btn-primary btn-sm-rounded" href='{{ absURL .button_url }}'
+      rel="noopener noreferrer" target="_blank">
+        {{ .button }}
+      </a>
+    </div>
+  </section>
+{{ end }}

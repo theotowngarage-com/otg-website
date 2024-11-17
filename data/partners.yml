@@ -1,0 +1,9 @@
+title: "Partners and Sponsors"
+partners :
+  - name  : "Rotoy"
+    icon: "images/partners/rotoy.svg"
+    url: https://rotoy.dk
+
+  - name  : "Coalescent Mobile Robotics"
+    icon: "images/partners/Coalescent-Mobile-Robotics.webp"
+    url: https://cm-robotics.com

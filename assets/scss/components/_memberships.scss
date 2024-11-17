@@ -3,5 +3,27 @@
   padding: $section-padding 0;
   .price-table {
     background: $white;
+    padding: 48px;
+    border-radius: 12px;
+    &-currency, &-price{
+      font-size: 36px;
+      font-weight: 600;
+    }
+    &-period {
+      font-size: 16px;
+    }
+    .btn {
+      width: 100%;
+    }
+
+    @include mobile{
+      // only applies in desktop window size
+      &-currency, &-price{
+        font-size: 30px;
+      }
+      &-period {
+        font-size: 14px;
+      }
+    }
   }
 }

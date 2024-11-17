@@ -1,12 +1,12 @@
 {{ with .Site.Data.values }}
-  <section class="culture" >
+  <section class="values" >
     <div class="container">
       <h2> {{ .title }} </h2>
       <div class="row">
       {{ range .values }}
       <div class="col-lg-6 col-sm-12 mx-auto">
         <img src="{{ .icon | absURL }}" alt="{{path.Base .icon }}">
-        <h3>{{ .name }}</h3>
+        <h4>{{ .name }}</h4>
         <p>{{ .description }}</p>
       </div>
       {{ end }}

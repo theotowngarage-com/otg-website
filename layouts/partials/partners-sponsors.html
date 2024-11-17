@@ -1,0 +1,16 @@
+{{ with .Site.Data.partners }}
+  <section class="partners" >
+    <div class="container">
+      <h2> {{ .title }} </h2>
+      <div class="row">
+      {{ range .partners }}
+      <div class="col-lg-6 col-sm-12 mx-auto">
+        <a href="{{ .url }}">
+            <img src="{{ .icon | absURL }}" alt="{{ .name }}" height="111px"/>
+        </a>
+      </div>
+      {{ end }}
+    </div>
+    </div>
+  </section>
+{{ end }}

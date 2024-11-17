@@ -1,20 +1,22 @@
 .site-team{
   padding: 100px 0;
+  background-color: $primary-color;
+
   &-member{
-    padding: 95px 30px 30px;
-    margin: 50px 0 30px;
+    padding: 30px 30px 30px;
+    margin: 30px 0 0px;
     &-image{
       object-fit: cover;
       width: 216px; height: 216px;
       border-radius: $border-radius;
     }
     &-content{
-      h3{
-        color: $primary-color;
+      h4{
+        color: $secondary-color;
         margin-top: 27px;
         margin-bottom: 10px;
       }
-      p{
+      h6{
         color: $text-color-dark;
         margin-bottom: 20px;
       }
