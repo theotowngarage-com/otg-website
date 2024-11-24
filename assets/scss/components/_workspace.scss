@@ -1,7 +1,7 @@
 .section-workspace {
     .workspace-title {
         --title-max-height: 330px;
-        @include mobile {
+        @include tablet {
             --title-max-height: 260px;
         }
         max-height: var(--title-max-height);
@@ -34,7 +34,7 @@
             gap: 24px;
             justify-content: flex-end;
             padding-bottom: 30px;
-            @include mobile {
+            @include tablet {
                 gap: 6px;
                 padding-bottom: 20px;
             }

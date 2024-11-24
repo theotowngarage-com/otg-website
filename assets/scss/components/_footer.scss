@@ -4,7 +4,7 @@
 
   &-logo{
     margin-bottom: 50px;
-    @include mobile{
+    @include tablet{
       text-align: center;
     }
   }
@@ -32,7 +32,7 @@
     @include desktop{
       margin-bottom: 40px;
     }
-    @include mobile{
+    @include tablet{
       text-align: center;
     }
     &-title{

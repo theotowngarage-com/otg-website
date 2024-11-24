@@ -37,14 +37,14 @@ body {
 
 .desktop-only {
   display: inherit!important;
-  @include mobile{
+  @include tablet{
     display: none!important;
   }
 }
 
 .mobile-only {
   display: none!important;
-  @include mobile{
+  @include tablet{
     display: inherit!important;
   }
 }
@@ -56,7 +56,7 @@ body {
 }
 
 .mobile-centered {
-  @include mobile{
+  @include tablet{
     width: fit-content;
     margin-left: auto!important;
     margin-right: auto!important;
@@ -66,7 +66,7 @@ body {
 .section-pad {
   padding-top: $section-padding-top;
   padding-bottom: $section-padding-bottom;
-  @include mobile {
+  @include tablet {
     padding-top: $section-padding-mobile-top;
     padding-bottom: $section-padding-mobile-bottom;
   }
@@ -88,6 +88,9 @@ a:hover{
 a:visited{
   // Add style for when the link was already visited
   color: $secondary-color-2;
+  &:hover {
+    color: $accent-color-2;
+  }
 }
 
 a.inactive {

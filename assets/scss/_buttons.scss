@@ -18,6 +18,10 @@
     // Add style for when the link was already visited
     background-color: $secondary-color-2;
     color: $white;
+    &:hover {
+      background-color: $accent-color-2;
+      color: $white;
+    }
   }
 
   &.inactive {

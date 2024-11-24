@@ -51,12 +51,31 @@
     @include desktop{
       text-align: center;
     }
+    a {
+      text-decoration-line: none;
+      color: $secondary-color;
+      &:hover{
+        // Add style when hovering
+        color: $accent-color-2;
+      }
+      
+      &:visited{
+        // Add style for when the link was already visited
+        color: $secondary-color-2;
+        &:hover {
+          color: $accent-color-2;
+        }
+      }
+    }
+
     .nav-link{
-      color: $secondary-color-2;
       font-weight: 400;
       font-size: 20px;
       transition: all .3s ease;
       padding: 15px 18px;
+      display: inline-block;
+      width: 100%;
+      height: 100%;
     }
     .nav-link.btn {
       // small hack to keep the coloring of the primary button
@@ -67,7 +86,7 @@
       margin-left: auto;
       align-self: flex-end;
     }
-    @include mobile{
+    @include tablet{
       &:last-child{
         margin-left: inherit;
         align-self: inherit;
@@ -76,14 +95,14 @@
   }
   &.nav-bg{
     padding: 12px 0;
-    @include mobile{
+    @include tablet{
       padding: 15px;
     }
   }
 
 
   ///// Mobile
-  @include mobile {
+  @include tablet {
     min-height: 55px;
     padding-top: 5px;
     padding-bottom: 5px;
