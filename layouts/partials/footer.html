@@ -46,5 +46,8 @@
       </div>
       {{ end }}
     </div>
+    {{ with .Site.Params.footer.copyright}}
+    <p class="copyright centered">&copy{{ .holder }} {{ .date }}</p>;
+    {{ end }}
   </div>
 </footer>

@@ -94,6 +94,9 @@ enableRobotsTXT = "true"
       title       = "Open House"
       time        = "Thursdays 17.00-19.00"
       description = "Members have 24h access to the space"
+    [params.footer.copyright]
+      holder = "The O'Town Garage"
+      date = "2024"
 
 [build]
   # writestats tells Hugo to write a hugo_stats.json file to the project root as part of the build.
