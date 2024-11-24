@@ -13,16 +13,21 @@
   {{ hugo.Generator }}
 
   {{/*  (resources.Get "css/bootstrap.css")  */}}
+  {{/*  The final css file is under css/ folder, because fontawesome requires it's own css file to 
+        be in a subfolder, so the pathinf to `../fonts/*` works correctly   */}}
   {{- $css := slice 
     (resources.Get "css/font-awesome.css")
-    (resources.Get "scss/style.scss" | resources.ToCSS | resources.ExecuteAsTemplate "_style.css" . )
+    (resources.Get "scss/style.scss" | resources.ToCSS | resources.ExecuteAsTemplate "css/_style.css" . )
   }}
   {{ if hugo.IsProduction }} 
     {{/* 
       I cannot really explain this but... by concatenating all the css before minify and postprocess,
       we reduce the css size from 200 KB to 34 KB (at time of writing)
+
+      The final css file is under css/ folder, because fontawesome requires it's own css file to 
+        be in a subfolder, so the pathinf to `../fonts/*` works correctly
     */}}
-    {{ $css = $css | resources.Concat "_main.css" | minify | fingerprint | resources.PostProcess }}
+    {{ $css = $css | resources.Concat "css/_main.css" | minify | fingerprint | resources.PostProcess }}
     <link
       rel="stylesheet"
       href="{{ $css.RelPermalink }}"
