@@ -3,6 +3,7 @@
     padding-bottom: $section-padding;
     display: flex;
     .iconography {
+        width: fit-content;
         & > div {
             width: 216px;
             height: 216px;
