@@ -21,7 +21,7 @@
         {{ if eq (add $index 1) $len }}
           <a
             class="nav-link btn btn-sm btn-primary btn-sm-rounded"
-            href='{{ relURL .URL}}'
+            href='{{ absURL .URL }}'
           >
             <span class="btn-area">
               <span data-text="{{ .Name }}">
@@ -30,7 +30,7 @@
             </span>
           </a>
         {{ else }}
-          <a class="nav-link" href='{{ relURL .URL }}'>{{ .Name }}</a>
+          <a class="nav-link" href='{{ absURL .URL }}'>{{ .Name }}</a>
         {{ end }} 
         <li>
       {{ end }}
@@ -46,7 +46,7 @@
           {{ if eq (add $index 1) $len }}
             <a
               class="nav-link btn btn-sm btn-primary btn-sm-rounded"
-              href='{{ relURL .URL}}'
+              href='{{ absURL .URL}}'
             >
               <span class="btn-area">
                 <span data-text="{{ .Name }}">
@@ -55,7 +55,7 @@
               </span>
             </a>
           {{ else }}
-            <a class="nav-link" href='{{ relURL .URL }}'>{{ .Name }}</a>
+            <a class="nav-link" href='{{ absURL .URL }}'>{{ .Name }}</a>
             {{ end }} 
           </li>
           {{ end }}
