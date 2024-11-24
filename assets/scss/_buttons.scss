@@ -6,21 +6,25 @@
   padding: 14px 24px;
   background-color: $accent-color;
   border-radius: 8px;
-  &:focus{
-    box-shadow: none;
-  }
+  box-shadow: none;
+
   &:hover{
     // Add style when hovering
     background-color: $accent-color-2;
     color: $white;
   }
+
   &:visited{
     // Add style for when the link was already visited
     background-color: $secondary-color-2;
+    color: $white;
   }
+
   &.inactive {
     background-color: $primary-color-2;
+    color: $white;
   }
+
   @include desktop{
     // only applies in desktop window size
     padding: 17px 40px;

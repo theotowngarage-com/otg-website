@@ -9,6 +9,10 @@
     flex-wrap: wrap;
   }
 
+  a {
+    text-decoration: none;
+  }
+
   p {
     font-size: 24px;
     color: $text-color;

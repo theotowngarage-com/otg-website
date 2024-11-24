@@ -73,5 +73,23 @@ body {
 }
 
 a {
-  text-decoration: none;
+  color: $accent-color;
+}
+
+a:focus{
+  box-shadow: none;
+}
+
+a:hover{
+  // Add style when hovering
+  color: $accent-color-2;
+}
+
+a:visited{
+  // Add style for when the link was already visited
+  color: $secondary-color-2;
+}
+
+a.inactive {
+  color: $primary-color-2;
 }
