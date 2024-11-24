@@ -14,9 +14,9 @@
 
 @import "variables";
 
-@import "typography";
-
 @import "mixins";
+
+@import "typography";
 
 @import "buttons";
 
@@ -40,4 +40,6 @@
 
 @import "components/team";
 
-@import "components/code_of_conduct"
+@import "components/code_of_conduct";
+
+@import "components/values";

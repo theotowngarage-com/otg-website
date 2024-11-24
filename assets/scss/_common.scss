@@ -27,6 +27,51 @@ body {
   color: $white;
 }
 
-  .bg-paint {
+.bg-paint {
   background-color: $primary-color;
+}
+
+.bg-white {
+  background-color: $white;
+}
+
+.desktop-only {
+  display: inherit!important;
+  @include mobile{
+    display: none!important;
+  }
+}
+
+.mobile-only {
+  display: none!important;
+  @include mobile{
+    display: inherit!important;
+  }
+}
+
+.centered {
+  width: fit-content;
+  margin-left: auto!important;
+  margin-right: auto!important;
+}
+
+.mobile-centered {
+  @include mobile{
+    width: fit-content;
+    margin-left: auto!important;
+    margin-right: auto!important;
+  }
+}
+
+.section-pad {
+  padding-top: $section-padding-top;
+  padding-bottom: $section-padding-bottom;
+  @include mobile {
+    padding-top: $section-padding-mobile-top;
+    padding-bottom: $section-padding-mobile-bottom;
+  }
+}
+
+a {
+  text-decoration: none;
 }

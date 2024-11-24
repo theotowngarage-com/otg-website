@@ -1,4 +1,5 @@
 .site-bento-workspace{
+  $gap: 16px;
   
   .container {
     display: flex;
@@ -9,53 +10,34 @@
     max-width: 1478px;
     flex-wrap: wrap;
   }
-  
-  .grid { 
-    
-    display: grid;
-    height: 662px;
-    width: 1478px;
-    grid-template-columns: repeat(10, 1fr);
-    grid-template-rows: repeat(10, 1fr);
-    gap: 16px;
-    padding: 24px 0;
-    border-radius: 8px;
-    
-    .bento-bg {
-      background-size: cover;
-      background-position: center center;
-      isolation: isolate;
-      z-index: 1;
-      position: relative;
+
+  p {
+    font-size: 24px;
+    color: $text-color;
+    align-self: flex-end;
+    margin-left: 8px;
+    margin-bottom: 8px;
+  }
+
+  .bento-bg {
+    background-size: cover;
+    background-position: center center;
+    isolation: isolate;
+    z-index: 1;
+    position: relative;
+    border-radius: $border-radius;
+    display: flex;
+
+    .gradient {
+      position: absolute;
+      background: linear-gradient(rgba(#d9d9d9, 0), rgba(#1e1e1e, 0.8));
+      width: 100%;
+      height: 100%;
       border-radius: $border-radius;
-      display: flex;
-
-      .gradient {
-        position: absolute;
-        background: linear-gradient(rgba(#d9d9d9, 0), rgba(#d9d9d9, 0), rgba(#1e1e1e, 0.8));
-        width: 100%;
-        height: 100%;
-        border-radius: $border-radius;
-      }
     }
-
-    p {
-      font-family:'Roboto';
-      font-size: 24px;
-      color: $text-color;
-      align-self: flex-end;
-      margin-left: 8px;
-      margin-bottom: 8px;
-    }
-    .bento-text1 {
-      h2 {
-        color: $secondary-color;
-      }
-      p {
-        color: $secondary-color;
-      }
-    }
-    .bento-bg::after {
+    &::before {
+      position: absolute;
+      display: block;
       mix-blend-mode: color;
       background: $secondary-color;
       content: '';
@@ -63,13 +45,113 @@
       height: 100%;
       border-radius: $border-radius;
     }
-    .bento-bg:hover {
-      &::after {
+    &:hover {
+      &::before {
         mix-blend-mode: none;
         background: none;
       }
       .gradient {
         background: none;
+      }
+    }
+    p, .catchphrase {
+      z-index: 2; // get on top of the color filter
+    }
+  }
+
+
+  .grid {
+    display: grid;
+    @include mobile{
+      display: none;
+    }
+    height: 662px;
+    width: 1478px;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    gap: $gap;
+    padding: 24px 0;
+    border-radius: $border-radius;
+    
+    .bg-white {
+      border-radius: $border-radius;
+      padding: 40px;
+      position: relative;
+      .btn {
+        // float: right;
+        position: absolute;
+        bottom: 30px;
+        right: 30px;
+        // Trying to use these to make a rounded contour around the button
+        // clip-path: polygon(0% 0%, 100% 0%, 100% 85%, 85% 85%, 85% 100%, 0% 100%);
+        // inset: 0% 45% 0% 45% round 30px;
+        // clip-path: inset(45px 50px 15px 0 round 50px);
+      }
+      // .inset-btn {
+  
+      //   inset: calc(anchor(100%) - 10px) anchor(self-start) auto auto;
+  
+      // }
+    }
+    .bento-text1 {
+      // display: flex;
+      // border-radius: $border-radius;
+      // width: 100%;
+      // height: 100%;
+      h2 {
+        color: $secondary-color-2;
+      }
+      p {
+        color: $secondary-color;
+      }
+    }
+  }
+
+
+  .mobile {
+    display: none;
+    @include mobile{
+      display: flex;
+    }
+    padding: 30px 20px;
+    flex-direction: column;
+    width: 100%;
+
+    .bento-btn-mobile {
+      background-color: $white;
+      border-radius: $border-radius;
+      margin-bottom: $gap;
+      padding: 16px 22px;
+      display: flex;
+      flex-direction: row;
+      p {
+        font-size: 18px;
+        color: $secondary-color-2;
+        margin: auto 0px;
+      }
+      &::after {
+        content: url(/images/icons/arrow-right.svg);
+        margin: auto 0 auto auto;
+        align-self: flex-end;
+        // for some reason fit-content does not work...
+        height: 24px; 
+      }
+    }
+    .bento-text1 {
+      margin-bottom: $gap;
+      height: 125px;
+      .catchphrase {
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        h2 {
+          // display: inline;
+          position: relative;
+          align-self: flex-end;
+          // margin: 0 auto;
+          font-size: 25px;
+          filter: drop-shadow(0 4px 4px rgba(0,0,0, 45 ));
+        }
       }
     }
   }

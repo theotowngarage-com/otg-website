@@ -19,30 +19,63 @@ h3, h4, h5, h6 {
 }
 
 p{
+  font-family: $primary-font;
   font-size: 24px;
+  @include mobile {
+    font-size: 18px;
+  }
   color: $secondary-color-2;
 }
 
 h1{
   font-size: 64px;
+  @include mobile {
+    font-size: 40px;
+  }
 }
 
 h2{
   font-size: 40px;
+  @include mobile {
+    font-size: 28px;
+  }
 }
 
 h3{
   font-size: 28px;
+  @include mobile {
+    font-size: 24px;
+  }
 }
 
 h4{
   font-size: 24px;
+  font-weight: normal;
+  @include mobile {
+    font-size: 18px;
+  }
 }
 
 h5{
   font-size: 18px;
+  @include mobile {
+    font-size: 16px;
+  }
 }
 
 h6{
   font-size: 16px;
+  // @include mobile {
+  //   font-size: 16px;
+  // }
+}
+
+
+.p-small{
+  font-family: $primary-font;
+  font-size: 18px;
+  @include mobile {
+    font-size: 16px;
+  }
+  color: $secondary-color-2;
 }

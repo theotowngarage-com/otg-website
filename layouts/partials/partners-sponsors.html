@@ -1,16 +1,16 @@
 {{ with .Site.Data.partners }}
-  <section class="partners bg-paint" >
+  <section class="partners bg-paint section-pad">
     <div class="container">
-      <h2> {{ .title }} </h2>
+      <h2 class="centered"> {{ .title }} </h2>
       <div class="row">
-      {{ range .partners }}
-      <div class="col-lg-6 col-sm-12 mx-auto">
-        <a href="{{ .url }}">
-            <img src="{{ .icon | absURL }}" alt="{{ .name }}" height="111px"/>
-        </a>
+        {{ range .partners }}
+        <div class="col-lg-6 col-sm-12 mx-auto" style="padding-top: 50px">
+          <a class="centered" style="display:block;" href="{{ .url }}">
+              <img src="{{ .icon | absURL }}" alt="{{ .name }}" height="111px"/>
+          </a>
+        </div>
+        {{ end }}
       </div>
-      {{ end }}
-    </div>
     </div>
   </section>
 {{ end }}

@@ -1,5 +1,6 @@
 .invitation {
-    padding: $section-padding 0;
+    padding-top: $section-padding;
+    padding-bottom: $section-padding;
     display: flex;
     .iconography {
         & > div {
@@ -14,6 +15,33 @@
                 width: 82px;
                 height: 82px;
             }
+        }
+        margin-right: 80px;
+    }
+    h3 {
+        color: $secondary-color;
+    }
+    p {
+        font-size: 20px;
+    }
+
+    a {
+        color: $accent-color;
+        display: flex;
+        flex-direction: row;
+        &::before {
+            display: inline-block;
+            content: url(/images/icons/arrow-right-accent.svg);
+            margin: 9px;
+            height:24px;
+            width:24px;
+        }
+        .link {
+            // span {
+                margin: auto 0;
+            // }
+            // display: inline-block;
+
         }
     }
 }

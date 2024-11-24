@@ -1,20 +1,24 @@
 .site-bento-gallery .grid {
-    padding: $section-padding 0;
+    padding: 167px 0;
     gap: 10px;
     display: grid;
     grid-auto-flow: dense;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 12rem 12rem;
-    width: 100%;
+    grid-template-columns: repeat(6, 1fr);;
+    grid-template-rows: repeat(2, 12rem);
+    @include mobile {
+        grid-template-columns: 2fr;
+        grid-template-rows: repeat(6, 12rem);
+    }
     
-    & > div {
+    & > div, & > img {
         background-color: $primary-color;
         align-items: center;
-        display: flex;
-        justify-content: center;
+        border-radius: $border-radius;
     }
 
     .text1,.text2 {
+        display: flex;
+        justify-content: center;
         p {
             font-size: 24px;
             max-width: 90%;
@@ -22,9 +26,14 @@
         }
     }
 
-    .img1, .img2, .img3, .img4 {
-        background-size: cover;
-        background-position: center;
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        // background-size: cover;
+        // background-position: center;
+        border-radius: $border-radius;
+        overflow: hidden;
     }
 
     .text2 {
@@ -34,10 +43,18 @@
     .grid-1-2 {
         grid-column: span 1;
         grid-row: span 2;
+        @include mobile {
+            grid-column: span 2;
+            grid-row: span 1;
+        }
     }
 
     .grid-2-1 {
         grid-column: span 2;
         grid-row: span 1;
+        @include mobile {
+            grid-column: span 2;
+            grid-row: span 1;
+        }
     }
 }

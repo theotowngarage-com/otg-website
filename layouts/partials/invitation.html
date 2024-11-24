@@ -2,7 +2,7 @@
 <div class="container invitation">
     {{ with .context.invitation }}
     {{/*  This div allows to center the gray square  */}}
-    <div class="iconography col-md-4">
+    <div class="iconography col-md-4 desktop-only">
         <div> 
             <img src="{{ .image }}"/>
         </div>
@@ -10,7 +10,7 @@
     <div class="col-sm-12 col-md-8">
         <h3>{{ .title }}</h3>
         <p>{{ .description }}</p>
-        <a href="{{ .link | absURL }}">{{ .link_text }}</a>
+        <a href="{{ .link | absURL }}"><div class="link">{{ .link_text }}</div></a>
     </div>
     {{ end }}
 </div>

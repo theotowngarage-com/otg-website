@@ -1,6 +1,7 @@
 .btn{
-  font-family: $secondary-font;
+  font-family: $primary-font;
   font-size: 18px;
+  color: $white;
   border: none;
   padding: 14px 24px;
   background-color: $accent-color;
@@ -11,6 +12,7 @@
   &:hover{
     // Add style when hovering
     background-color: $accent-color-2;
+    color: $white;
   }
   &:visited{
     // Add style for when the link was already visited

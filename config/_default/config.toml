@@ -79,36 +79,21 @@ enableRobotsTXT = "true"
     [params.footer.contactInfo]
       title   = "Contact Info"
       address = "Havnegade 57,<br>5000 Odense"
-      phone   = "+45 42 76 93 98"
+      phone   = "+45 81 91 19 26"
       email   = "info@theotowngarage.com"
-      # Footer Sitemap
-      [params.footer.sitemap]
-        title   = "Sitemap"
-        [[params.footer.sitemap.link]]
-          name = "About Us"
-          url  = "about"
-        [[params.footer.sitemap.link]]
-          name = "Memberships"
-          url  = "memberships"
-        [[params.footer.sitemap.link]]
-          name = "Website Gitlab repo"
-          url  = "https://gitlab.com/alexloss/otg-website/"
-      # Footer Social Media
-      [params.footer.social]
-        title   = "Social Media"
-        [[params.footer.social.link]]
-          name = "Facebook"
-          url  = "https://www.facebook.com/theotowngarage/"
-        [[params.footer.social.link]]
-          name = "Instagram"
-          url  = "https://www.instagram.com/theotowngarage/?hl=da"
-        [[params.footer.social.link]]
-          name = "LinkedIn"
-          url  = "https://www.linkedin.com/company/the-o-town-garage/"
-      # Footer Service
-      [params.footer.service]
-        title       = "We do stuff:"
-        description = "teach and learn<br>valuable cultural content<br>innovative prototypes"
+    # Footer Social Media
+    [params.footer.social]
+      title   = "Social Media"
+      facebook  = "https://www.facebook.com/theotowngarage/"
+      instagram  = "https://www.instagram.com/theotowngarage/?hl=da"
+      linkedin  = "https://www.linkedin.com/company/the-o-town-garage/"
+      github  = "https://github.com/theotowngarage-com"
+      youtube = "https://www.youtube.com/channel/UCeKOtrPHlkVqkN1MYEZWZcQ"
+    # Footer Service
+    [params.footer.service]
+      title       = "Open House"
+      time        = "Thursdays 17.00-19.00"
+      description = "Members have 24h access to the space"
 
 [build]
   # writestats tells Hugo to write a hugo_stats.json file to the project root as part of the build.

@@ -17,12 +17,17 @@ $white: #fff;
 $black: #000;
 
 // Font Variables
-$primary-font: 'Josefin Sans', sans-serif;
+$primary-font: 'Roboto', sans-serif;
 $secondary-font: 'Space Grotesk', sans-serif;
 
 $navbar-padding: 80px;
-$section-padding: 60px;
-$section-padding-mobile: 45px;
+$section-padding-top: 100px;
+$section-padding-bottom: 120px;
+$section-padding: $section-padding-top;
+
+$section-padding-mobile-top: 50px;
+$section-padding-mobile-bottom: 60px;
+$section-padding-mobile: $section-padding-mobile-top;
 
 $border-radius: 10px;
 

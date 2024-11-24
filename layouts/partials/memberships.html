@@ -1,15 +1,13 @@
 {{ with .Site.Data.memberships }}
-<section class="site-memberships bg-paint" id="memberships">
+<section class="site-memberships bg-paint section-pad" id="memberships">
     <div class="container">
-        <div class="row" style="display: flex; width: 100%">
-            <div class="col-12">
-                <div class="section-title">
-                    <h2>{{ .title }}</h2>
-                    <h4>{{ .subtitle }}</h4>
-                </div>
-            </div>
+        <div class="section-title">
+            <h2>{{ .title }}</h2>
+            <h4>{{ .subtitle }}</h4>
+        </div>
+        <div class="site-memberships-options">
             {{ range .membership_items }}
-            <div class="site-memberships-item col-lg-4 col-md-5 col-sm-10 mx-auto">
+            <div class="site-memberships-item col-lg-4 col-md-6 col-sm-10">
                 <div class="price-table">
                     <div class="price-table-header">
                         <h6>{{ .title }}</h6>
@@ -20,7 +18,7 @@
                     <ul class="price-table-features-list">
                         {{ range .features }}
                         <li>
-                            <div class="price-table-feature-inner">
+                            <div class="price-table-features-list-items">
                                 {{ with .icon }}
                                 <i aria-hidden="true" class="fas {{ . }}"></i>
                                 {{ end }}

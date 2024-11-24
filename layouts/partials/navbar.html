@@ -8,18 +8,42 @@
         <img class="avatar-img" src="{{ .Site.Params.logo | absURL }}" alt="{{ .Site.Title }}" />
       {{ end }}
     </a>
-    <!-- burger menu -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <!-- mobile burger menu -->
+    <details class="mobile-only navbar-nav">
+      <summary data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <p></p>
+      </summary>
       <ul class="navbar-nav">
+      {{$menu := (.Site.Menus.nav)}}
+      {{$len := (len $menu)}} 
+      {{ range $index, $element := $menu }} 
+      <li class="nav-item">
+        {{ if eq (add $index 1) $len }}
+          <a
+            class="nav-link btn btn-sm btn-primary btn-sm-rounded"
+            href='{{ relURL .URL}}'
+          >
+            <span class="btn-area">
+              <span data-text="{{ .Name }}">
+                {{ .Name }}
+              </span>
+            </span>
+          </a>
+        {{ else }}
+          <a class="nav-link" href='{{ relURL .URL }}'>{{ .Name }}</a>
+        {{ end }} 
+        <li>
+      {{ end }}
+      </ul>
+    </details>
+
+    <!-- desktop navigation menu -->
+      <ul class="desktop-only navbar-nav">
         {{$menu := (.Site.Menus.nav)}}
         {{$len := (len $menu)}} 
         {{ range $index, $element := $menu }} 
+        <li class="nav-item">
           {{ if eq (add $index 1) $len }}
-          <li class="nav-item">
             <a
               class="nav-link btn btn-sm btn-primary btn-sm-rounded"
               href='{{ relURL .URL}}'
@@ -30,15 +54,12 @@
                 </span>
               </span>
             </a>
-          </li>
           {{ else }}
-          <li class="nav-item">
             <a class="nav-link" href='{{ relURL .URL }}'>{{ .Name }}</a>
+            {{ end }} 
           </li>
-          {{ end }} 
-        {{ end }}
+          {{ end }}
       </ul>
-    </div>
   </div>
 </nav>
 

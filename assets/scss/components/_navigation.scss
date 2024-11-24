@@ -1,10 +1,4 @@
 .site-navigation {
-  .navbar-brand {
-    padding: 0;
-    margin: auto 0;
-    height: 3.5rem;
-  }
-  padding: 15px;
   background: $white;
   // Uncomment to make the navbar sticky
   // position: fixed;
@@ -12,27 +6,32 @@
   width: 100%;
   z-index: 1000;
   transition: all 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  // height: 164px;
+  padding-top: 57px;
+  padding-bottom: 57px;
+  background: $white;
+
+  &> .container {
+    display: flex;
+    flex-direction: row;
+  }
+
   @include desktop{
-    background: $white;
     margin: 10px;
     border-radius: 5px;
     top: 0;
     width: calc(100% - 20px);
-    box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.09);
-  }
-  @include mobile{
-    padding: 15px;
   }
   .navbar-brand{
     padding: 0;
     margin: auto 0;
-    height: 3.5rem;
+    // height: 4rem;
     img{
       max-width: 78px;
     }
     svg{
-      max-height: 3.5rem;;
-      max-width: 8rem;
+      max-height: 4.2rem;
+      max-width: 12rem;
       margin: auto;
     }
   }
@@ -41,32 +40,102 @@
   // }
   .navbar-nav {
     width: 100%;
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;;
+    margin: auto 0;
+    width: 100%;
   }
   .nav-item{
     @include desktop{
       text-align: center;
     }
     .nav-link{
-      font-family: $secondary-font;
-      color: inherit;
+      color: $secondary-color-2;
+      font-weight: 400;
+      font-size: 20px;
       transition: all .3s ease;
       padding: 15px 18px;
-      position: relative;
     }
-    .nav-link.btn:hover {
+    .nav-link.btn {
       // small hack to keep the coloring of the primary button
-      color: $text-color
+      color: $text-color;
+      font-weight: inherit;
     }
     &:last-child{
       margin-left: auto;
       align-self: flex-end;
     }
+    @include mobile{
+      &:last-child{
+        margin-left: inherit;
+        align-self: inherit;
+      }
+    }
   }
   &.nav-bg{
     padding: 12px 0;
-    box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.09);
     @include mobile{
       padding: 15px;
+    }
+  }
+
+
+  ///// Mobile
+  @include mobile {
+    min-height: 55px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    $navbar-light-icon-color: $secondary-color;
+    $navbar-dark-icon-color: $primary-color;
+    $navbar-light-toggler-icon-bg:      url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='#{$navbar-light-icon-color}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>") !default;
+    $navbar-dark-toggler-icon-bg:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='#{$navbar-dark-icon-color}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>") !default;
+    // position: relative;
+
+    .navbar-brand svg{
+      max-height: 3.5rem;
+      height: 3rem;
+    }
+    .navbar-nav {
+      display: inherit;
+
+    }
+    details {
+      list-style-type: none;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      summary {
+        width: 100%;
+        height: 50px;
+        list-style-type: none; // hack for an svg icon
+        padding: calc((50px - 1.5em)/2);
+        &::before {
+          display: inline-block;
+          float: right;
+          width: 1.5em;
+          height: 1.5em;
+          content: $navbar-light-toggler-icon-bg;
+          margin: auto;
+        }
+      }
+    }
+
+    .navbar-brand{
+      position: absolute;
+      padding: 0;
+      margin: auto 0;
+      height: 4rem;
+      img{
+        max-width: 78px;
+      }
+      svg{
+        max-height: 4.2rem;;
+        max-width: 12rem;
+        margin: auto;
+      }
     }
   }
 }

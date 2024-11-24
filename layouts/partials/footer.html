@@ -1,46 +1,34 @@
 <footer class="site-footer">
   <div class="container">
     <div class="row">
-      <div class="col-12">
+      <div class="col-lg-6">
         <!-- See filters for changing the secondary color so they don't blend 
           https://developer.mozilla.org/en-US/docs/Web/SVG/Element/feComponentTransfer -->
         <div class="site-footer-logo"><a href="{{ .Site.BaseURL }}"><img src="{{ "images/logo-light.svg" | absURL }}" alt="logo-footer"></a></div>
+        <h4 class="site-footer-tagline mobile-centered">Your very own makerspace</h4>
+        {{ with .Site.Params.footer.social }}
+        <ul class="site-footer-social mobile-centered">
+          <li><a href="{{ .facebook | absURL }}"><i class="fa fa-facebook"></i></a></li>
+          <li><a href="{{ .instagram | absURL }}"><i class="fa fa-instagram"></i></a></li>
+          <li><a href="{{ .linkedin | absURL }}"><i class="fa fa-linkedin"></i></a></li>
+          <li><a href="{{ .github | absURL }}"><i class="fa fa-github"></i></a></li>
+          <li><a href="{{ .youtube | absURL }}"><i class="fa fa-youtube"></i></a></li>
+        </ul>
+        {{ end }}
       </div>
       {{ with .Site.Params.footer.contactInfo }}
       <div class="col-lg-3 col-md-6">
         <div class="site-footer-widget">
           <h5 class="site-footer-widget-title">{{ .title }}</h5>
-          <p class="site-footer-widget-description">
+          <p class="site-footer-widget-description p-small">
             {{ .address | safeHTML }}
-            <br>
+          </p>
+          <p class="site-footer-widget-description p-small">
             <a href="tel:{{ .phone }}">{{ .phone }}</a>
-            <br>
+          </p>
+          <p class="site-footer-widget-description p-small">
             <a href="mailto:{{ .email }}">{{ .email }}</a>
           </p>
-        </div>
-      </div>
-      {{ end }}
-      {{ with .Site.Params.footer.sitemap }}
-      <div class="col-lg-2 col-md-6">
-        <div class="site-footer-widget">
-          <h5 class="site-footer-widget-title">{{ .title }}</h5>
-          <ul class="site-footer-widget-links">
-            {{ range .link }}
-            <li><a href="{{ .url | absURL }}">{{ .name }}</a></li>
-            {{ end }}
-          </ul>
-        </div>
-      </div>
-      {{ end }}
-      {{ with .Site.Params.footer.social }}
-      <div class="col-lg-2 col-md-6">
-        <div class="site-footer-widget">
-          <h5 class="site-footer-widget-title">{{ .title }}</h5>
-          <ul class="site-footer-widget-links">
-            {{ range .link }}
-              <li><a href="{{ .url }}">{{ .name }}</a></li>
-            {{ end }}
-          </ul>
         </div>
       </div>
       {{ end }}
@@ -48,22 +36,15 @@
       <div class="col-lg-3 col-md-6">
         <div class="site-footer-widget">
           <h5 class="site-footer-widget-title">{{ .title }}</h5>
-          <p class="site-footer-widget-description">
-            {{ .description | safeHTML }}
+          <p class="site-footer-widget-description p-small">
+            {{ .time }}
+          </p>
+          <p class="site-footer-widget-description p-small">
+            {{ .description }}
           </p>
         </div>
       </div>
       {{ end }}
-      <div class="col-lg-2 col-md-6 col-12">
-        <a href="#top" class="site-footer-widget-top">
-          <img src="{{ "images/to-top.svg" | absURL }}" alt="back-to-top">
-          <p>
-            I want to 
-            <br>
-            visit again
-          </p>
-        </a>
-      </div>
     </div>
   </div>
 </footer>

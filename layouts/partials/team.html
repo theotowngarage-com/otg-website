@@ -3,26 +3,26 @@
     <div class="container">
       <div class="row">
         <div class="col-12">
-            <h2>
+            <h2 class="mobile-centered">
               {{ .title }}
             </h2>
-            <h4>
+            <h4 class="mobile-centered">
               {{ .subtitle }}
             </h4>
         </div>
         {{ range .members }}
-        <div class="col-lg-3 col-md-4 col-sm-12">
-          <div class="site-team-member">
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <div class="site-team-member mobile-centered">
             {{ with resources.GetMatch .image }}
               {{/*  Image Compression  */}}
               {{/*  Each image is 216 x 216 px in the css  */}}
               {{ $image :=  .Fill "216x216 Center webp q96" }}
-              <img class="site-team-member-image" src="{{ $image.Permalink }}" alt="team-member">
+              <img class="site-team-member-image mobile-centered" src="{{ $image.Permalink }}" alt="team-member">
             {{ end }}
             <div class="site-team-member-content">
-              <h4>{{ .name }}</h4>
-              <h5>{{ .designation }}</h5>
-              <ul class="site-team-member-social">
+              <h4 class="mobile-centered">{{ .name }}</h4>
+              <h5 class="mobile-centered">{{ .designation }}</h5>
+              <ul class="site-team-member-social mobile-centered">
                 {{ $member := . }}
                 {{ range $social := (slice "linkedin" "medium" "instagram" "github" "gitlab") }}
                   {{ with (index $member $social) }}

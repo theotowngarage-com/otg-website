@@ -2,7 +2,7 @@ title   : People
 subtitle   : Meet the leadership board
 members  :
   - image       : images/team/axel.png
-    name        : AXEL SOLL
+    name        : Axel Soll
     designation : Chairman | Event Coordinator
     # medium      : https://www.medium.com/
     linkedin    : https://www.linkedin.com/in/axel-soll/
@@ -11,7 +11,7 @@ members  :
     # instagram   : https://www.instagram.com/
 
   - image       : images/team/iustinian.png
-    name        : IUSTINIAN (JUSTIN) OLARU  
+    name        : Iustinian Olaru  
     designation : Treasurer | Public Relations
     github: https://github.com/iustin94
     # medium      : https://www.medium.com/
@@ -19,7 +19,7 @@ members  :
     # instagram   : https://www.instagram.com/
 
   - image       : images/team/michal.png
-    name        : MICHAŁ MIŁKOWSKI
+    name        : Michał Miłkowski
     designation : Maintenance
     linkedin    : https://www.linkedin.com/in/michalmilkowski/
     github      : https://github.com/myinternetofthings

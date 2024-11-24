@@ -4,7 +4,12 @@
   &-member{
     padding: 30px 30px 30px;
     margin: 30px 0 0px;
+    @include mobile {
+      width: fit-content;
+    }
+
     &-image{
+      display:block;
       object-fit: cover;
       width: 216px; height: 216px;
       border-radius: $border-radius;
@@ -14,6 +19,7 @@
         color: $secondary-color;
         margin-top: 27px;
         margin-bottom: 10px;
+        
       }
       h6{
         color: $text-color-dark;

@@ -1,3 +1,12 @@
 .code_of_conduct{
   padding: 100px 0;
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: flex-start;
+  }
+  .coc-subtitle {
+    color: $secondary-color;
+  }
 }
