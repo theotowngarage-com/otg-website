@@ -15,34 +15,42 @@
   {{/*  (resources.Get "css/bootstrap.css")  */}}
   {{/*  The final css file is under css/ folder, because fontawesome requires it's own css file to 
         be in a subfolder, so the pathinf to `../fonts/*` works correctly   */}}
-  {{- $css := slice 
-    (resources.Get "css/font-awesome.css")
-    (resources.Get "scss/style.scss" | resources.ToCSS | resources.ExecuteAsTemplate "css/_style.css" . )
-  }}
-  {{ if hugo.IsProduction }} 
-    {{/* 
-      I cannot really explain this but... by concatenating all the css before minify and postprocess,
-      we reduce the css size from 200 KB to 34 KB (at time of writing)
+  {{ with resources.Get "scss/style_template.scss" }}
+    {{ with resources.ExecuteAsTemplate "scss/style.scss" $ . }}
+      {{ $opts := (dict "targetPath" "css/style.css" "enableSourceMap" true ) }}
+      {{ with . | toCSS $opts }}
+        {{- $css := slice 
+          (resources.Get "css/font-awesome.css")
+          .
+        }}
+        {{ if hugo.IsProduction }} 
+          {{/* 
+            I cannot really explain this but... by concatenating all the css before minify and postprocess,
+            we reduce the css size from 200 KB to 34 KB (at time of writing)
 
-      The final css file is under css/ folder, because fontawesome requires it's own css file to 
-        be in a subfolder, so the pathinf to `../fonts/*` works correctly
-    */}}
-    {{ $css = $css | resources.Concat "css/_main.css" | minify | fingerprint | resources.PostProcess }}
-    <link
-      rel="stylesheet"
-      href="{{ $css.RelPermalink }}"
-      integrity="{{ $css.Data.Integrity }}"
-    />
-  {{ else }}
-    {{ range $css }}
-      {{/*  Uncomment the `with` statement for 1:1 benchmark of concatenating the css files */}}
-      {{/*  {{ with . | resources.PostCSS | minify | fingerprint | resources.PostProcess }}  */}}
-        <link
-          rel="stylesheet"
-          href="{{ .RelPermalink }}"
-          integrity="{{ .Data.Integrity }}"
-        />
-      {{/*  {{ end }}  */}}
+            The final css file is under css/ folder, because fontawesome requires it's own css file to 
+              be in a subfolder, so the pathinf to `../fonts/*` works correctly
+          */}}
+          {{ $css = $css | resources.Concat "css/_main.css" | fingerprint | resources.PostProcess }}
+          <link
+            rel="stylesheet"
+            href="{{ $css.RelPermalink }}"
+            integrity="{{ $css.Data.Integrity }}"
+            crossorigin="anonymous"
+          />
+        {{ else }}
+          {{ range $css }}
+            {{/*  Uncomment the `with` statement for 1:1 benchmark of concatenating the css files */}}
+            {{/*  {{ with . | resources.PostCSS | minify | fingerprint | resources.PostProcess }}  */}}
+              <link
+                rel="stylesheet"
+                href="{{ .RelPermalink }}"
+                integrity="{{ .Data.Integrity }}"
+              />
+            {{/*  {{ end }}  */}}
+          {{ end }}
+        {{ end }}
+      {{ end }}
     {{ end }}
   {{ end }}
 

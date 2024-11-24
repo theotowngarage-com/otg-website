@@ -44,17 +44,11 @@ enableRobotsTXT = "true"
 
   # Banner Section
   [params.banner]
-    enable                = true
-    background_image      = "images/backgrounds/angle_grinder_progressive.avif"
     logo                  = "images/logo.svg"
     down_arrow            = "images/arrow-down.svg"
   [params.banner_txt]
-    heading               = "For creatives who want to make their ideas reality"
-    # tagline               = "we have the tools, the space, the greatest community!"
     primary_button        = "Become a member"
     primary_button_url    = "/#memberships"
-    # secondary_button      = "JOIN US"
-    # secondary_button_url  = "contact"
 
   [params.events]
     datefmt   = "Monday, Dec 3"
@@ -62,7 +56,6 @@ enableRobotsTXT = "true"
     subtitle  = "Crafting experiences and character."
 
   [params.calendar]
-    enable              = true
     title               = "Calendar"
     subtitle            = "Come see what we do"
     ics                 = "https://calendar.google.com/calendar/ical/info%40theotowngarage.com/public/basic.ics"
@@ -72,8 +65,6 @@ enableRobotsTXT = "true"
     title               = "JOIN US!"
     primary_button      = "Submit Query"
     primary_button_url  = "contact"
-    secondary_button    = "Not Convinced"
-    secondary_button_url = "portfolio"
   [params.footer]
     # Footer Contact Info
     [params.footer.contactInfo]
@@ -92,7 +83,7 @@ enableRobotsTXT = "true"
     # Footer Service
     [params.footer.service]
       title       = "Open House"
-      time        = "Thursdays 17.00-19.00"
+      time        = "Thursdays 17.00 - 19.00"
       description = "Members have 24h access to the space"
     [params.footer.copyright]
       holder = "The O'Town Garage"
