@@ -65,7 +65,7 @@
       }
     }
   }
-  .nav-item{
+  .nav-item {
     @include desktop{
       text-align: center;
     }
@@ -95,6 +95,25 @@
       }
     }
   }
+
+  .nav-item-btn {
+    a {
+      color: $white;
+    }
+    &:hover{
+      // Add style when hovering
+      color: $white;
+    }
+    
+    &:visited{
+      // Add style for when the link was already visited
+      color: $white;
+      &:hover {
+        color: $white;
+      }
+    }
+  }
+  
   &.nav-bg{
     padding: 12px 0;
     @include tablet{
