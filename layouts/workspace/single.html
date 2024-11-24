@@ -1,46 +1,58 @@
 {{ define "main" }}
 
-<section class="site-project-single-section">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 mx-auto">
-        <div class="site-project-single">
-          <h1>
-            {{ .Title }}
-          </h1>
-          <div class="site-project-single-description">
-            {{ .Content }}
-          </div>
-          <div class="site-project-single-image">
-            {{ range .Resources.Match "images/*" }}
-            <img src="{{ .Permalink }}" alt="project image">
-            {{ end }}
-          </div>
+<section class="section-workspace">
+  <div class="workspace-title bento-bg">
+    {{ with .Resources.Get "background.jpg" }}
+    <!-- For some crazy reason, the {{ .Permalink }} in the <div> returns the hash instead of a link to the image ... -->
+    <!-- <div class="workspace-title" style="background-image: url({{ .Permalink }})"> -->
+    <img class="workspace-title-background" src="{{ .Permalink }}"/>
+    {{ end }}
+    <div class="container workspace-title-content">
+      <h3>Facilities</h3>
+      <h1>
+        {{ .Title }}
+      </h1>
+    </div>
+  </div>
+  <div class="container section-pad">
+    <div class="site-project-single">
+      <div class="description">
+        {{ .Content }}
+      </div>
 
-          {{/* partial "gallery.html" .Resources */}}
-          <div class="site-project-single-action">
-          {{ with .PrevInSection }}
-            <a href="{{.Permalink}}" class="previous">
-              <img src="{{ "images/to-top.svg" | absURL }}" alt="previous project">
-              <span class="link-area">
-                <span data-text="Previous">
-                  {{.Title}}
-                </span>
-              </span>
-            </a>
-          {{ end }}
-          {{ with .NextInSection }}
-            <a href="{{.Permalink}}" class="next">
-              <span class="link-area">
-                <span data-text="Next">
-                  {{.Title}}
-                </span>
-              </span>
-              <img src="{{ "images/to-top.svg" | absURL }}" alt="next project">
-            </a>
-            {{ end }}
-          </div>
-        </div>
+      {{/*  Image gallery  */}}
+      {{/*  {{ with .Resources.Match "images/*" }}
+      <div class="workspace-gallery">
+        {{ range . }}
+        <img src="{{ .Permalink }}" alt="project image">
+        {{ end }}
+      </div>
+      {{ end }}  */}}
+
+      <div class="workspace-other section-pad">
+        {{ with .PrevInSection }}
+        {{$other := .}}
+        {{ with .Resources.Get "background.jpg" }}
+        {{$image := .}}
+        <a href="{{ $other.Permalink}}" 
+          class="bento-bg workspace-other-section"
+          style="background-image: url({{ $image.Permalink }});">
+          <p>{{$other.Title}}</p>
+        </a>
+        {{ end }}
+        {{ end }}
+        {{ with .NextInSection }}
+        {{$other := .}}
+        {{ with .Resources.Get "background.jpg" }}
+        {{$image := .}}
+        <a href="{{ $other.Permalink}}" 
+          class="bento-bg workspace-other-section"
+          style="background-image: url({{ $image.Permalink }});">
+          <p>{{$other.Title}}</p>
+        </a>
+        {{ end }}
+        {{ end }}
+        <h4>Other facilities</h4>
       </div>
     </div>
   </div>

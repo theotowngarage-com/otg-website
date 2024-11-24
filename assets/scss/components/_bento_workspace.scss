@@ -1,5 +1,4 @@
 .site-bento-workspace{
-  $gap: 16px;
   
   .container {
     display: flex;
@@ -9,9 +8,6 @@
     flex-wrap: wrap;
   }
 
-  a {
-    text-decoration: none;
-  }
 
   p {
     font-size: 24px;
@@ -21,43 +17,13 @@
     margin-bottom: 8px;
   }
 
-  .bento-bg {
-    background-size: cover;
-    background-position: center center;
-    isolation: isolate;
-    z-index: 1;
-    position: relative;
-    border-radius: $border-radius;
-    display: flex;
-
-    .gradient {
-      position: absolute;
-      background: linear-gradient(rgba(#d9d9d9, 0), rgba(#1e1e1e, 0.8));
-      width: 100%;
-      height: 100%;
-      border-radius: $border-radius;
-    }
+  .bento-bg:hover {
     &::before {
-      position: absolute;
-      display: block;
-      mix-blend-mode: color;
-      background: $secondary-color;
-      content: '';
-      width: 100%;
-      height: 100%;
-      border-radius: $border-radius;
+      mix-blend-mode: none;
+      background: none;
     }
-    &:hover {
-      &::before {
-        mix-blend-mode: none;
-        background: none;
-      }
-      .gradient {
-        background: none;
-      }
-    }
-    p, .catchphrase {
-      z-index: 2; // get on top of the color filter
+    &::after {
+      background: none;
     }
   }
 
@@ -71,7 +37,7 @@
     width: 1478px;
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(10, 1fr);
-    gap: $gap;
+    gap: $default-grid-gap;
     padding: 24px 0;
     border-radius: $border-radius;
     
@@ -122,7 +88,7 @@
     .bento-btn-mobile {
       background-color: $white;
       border-radius: $border-radius;
-      margin-bottom: $gap;
+      margin-bottom: $default-grid-gap;
       padding: 16px 22px;
       display: flex;
       flex-direction: row;
@@ -140,7 +106,7 @@
       }
     }
     .bento-text1 {
-      margin-bottom: $gap;
+      margin-bottom: $default-grid-gap;
       height: 125px;
       .catchphrase {
         display: flex;
