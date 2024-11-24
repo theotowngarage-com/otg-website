@@ -49,25 +49,25 @@
     margin: auto 0;
     width: 100%;
   }
+  a {
+    text-decoration-line: none;
+    color: $secondary-color;
+    &:hover{
+      // Add style when hovering
+      color: $accent-color-2;
+    }
+    
+    &:visited{
+      // Add style for when the link was already visited
+      color: $secondary-color-2;
+      &:hover {
+        color: $accent-color-2;
+      }
+    }
+  }
   .nav-item{
     @include desktop{
       text-align: center;
-    }
-    a {
-      text-decoration-line: none;
-      color: $secondary-color;
-      &:hover{
-        // Add style when hovering
-        color: $accent-color-2;
-      }
-      
-      &:visited{
-        // Add style for when the link was already visited
-        color: $secondary-color-2;
-        &:hover {
-          color: $accent-color-2;
-        }
-      }
     }
 
     .nav-link{

@@ -8,7 +8,10 @@
             background: $primary-color;
             border-radius: $border-radius;
             height: 70px;
-            list-style-type: none; // hack for an svg icon
+            & ::marker {
+              font-size: 0; // hack for an svg icon
+            }
+            // list-style-type: none;
             p,svg {
                 margin: auto 20px;
             }

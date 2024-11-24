@@ -47,27 +47,6 @@
       color: $white;
       line-height: 30px;
     }
-    &-links{
-      margin: 0;
-      padding: 0;
-      li{
-        list-style: none;
-        a{
-          color: $white;
-          transition: all 0.3s $site-ease;
-          display: block;
-          text-decoration: none;
-        }
-        a:hover {
-          text-decoration: $link-decoration;
-        }
-        &:not(:last-child){
-          a{
-            padding-bottom: 9px;
-          }
-        }
-      }
-    }
   }
   .lang-list {
     a {

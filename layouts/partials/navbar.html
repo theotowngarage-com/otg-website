@@ -20,13 +20,11 @@
       <li class="nav-item">
         {{ if eq (add $index 1) $len }}
           <a
-            class="nav-link btn btn-sm btn-primary btn-sm-rounded"
+            class="btn"
             href='{{ absURL .URL }}'
           >
-            <span class="btn-area">
-              <span data-text="{{ .Name }}">
-                {{ .Name }}
-              </span>
+            <span data-text="{{ .Name }}">
+              {{ .Name }}
             </span>
           </a>
         {{ else }}
