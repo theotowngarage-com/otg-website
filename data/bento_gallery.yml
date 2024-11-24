@@ -1,5 +1,5 @@
-txt1: We are makers. We run an independent creative <span class="accent-text">makerspace</span>
-txt2: Our mermbers’<br/><span class="accent-text-light">creative work</span>
+txt1: We are makers. We run an independent creative <b><span class="accent-text-dark">makerspace</span></b>
+txt2: <span class="accent-text">Our members’</span><br/><b><span class="accent-text-light">creative work</span></b>
 
 img1: "images/gallery/10_shroom_lamp.jpg"
 img2: "images/gallery/21_wood_table.jpg"
