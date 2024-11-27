@@ -15,9 +15,11 @@
   {{/*  (resources.Get "css/bootstrap.css")  */}}
   {{/*  The final css file is under css/ folder, because fontawesome requires it's own css file to 
         be in a subfolder, so the pathinf to `../fonts/*` works correctly   */}}
+  {{/*  {{ $opts := (dict "targetPath" "css/style.css" "enableSourceMap" true ) }}  */}}
+  {{ $opts := (dict "enableSourceMap" true ) }}
   {{- $css := slice 
     (resources.Get "css/font-awesome.css")
-    (resources.Get "scss/style.scss" | resources.ToCSS | resources.ExecuteAsTemplate "css/_style.css" . )
+    (resources.Get "scss/style.scss" | resources.ToCSS $opts | resources.ExecuteAsTemplate "css/_style.css" . )
   }}
   {{ if hugo.IsProduction }} 
     {{/* 

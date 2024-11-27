@@ -1,7 +1,8 @@
 
-<section class="site-events" id="events">
+<section class="site-events section-pad" id="events">
     {{ with .Site.Data.events }}
     <div class="container">
+        <div class="events-inner col-sm-12 col-lg-9 mx-auto">
         <div class="section-title">
             <h2>{{ .title }}</h2>
         </div>
@@ -11,7 +12,9 @@
                 <p>{{ .description }}</p>
             </details>
         {{ end }}
+            
+            {{ partial "invitation.html"  (dict "context" . "invitation" .invitation) }}
+            {{ end }}
+        </div>
     </div>
-    {{ partial "invitation.html"  (dict "context" . "invitation" .invitation) }}
-    {{ end }}
 </section>
