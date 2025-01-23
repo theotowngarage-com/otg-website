@@ -5,8 +5,8 @@
       <div class="row">
         {{ range .partners }}
         <div class="col-lg-6 col-sm-12 mx-auto" style="padding-top: 50px">
-          <a class="centered" style="display:block;" href="{{ .url }}">
-              <img src="{{ .icon | absURL }}" alt="{{ .name }}" height="111px"/>
+          <a href="{{ .url }}">
+              <img src="{{ .icon | absURL }}" class="centered" style="display:block; max-width:90%; max-height: 111px; width: auto;" alt="{{ .name }}"/>
           </a>
         </div>
         {{ end }}

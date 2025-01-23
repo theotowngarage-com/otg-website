@@ -29,7 +29,7 @@ enableRobotsTXT = "true"
     down_arrow            = "images/arrow-down.svg"
   [params.banner_txt]
     primary_button        = "Become a member"
-    primary_button_url    = "/#memberships"
+    primary_button_url    = "#memberships"
 
   [params.events]
     datefmt   = "Monday, Dec 3"
