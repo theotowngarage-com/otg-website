@@ -1,11 +1,11 @@
 title: "Our Events"
 events:
-  - summary: "Laser cutting workshop"
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eleifend tristique consequat. In diam ante, feugiat aliquam aliquet at, sodales ac ligula."
-  - summary: "3D printing workshops"
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eleifend tristique consequat. In diam ante, feugiat aliquam aliquet at, sodales ac ligula."
-  - summary: "Make your own packaging workshop"
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eleifend tristique consequat. In diam ante, feugiat aliquam aliquet at, sodales ac ligula."
+  - summary: "Laser cutting workshop [members only] - Thursdays 17:00"
+    description: "Learn the basics on how to use our lasercutter. The level of the workshop is adjusted to the attendees. If you already have something you would like to make, feel free to bring your design file & material. We mainly use vector file formats: .ai, .svg and .dxf for following lines, and all images for engravings."
+  - summary: "CnC cutting workshop [members only] - Thursdays 18:00 (Back on Feb 12.)"
+    description: "The ultimate maker tool in the toolbelt. Come learn to transform a 3D CAD file into reality. You will learn about the different bits to use, and how to generate paths for the CnC. We mainly use Autodesk Fusion 360."
+  - summary: "Open house [anyone] - Thursdays 17:00 to 19:00"
+    description: "Come and visit the Makerspace, see if it something for you :D"
 
 invitation:
   title: Would you like to host a workshop with us?
