@@ -59,7 +59,7 @@ enableRobotsTXT = "true"
       facebook  = "https://www.facebook.com/theotowngarage/"
       instagram  = "https://www.instagram.com/theotowngarage/?hl=da"
       linkedin  = "https://www.linkedin.com/company/the-o-town-garage/"
-      github  = "https://github.com/theotowngarage-com"
+      github  = "https://github.com/theotowngarage-com/otg-website/"
       youtube = "https://www.youtube.com/channel/UCeKOtrPHlkVqkN1MYEZWZcQ"
     # Footer Service
     [params.footer.service]
@@ -68,7 +68,7 @@ enableRobotsTXT = "true"
       description = "Members have 24h access to the space"
     [params.footer.copyright]
       holder = "The O'Town Garage"
-      date = "2024"
+      date = "2025"
 
 [build]
   # writestats tells Hugo to write a hugo_stats.json file to the project root as part of the build.
