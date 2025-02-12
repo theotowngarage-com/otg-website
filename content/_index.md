@@ -1,6 +1,7 @@
 ---
 title: "The O'Town Garage"
 description: "Odense's independent and accessible makespace. Havnegade 57, 5000 Odense; info@theotowngarage.com"
+aliases: ["/events", "/about", "/calendar", "/gallery"]
 ---
 
 ## Front Page Content
