@@ -35,36 +35,6 @@
       margin: auto;
     }
   }
-  // .navbar-collapse {
-  //   flex-direction: row-reverse;
-  // }
-  .navbar-nav {
-    width: 100%;
-    & ::marker {
-      font-size: 0;
-    }
-    display: flex;
-    flex-direction: row;
-    align-items: center;;
-    margin: auto 0;
-    width: 100%;
-  }
-  a {
-    text-decoration-line: none;
-    color: $secondary-color;
-    &:hover{
-      // Add style when hovering
-      color: $accent-color-2;
-    }
-    
-    &:visited{
-      // Add style for when the link was already visited
-      color: $secondary-color-2;
-      &:hover {
-        color: $accent-color-2;
-      }
-    }
-  }
   .nav-item {
     @include desktop{
       text-align: center;
@@ -122,6 +92,38 @@
   }
 
 
+  // .navbar-collapse {
+  //   flex-direction: row-reverse;
+  // }
+  .navbar-nav {
+    width: 100%;
+    & ::marker {
+      font-size: 0;
+    }
+  }
+  .navbar-nav-list {
+    display: flex;
+    flex-direction: row;
+    // align-items: center;
+    margin: auto 0;
+  }
+  a {
+    text-decoration-line: none;
+    color: $secondary-color;
+    &:hover{
+      // Add style when hovering
+      color: $accent-color-2;
+    }
+    
+    &:visited{
+      // Add style for when the link was already visited
+      color: $secondary-color-2;
+      &:hover {
+        color: $accent-color-2;
+      }
+    }
+  }
+
   ///// Mobile
   @include tablet {
     min-height: 55px;
@@ -132,47 +134,42 @@
     $navbar-dark-icon-color: $primary-color;
     $navbar-light-toggler-icon-bg:      url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='#{$navbar-light-icon-color}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>") !default;
     $navbar-dark-toggler-icon-bg:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='#{$navbar-dark-icon-color}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>") !default;
-    // position: relative;
 
-    .navbar-brand svg{
-      max-height: 3.5rem;
-      height: 3rem;
+    a.navbar-brand{
+      // float: left;
+      position: fixed;
+      inset-inline-start: 0px;
+      inset-block-start: 0px;
+      margin-top: 15px;
+      img{
+        max-width: 78px;
+      }
+      svg{
+        max-height: 3.5rem;
+        height: 3rem;
+        max-width: 12rem;
+        margin: auto;
+      }
     }
-    .navbar-nav {
-      display: inherit;
 
-    }
-    details {
-      margin: 0 auto;
+    .navbar-nav-list {
       display: flex;
       flex-direction: column;
+    }
+    details {
       summary {
         width: 100%;
         height: 50px;
         padding: calc((50px - 1.5em)/2);
-        &::before {
-          display: block;
-          float: right;
+        display: inline-flex;
+        justify-content: flex-end;
+        p::before {
+          float: inline-end;
           width: 1.5em;
           height: 1.5em;
           content: $navbar-light-toggler-icon-bg;
           margin: auto;
         }
-      }
-    }
-
-    .navbar-brand{
-      position: absolute;
-      padding: 0;
-      margin: auto 0;
-      height: 4rem;
-      img{
-        max-width: 78px;
-      }
-      svg{
-        max-height: 4.2rem;;
-        max-width: 12rem;
-        margin: auto;
       }
     }
   }

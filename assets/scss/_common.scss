@@ -40,16 +40,14 @@ body {
 }
 
 .desktop-only {
-  display: inherit!important;
   @include tablet{
     display: none!important;
   }
 }
 
 .mobile-only {
-  display: none!important;
-  @include tablet{
-    display: inherit!important;
+  @media(min-width:991px){
+    display: none!important;
   }
 }
 
