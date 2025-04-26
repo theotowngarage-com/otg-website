@@ -8,7 +8,7 @@
         </div>
         {{ range .events }}
             <details>
-                <summary><p>{{ .summary }}</p> {{ readFile "static/images/icons/expand-details.svg" | safeHTML }}</summary>
+                <summary><h4>{{ .summary }}</h4> {{ readFile "static/images/icons/expand-details.svg" | safeHTML }}</summary>
                 <p>{{ .description }}</p>
             </details>
         {{ end }}

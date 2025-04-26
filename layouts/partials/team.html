@@ -20,8 +20,8 @@
               <img class="site-team-member-image mobile-centered" src="{{ $image.Permalink }}" alt="team-member">
             {{ end }}
             <div class="site-team-member-content">
-              <h4 class="mobile-centered">{{ .name }}</h4>
-              <h5 class="mobile-centered">{{ .designation }}</h5>
+              <h3 class="mobile-centered">{{ .name }}</h3>
+              <p class="mobile-centered">{{ .designation }}</p>
               <ul class="site-team-member-social mobile-centered">
                 {{ $member := . }}
                 {{ range $social := (slice "linkedin" "medium" "instagram" "github" "gitlab") }}

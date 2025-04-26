@@ -13,7 +13,7 @@
     primary_button        = "Become a member"
     primary_button_url    = "/#memberships"
   [params.call_to_action]
-    primary_button      = "Memberships"
+    primary_button      = "Become a member"
     primary_button_url  = "memberships"
   [params.gallery]
     title = "WHAT WE DO HERE"

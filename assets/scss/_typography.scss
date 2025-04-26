@@ -6,6 +6,13 @@ body{
 
 h1, h2 {
   font-family: $secondary-font;
+}
+
+h3, h4, h5, h6, p {
+  font-family: $primary-font;
+}
+
+h1 {
   color: $secondary-color;
 }
 
@@ -13,18 +20,28 @@ h2 {
   color: $text-color-dark;
 }
 
-h3, h4, h5, h6 {
-  font-family: $primary-font;
+h3 {
+  color: $secondary-color;
+}
+
+h4, h5, h6, p {
   color: $secondary-color-2;
 }
 
-p{
-  font-family: $primary-font;
-  font-size: 24px;
+// <p1> in Figma is <p> in css
+p {
+  font-size: 20px;
   @include tablet {
-    font-size: 18px;
+    font-size: 16px;
   }
-  color: $secondary-color-2;
+}
+
+// <p2> in Figma is <* class="muted"> in css
+.p-small{
+  font-size: 18px;
+  @include tablet {
+    font-size: 16px;
+  }
 }
 
 h1{
@@ -70,12 +87,3 @@ h6{
   // }
 }
 
-
-.p-small{
-  font-family: $primary-font;
-  font-size: 18px;
-  @include tablet {
-    font-size: 16px;
-  }
-  color: $secondary-color-2;
-}

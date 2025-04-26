@@ -15,15 +15,9 @@
       border-radius: $border-radius;
     }
     &-content{
-      h4{
-        color: $secondary-color;
+      h3{
         margin-top: 27px;
         margin-bottom: 10px;
-        
-      }
-      h6{
-        color: $text-color-dark;
-        margin-bottom: 20px;
       }
     }
     &-social{
