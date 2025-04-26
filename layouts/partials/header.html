@@ -19,7 +19,7 @@
   {{ $opts := (dict "enableSourceMap" true ) }}
   {{- $css := slice 
     (resources.Get "css/font-awesome.css")
-    (resources.Get "scss/style.scss" | resources.ToCSS $opts | resources.ExecuteAsTemplate "css/_style.css" . )
+    (resources.Get "scss/style.scss" | css.Sass $opts | resources.ExecuteAsTemplate "css/_style.css" . )
   }}
   {{ if hugo.IsProduction }} 
     {{/* 
