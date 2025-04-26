@@ -14,11 +14,25 @@
       </h1>
     </div>
   </div>
-  <div class="container section-pad">
-    <div class="site-project-single">
-      <div class="description">
+  <div class="section-pad">
+    <div class="site-project-single section-pad">
+      <div class="container description">
         {{ .Content }}
       </div>
+      <div class="section-pad"></div>
+      <div class="description-2">
+        {{ with .Resources.Get "sub.png" }}
+          <img class="description-img" src="{{ .Permalink }}"/>
+        {{ end }}
+        <div class="container">
+          <div class="content">
+            {{ with .Resources.Get "sub.md" }}
+              {{ .Content }}
+            {{ end }}
+          </div>
+        </div> 
+      </div>
+
 
       {{/*  Image gallery  */}}
       {{/*  {{ with .Resources.Match "images/*" }}
@@ -29,7 +43,7 @@
       </div>
       {{ end }}  */}}
 
-      <div class="workspace-other section-pad">
+      <div class="container workspace-other section-pad">
         {{ with .PrevInSection }}
         {{$other := .}}
         {{ with .Resources.Get "background.jpg" }}

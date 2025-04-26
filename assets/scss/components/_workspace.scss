@@ -42,6 +42,29 @@
 
     }
 
+    .description-2 {
+        background-color: $primary-color;
+        display: flex;
+        .container {
+            margin: auto 0;
+            .content {
+                padding: 0 50px;
+            }
+        }
+        @include tablet {
+            flex-direction: column;
+            .content {
+                margin: 57px 0;
+                padding: inherit;
+            }
+        }
+    }
+    .description-img {
+        min-width: 50%;
+        height:fit-content;
+        width:100%;
+    }
+
     .workspace-other {
         display: flex;
         flex-direction: row;
@@ -54,6 +77,13 @@
             flex-direction: column-reverse;
             p {
                 padding-left: 20px;
+            }
+        }
+        @include tablet {
+            flex-direction: column;
+            &-section {
+                height: 285px;
+                width: 100%;
             }
         }
     }
