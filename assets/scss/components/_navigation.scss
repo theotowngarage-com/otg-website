@@ -7,8 +7,8 @@
   z-index: 1000;
   transition: all 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);
   // height: 164px;
-  padding-top: 57px;
-  padding-bottom: 57px;
+  padding-top: 22px;
+  padding-bottom: 22px;
   background: $white;
 
   &> .container {
@@ -25,7 +25,6 @@
   .navbar-brand{
     padding: 0;
     margin: auto 0;
-    // height: 4rem;
     img{
       max-width: 78px;
     }
@@ -56,7 +55,6 @@
     }
     &:last-child{
       margin-left: auto;
-      align-self: flex-end;
     }
     @include tablet{
       &:last-child{
@@ -135,12 +133,13 @@
     $navbar-light-toggler-icon-bg:      url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='#{$navbar-light-icon-color}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>") !default;
     $navbar-dark-toggler-icon-bg:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='#{$navbar-dark-icon-color}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>") !default;
 
-    a.navbar-brand{
-      // float: left;
-      position: fixed;
-      inset-inline-start: 0px;
-      inset-block-start: 0px;
-      margin-top: 15px;
+    &>.container {
+      display: relative;
+    }
+    a.navbar-brand {
+      // detach the icon from the document flow,
+      // allowing for the burger menu to take the entire width of the container
+      position: absolute;
       img{
         max-width: 78px;
       }
@@ -168,7 +167,6 @@
           width: 1.5em;
           height: 1.5em;
           content: $navbar-light-toggler-icon-bg;
-          margin: auto;
         }
       }
     }
