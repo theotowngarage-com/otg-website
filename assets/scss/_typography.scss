@@ -29,7 +29,7 @@ h4, h5, h6, p {
 }
 
 // <p1> in Figma is <p> in css
-p {
+p, a {
   font-size: 20px;
   @include desktop {
     font-size: 16px;

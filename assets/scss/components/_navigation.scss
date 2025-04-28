@@ -6,14 +6,19 @@
   width: 100%;
   z-index: 1000;
   transition: all 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);
-  // height: 164px;
   padding-top: 22px;
   padding-bottom: 22px;
   background: $white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &> .container {
     display: flex;
     flex-direction: row;
+    margin: auto;
+    // margin-top: auto;
+    // margin-bottom: auto;
   }
 
   @include desktop{
@@ -21,6 +26,10 @@
     border-radius: 5px;
     top: 0;
     width: calc(100% - 20px);
+  }
+  @include not-desktop{
+    max-height: 164px;
+    height: 164px;
   }
   .navbar-brand{
     padding: 0;
@@ -41,7 +50,6 @@
 
     .nav-link{
       font-weight: 400;
-      font-size: 20px;
       transition: all .3s ease;
       padding: 15px 18px;
       display: inline-block;
@@ -88,7 +96,40 @@
     justify-content: flex-end;
   }
   a {
+    font-family: $secondary-font;
     text-decoration-line: none;
+    font-weight: 550!important;
+    color: $secondary-color-2;
+    &:hover{
+      // Add style when hovering
+      color: $accent-color-2;
+    }
+    
+    &:visited{
+      // Add style for when the link was already visited
+      color: $secondary-color-2;
+      &:hover {
+        color: $accent-color-2;
+      }
+    }
+  }
+
+  .nav-item-btn {
+    a {
+      color: $white;
+    }
+    &:hover{
+      // Add style when hovering
+      color: $white;
+    }
+    
+    &:visited{
+      // Add style for when the link was already visited
+      color: $white;
+      &:hover {
+        color: $white;
+      }
+    }
   }
 
   ///// Mobile
