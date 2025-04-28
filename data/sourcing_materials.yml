@@ -1,0 +1,69 @@
+invitation:
+  title: Looking for building materials?
+  description: Check out what we recommend
+  link: /sourcing
+  link_text: Building materials
+  image: images/icons/shop.svg
+
+table:
+  - place: OLT
+    link: https://olt.dk
+    price: €€
+    proximity: 3 km
+    selection: very good
+    open_hours: 
+      - "Mon-Fri: 8:00-17:00"
+      - "Sat: 8:00-12:00"
+  - place: Røde Kors
+    link:
+    price: €€
+    proximity: 1,1 km
+    selection: Poor
+    open_hours:
+      - "Thu: 13:00 - 16:00"
+      - "Sat: 9:00 - 12:00"
+  - place: Hjem og Fix
+    link:
+    price: €€
+    proximity: 4,5 km
+    selection: Average
+    open_hours:
+      -  "Mon-Sun: 8:00-19:00"
+  - place: Silvan
+    link:
+    price: €€€
+    proximity: 4,5 km
+    selection: Average
+    open_hours:
+      -  "Mon-Fri: 8:00-19:00"
+      - "Sat-Sun: 9:00-19:00"
+  - place: Bauhaus
+    link:
+    price: €€€
+    proximity: 4,5 km
+    selection: Good
+    open_hours: "Mon-Fri: 8:00-20:00"
+  - place: Biltema
+    link:
+    price: €€€
+    proximity: 4,5 km
+    selection: Ok
+    open_hours:
+      -  "Mon-Fri: 8:00-20:00"
+      - "Sat-Sun: 9:00-18:00"
+  - place: Ståby Savværk
+    link:
+    price: €€
+    proximity: 25km
+    selection: Good
+    open_hours: 
+      - "Mon-Thu: 8:00-17:00"
+      - "Fri: 8:00-12:00"
+  - place: Jern & metalhandel
+    link:
+    price: €
+    proximity: 2,3 km
+    selection: Poor
+    open_hours: 
+      - "Mon-Thu: 7:30-16:00"
+      - "Fri: 7:30-15:30"

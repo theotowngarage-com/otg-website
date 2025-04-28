@@ -1,16 +1,14 @@
 {{/*  Include this partial inside a <div class="container"></div>  */}}
-<div class="invitation">
-    {{ with .context.invitation }}
+<div class="invitation flex-row">
     {{/*  This div allows to center the gray square  */}}
-    <div class="iconography col-md-4 desktop-only">
+    <div class="iconography">
         <div> 
-            <img src="{{ .image }}"/>
+            <img src="{{ .image | absURL }}"/>
         </div>
     </div>
-    <div class="col-sm-12 col-md-8">
+    <div class="invitation-details">
         <h3>{{ .title }}</h3>
         <p>{{ .description }}</p>
         <a href="{{ .link | absURL }}"><div class="link">{{ .link_text }}</div></a>
     </div>
-    {{ end }}
 </div>

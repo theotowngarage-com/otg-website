@@ -1,0 +1,114 @@
+// ----------------------------------------
+// // ------ tables config ------
+// ----------------------------------------
+
+// ----------------------------------------
+// // ------ colors ------
+// ----------------------------------------
+
+$table-border-color: $primary-color;
+$table-header-color: $secondary-color-2;
+$table-header-color-font: $white;
+
+// ----------------------------------------
+// // ------ table settings ------
+// ----------------------------------------
+
+$table-border-width: .071428571em;
+$table-border-style: solid;
+$table-margin-bottom: 1.529411765em;
+$table-cell-padding: .470588235em;
+$table-cell-text-align: center;
+$table-cell-border-top: $table-border-width $table-border-style $table-border-color;
+$table-header-font-weight: bold;
+$table-body-border-top: .142857143em $table-border-style $table-border-color;
+$table-condensed-padding: .294117647em;
+$table-bordered-border: $table-border-width $table-border-style $table-border-color;
+$table-bordered-border-radius: .470588235em;
+$table-border-left: $table-border-width $table-border-style $table-border-color;
+$table-bordered-child-radius: .470588235em;
+
+/* =============================================================
+
+    Tables v1.0
+    Simple table styling by Chris Ferdinandi.
+    http://gomakethings.com
+
+    Adapted from Twitter Bootstrap.
+    http://twitter.github.com/bootstrap/
+
+    Licensed under the Apache License v2.0
+    http://www.apache.org/licenses/LICENSE-2.0
+
+ * ============================================================= */
+
+
+/* =============================================================
+    TABLES
+    Table styling.
+ * ============================================================= */
+
+/*  Removes default browser settings
+ *  and evens out inconsistencies. */
+table {
+    max-width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+/*  Sets table width to 100%.
+ *  Adds bottom-margin. */
+.table,
+%table {
+    width: 100%;
+    margin-bottom: $table-margin-bottom;
+}
+
+
+
+.table tr:nth-child(even),
+%table tr:nth-child(even) {
+    background-color: $primary-color;
+}
+/*  Adds table cell padding,
+ *  aligns text to the left,
+ *  and adds a top border to each cell. */
+.table th,
+%table th,
+.table td,
+%table td {
+    padding: $table-cell-padding;
+    text-align: $table-cell-text-align;
+    border-top: $table-cell-border-top;
+    vertical-align: middle;
+}
+
+.table thead,
+%table thead {
+    td {
+        color: $table-header-color-font;
+    }
+    background-color: $table-header-color;
+}
+
+/*  Removes the border-top from the first row. */
+.table thead:first-child tr th,
+%table thead:first-child tr th,
+.table thead:first-child tr td,
+%table thead:first-child tr td {
+    border-top: 0;
+}
+
+/*  Adds border-top between two table-body sections. */
+.table tbody + tbody,
+%table tbody + tbody {
+    border-top: $table-body-border-top;
+}
+
+/*  Reduces cell padding */
+.table-condensed th,
+%table-condensed th,
+.table-condensed td,
+%table-condensed td {
+    padding: $table-condensed-padding;
+}

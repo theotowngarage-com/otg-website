@@ -10,11 +10,15 @@
     ))
   }}
   <div class="section-pad">
-    <div class="site-project-single section-pad">
-      <div class="container description">
+    <div class="flex-row">
+      <div class="description">
         {{ .Content }}
       </div>
-      <div class="section-pad"></div>
+      <div class="description-invitation">
+        {{ partial "invitation.html" .Site.Data.sourcing_materials.invitation }}
+      </div>
+    </div>
+    <div class="section-pad">
       <div class="description-2">
         {{ with .Resources.Get "sub.png" }}
           <img class="description-img" src="{{ .Permalink }}"/>
@@ -27,6 +31,7 @@
           </div>
         </div> 
       </div>
+    </div>
 
 
       {{/*  Image gallery  */}}
@@ -68,7 +73,5 @@
     </div>
   </div>
 </section>
-
-{{/* partial "call-to-action.html" . */}}
 
 {{ end }}

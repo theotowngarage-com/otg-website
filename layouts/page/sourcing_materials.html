@@ -1,0 +1,46 @@
+
+{{ define "main" }}
+<section class="section-workspace">
+  {{ partial "pic_banner.html" 
+    (dict "context" (dict 
+      "img" (resources.Get "images/source_materials.png").Permalink
+      "title" .Title
+    )) }}
+  <div class="container section-pad">
+    {{ .Content }}
+  </div>
+
+  {{ with .Site.Data.sourcing_materials.table }}
+  <div class="container">
+    <table class="table table-bordered table-hover dt-responsive">
+      <caption class="text-center">Find the best place to get your materials</caption>
+      <thead>
+        <tr>
+          <td> Place </td>
+          <td> Price </td>
+          <td> Proximity </td>
+          <td> Selection </td>
+          <td> Opening hours </td>
+        </tr>
+      </thead>
+      {{ range . }}
+        <tr>
+          <td>{{ .place }}</td>
+          <td>{{ .price }}</td>
+          <td>{{ .proximity }}</td>
+          <td>{{ .selection }}</td>
+          <td>
+            {{ if (reflect.IsSlice .open_hours) }}
+            {{ range .open_hours }} {{.}}<br/> {{ end }}
+            {{ else }}
+            {{ .open_hours }}
+            {{ end }}
+          </td>
+        </tr>
+      {{ end }}
+    </table>
+  </div>
+  {{ end }}
+  
+</section>
+{{ end }}

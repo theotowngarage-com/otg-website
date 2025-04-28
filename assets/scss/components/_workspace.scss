@@ -1,4 +1,24 @@
 .section-workspace {
+    .section-pad >.flex-row {
+        justify-content: space-around;
+        align-items: center;
+        @include desktop-lg {
+            flex-wrap: wrap;
+        }
+        column-gap: 50px;
+    }
+    .description {
+        padding: 0 29px;
+        flex-basis: 40%;
+        @include not-desktop-lg {
+            flex-basis: 45%;
+        }
+        flex-grow: 1;
+    }
+    .description-invitation {
+        flex-grow: 1;
+    }
+
     .description-2 {
         background-color: $primary-color;
         display: flex;

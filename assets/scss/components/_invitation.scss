@@ -2,6 +2,9 @@
     padding-top: $section-padding;
     padding-bottom: $section-padding;
     display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    column-gap: 43px;
     .iconography {
         width: fit-content;
         & > div {
@@ -17,7 +20,10 @@
                 height: 82px;
             }
         }
-        margin-right: 80px;
+        margin-bottom: 30px;
+    }
+    &-details {
+        margin-bottom: 30px;
     }
     h3 {
         color: $secondary-color;
@@ -37,11 +43,7 @@
             width:24px;
         }
         .link {
-            // span {
-                margin: auto 0;
-            // }
-            // display: inline-block;
-
+            margin: auto 0;
         }
     }
 }

@@ -14,7 +14,7 @@
         <p>{{ .description }}</p>
       </details>
       {{ end }}
-      {{ partial "invitation.html" (dict "context" . "invitation" .invitation) }}
+      {{ partial "invitation.html" .invitation }}
     </div>
   </div>
   {{ end }}
