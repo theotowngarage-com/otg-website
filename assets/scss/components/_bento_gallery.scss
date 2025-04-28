@@ -3,7 +3,7 @@
     gap: 10px;
     display: grid;
     grid-auto-flow: dense;
-    grid-template-columns: repeat(6, 1fr);;
+    grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(2, 12rem);
     @include tablet {
         grid-template-columns: 2fr;

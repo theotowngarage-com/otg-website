@@ -1,0 +1,13 @@
+{{ with .context }}
+<div class="pic-banner img-gradient {{ .css_classes }}">
+  <img class="pic-banner-background" alt="{{ .img }}" src="{{ .img }}"/>
+  <div class="container pic-banner-content">
+    {{ with .subtitle }}
+    <h3>{{ . }}</h3>
+    {{ end }}
+    {{ with .title }}
+    <h1>{{ . }}</h1>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

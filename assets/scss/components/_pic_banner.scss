@@ -1,0 +1,30 @@
+
+.pic-banner {
+    --title-max-height: 329px;
+    @include tablet {
+        --title-max-height: 260px;
+    }
+    max-height: var(--title-max-height);
+    position: relative;
+    height: var(--title-max-height);
+    position: relative;
+    &-background {
+        z-index: -3;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        max-height: var(--title-max-height);
+    }
+    &-content {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        justify-content: flex-end;
+        padding-bottom: 30px;
+        @include tablet {
+            gap: 6px;
+            padding-bottom: 20px;
+        }
+    }
+}

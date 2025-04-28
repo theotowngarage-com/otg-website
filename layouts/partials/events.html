@@ -1,20 +1,21 @@
-
 <section class="site-events section-pad" id="events">
-    {{ with .Site.Data.events }}
-    <div class="container">
-        <div class="events-inner col-sm-12 col-lg-9 mx-auto">
-        <div class="section-title">
-            <h2>{{ .title }}</h2>
-        </div>
-        {{ range .events }}
-            <details>
-                <summary><h4>{{ .summary }}</h4> {{ readFile "static/images/icons/expand-details.svg" | safeHTML }}</summary>
-                <p>{{ .description }}</p>
-            </details>
-        {{ end }}
-            
-            {{ partial "invitation.html"  (dict "context" . "invitation" .invitation) }}
-            {{ end }}
-        </div>
+  {{ with .Site.Data.events }}
+  <div class="container">
+    <div class="events-inner col-sm-12 col-lg-9 mx-auto">
+      <div class="section-title">
+        <h2>{{ .title }}</h2>
+      </div>
+      {{ range .events }}
+      <details>
+        <summary>
+          <h4>{{ .summary }}</h4>
+          {{ readFile "static/images/icons/expand-details.svg" | safeHTML }}
+        </summary>
+        <p>{{ .description }}</p>
+      </details>
+      {{ end }}
+      {{ partial "invitation.html" (dict "context" . "invitation" .invitation) }}
     </div>
+  </div>
+  {{ end }}
 </section>

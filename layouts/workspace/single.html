@@ -1,19 +1,14 @@
 {{ define "main" }}
 
 <section class="section-workspace">
-  <div class="workspace-title bento-bg">
-    {{ with .Resources.Get "background.jpg" }}
-    <!-- For some crazy reason, the {{ .Permalink }} in the <div> returns the hash instead of a link to the image ... -->
-    <!-- <div class="workspace-title" style="background-image: url({{ .Permalink }})"> -->
-    <img class="workspace-title-background" src="{{ .Permalink }}"/>
-    {{ end }}
-    <div class="container workspace-title-content">
-      <h3>Facilities</h3>
-      <h1>
-        {{ .Title }}
-      </h1>
-    </div>
-  </div>
+  {{ partial "pic_banner.html" 
+    (dict "context" (dict 
+      "img" (.Resources.Get "background.jpg").Permalink
+      "title" .Title
+      "subtitle" "Facilities"
+      "css_classes" "img-tint"
+    ))
+  }}
   <div class="section-pad">
     <div class="site-project-single section-pad">
       <div class="container description">
@@ -43,13 +38,14 @@
       </div>
       {{ end }}  */}}
 
+      {{ if or .PrevInSection .NextInSection }}
       <div class="container workspace-other section-pad">
         {{ with .PrevInSection }}
         {{$other := .}}
         {{ with .Resources.Get "background.jpg" }}
         {{$image := .}}
         <a href="{{ $other.Permalink}}" 
-          class="bento-bg workspace-other-section"
+          class="img-tint img-gradient img-rounded hover-rm-img-tint workspace-other-section"
           style="background-image: url({{ $image.Permalink }});">
           <p>{{$other.Title}}</p>
         </a>
@@ -59,8 +55,8 @@
         {{$other := .}}
         {{ with .Resources.Get "background.jpg" }}
         {{$image := .}}
-        <a href="{{ $other.Permalink}}" 
-          class="bento-bg workspace-other-section"
+        <a href="{{ $other.Permalink}}"
+          class="img-tint img-gradient img-rounded hover-rm-img-tint workspace-other-section"
           style="background-image: url({{ $image.Permalink }});">
           <p>{{$other.Title}}</p>
         </a>
@@ -68,6 +64,7 @@
         {{ end }}
         <h4>Other facilities</h4>
       </div>
+      {{ end }}
     </div>
   </div>
 </section>

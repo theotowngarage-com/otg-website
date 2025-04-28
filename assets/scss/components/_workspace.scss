@@ -1,47 +1,4 @@
 .section-workspace {
-    .workspace-title {
-        --title-max-height: 330px;
-        @include tablet {
-            --title-max-height: 260px;
-        }
-        max-height: var(--title-max-height);
-        position: relative;
-        height: var(--title-max-height);
-
-        h1, h2, h3 {
-            color: $white;
-        }
-
-        .bento-bg {
-            &::before { // gradient
-                z-index: -1; 
-            }
-            &::after { // tint
-                z-index: -2;
-            }
-        }
-        &-background {
-            z-index: -3;
-            position: absolute;
-            width: 100%;
-            object-fit: cover;
-            max-height: var(--title-max-height);
-        }
-
-        &-content {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-            justify-content: flex-end;
-            padding-bottom: 30px;
-            @include tablet {
-                gap: 6px;
-                padding-bottom: 20px;
-            }
-        }
-
-    }
-
     .description-2 {
         background-color: $primary-color;
         display: flex;

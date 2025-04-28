@@ -17,15 +17,6 @@
     margin-bottom: 8px;
   }
 
-  .bento-bg:hover {
-    &::before {
-      mix-blend-mode: none;
-      background: none;
-    }
-    &::after {
-      background: none;
-    }
-  }
 
 
   .grid {
