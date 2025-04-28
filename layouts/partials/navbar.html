@@ -8,41 +8,50 @@
         <img class="avatar-img" src="{{ .Site.Params.logo | absURL }}" alt="{{ .Site.Title }}" />
       {{ end }}
     </a>
+
     <!-- mobile burger menu -->
     <details class="mobile-only navbar-nav">
       <summary data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <p><!-- contains burger menu icon --></p> 
       </summary>
       <ul class="navbar-nav-list">
-        {{ range $index, $element := .Site.Menus.nav }} 
-        <li class="nav-item">
-          <a class="nav-link" href='{{ absURL .URL }}'>{{ .Name }}</a>
-        </li>
+        {{ range $index, $btn := .Site.Menus.nav }}
+          <li class="nav-item">
+            <a class="nav-link" href='{{ absURL .URL }}'>
+              {{ with .Params.icon }}<i class="fa fa-{{ . }}"></i>{{ end }}
+              {{ .Name }}
+            </a>
+          </li>
         {{ end }}
       {{$menu := (.Site.Menus.nav_right)}}
       {{$len := (len $menu)}} 
-      {{ range $index, $element := $menu }} 
+      {{ range $index, $btn := $menu }} 
         <li class="nav-item">
           {{ if eq (add $index 1) $len }}
             <a
               class="btn nav-item-btn"
-              href='{{ absURL .URL }}'
+              href='{{ absURL $btn.URL }}'
             >
-              <span data-text="{{ .Name }}">
-                {{ .Name }}
+              <span data-text="{{ $btn.Name }}">
+                {{ with .Params.icon }}<i class="fa fa-{{ . }}"></i>{{ end }}
+                {{ $btn.Name }}
               </span>
             </a>
           {{ else if eq (add $index 2) $len }}
           <a
             class="btn btn-outline nav-item-btn"
-            href='{{ absURL .URL }}'
+            href='{{ absURL $btn.URL }}'
           >
-            <span data-text="{{ .Name }}">
-              {{ .Name }}
+            <span data-text="{{ $btn.Name }}">
+              {{ with .Params.icon }}<i class="fa fa-{{ . }}"></i>{{ end }}
+              {{ $btn.Name }}
             </span>
           </a>
         {{ else }}
-            <a class="nav-link" href='{{ absURL .URL }}'>{{ .Name }}</a>
+            <a class="nav-link" href='{{ absURL $btn.URL }}'>
+              {{ with .Params.icon }}<i class="fa fa-{{ . }}"></i>{{ end }}
+              {{ $btn.Name }}
+            </a>
           {{ end }} 
         </li>
       {{ end }}
@@ -51,7 +60,7 @@
 
     <!-- desktop navigation menu -->
     <ul class="desktop-only navbar-nav navbar-nav-list">
-      {{ range $index, $element := .Site.Menus.nav }} 
+      {{ range $index, $btn := .Site.Menus.nav }} 
       <li class="nav-item">
         <a class="nav-link" href='{{ absURL .URL }}'>{{ .Name }}</a>
       </li>
@@ -60,37 +69,34 @@
     <ul class="desktop-only navbar-nav navbar-nav-list navbar-right">
       {{$menu := (.Site.Menus.nav_right)}}
       {{$len := (len $menu)}} 
-      {{ range $index, $element := $menu }} 
+      {{ range $index, $btn := $menu }} 
 
-      <li class="nav-item">
-      {{ if eq (add $index 2) $len }}
-      <a
-        class="btn btn-outline nav-link"
-        href='{{ absURL .URL }}'
-      >
-        <span class="btn-area">
-          <span data-text="{{ .Name }}">
-            {{ .Name }}
-          </span>
-        </span>
-      </a>
-    {{ else if eq (add $index 1) $len }}
-      <a
-        class="nav-link btn"
-        href='{{ absURL .URL}}'
-      >
-        <span class="btn-area">
-          <span data-text="{{ .Name }}">
-            {{ .Name }}
-          </span>
-        </span>
-      </a>
-    {{ else }}
-    <li class="nav-item">
-      <a class="nav-link" href='{{ absURL .URL }}'>{{ .Name }}</a>
-    </li>
-    {{ end }}
-      </li>
+        <li class="nav-item">
+          {{ if eq (add $index 2) $len }}
+            <a class="btn btn-outline nav-link" href='{{ absURL .URL }}'>
+              <span class="btn-area">
+                <span data-text="{{ .Name }}">
+                  {{ with .Params.icon }}<i class="fa fa-{{ . }}"></i>{{ end }}
+                  {{ .Name }}
+                </span>
+              </span>
+            </a>
+          {{ else if eq (add $index 1) $len }}
+            <a class="btn nav-link" href='{{ absURL .URL }}'>
+              <span class="btn-area">
+                <span data-text="{{ .Name }}">
+                  {{ with .Params.icon }}<i class="fa fa-{{ . }}"></i>{{ end }}
+                  {{ .Name }}
+                </span>
+              </span>
+            </a>
+          {{ else }}
+            <a class="nav-link" href='{{ absURL .URL }}'>
+              {{ with .Params.icon }}<i class="fa fa-{{ . }}"></i>{{ end }}
+              {{ .Name }}
+            </a>
+          {{ end }}
+        </li>
       {{ end }}
     </ul>
   </div>

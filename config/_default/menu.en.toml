@@ -16,6 +16,8 @@
     name    = "Log in"
     url     = "https://members.theotowngarage.com"
     weight  = 5
+    [[nav_right.params]]
+        icon    = "user"
 # The last item is highlighted
 [[nav_right]]
     name    = "Become a member"
