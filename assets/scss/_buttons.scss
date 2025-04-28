@@ -37,3 +37,40 @@
 
 }
 
+.btn-outline {
+  font-family: $primary-font;
+  font-size: 18px;
+  color: $secondary-color-2;
+  border: 2px solid $secondary-color-2;
+  padding: 14px 24px;
+  background-color: transparent!important;
+  border-radius: 8px;
+  box-shadow: none;
+  padding: 15px 18px;
+  margin: auto;
+  @include desktop{
+    // only applies in desktop window size
+    padding: 17px 40px;
+  }
+  span {
+    color: $secondary-color-2;
+  }
+
+  &:hover{
+    // Add style when hovering
+    border-color: $secondary-color-2;
+    color: $secondary-color-2;
+    // color: $white;
+  }
+
+  &:visited{
+    // Keep default style for when the link was not already visited
+    // necessary because a:visited will apply to the buttons
+    // background-color: $secondary-color-2;
+    color: $white;
+    &:hover {
+      // background-color: $accent-color-2;
+      color: $white;
+    }
+  }
+}

@@ -8,12 +8,12 @@
     @content;
   }
 }
-@mixin tablet{
+@mixin desktop{
   @media(max-width:767px){
     @content;
   }
 }
-@mixin not-tablet{
+@mixin not-desktop{
   @media(min-width:767px){
     @content;
   }

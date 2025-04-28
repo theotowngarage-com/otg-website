@@ -28,7 +28,7 @@
       width: 100%;
     }
 
-    @include tablet{
+    @include desktop{
       // only applies in desktop window size
       &-currency, &-price{
         font-size: 30px;
@@ -44,7 +44,7 @@
     flex-direction: row;
     gap: 82px;
     justify-content: center;
-    @include tablet {
+    @include desktop {
       flex-direction: column;
     }
 

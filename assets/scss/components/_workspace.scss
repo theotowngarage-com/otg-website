@@ -28,7 +28,7 @@
                 padding: 0 50px;
             }
         }
-        @include tablet {
+        @include desktop {
             flex-direction: column;
             .content {
                 margin: 57px 0;
@@ -56,7 +56,7 @@
                 padding-left: 20px;
             }
         }
-        @include tablet {
+        @include desktop {
             flex-direction: column;
             &-section {
                 height: 285px;

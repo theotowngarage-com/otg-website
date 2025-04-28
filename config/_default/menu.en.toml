@@ -12,12 +12,12 @@
     name    = "Code of Conduct"
     url     = "/#coc"
     weight  = 4
-[[nav]]
-    name    = "Member login"
+[[nav_right]]
+    name    = "Log in"
     url     = "https://members.theotowngarage.com"
     weight  = 5
 # The last item is highlighted
-[[nav]]
+[[nav_right]]
     name    = "Become a member"
     url     = "/#memberships"
     weight  = 6

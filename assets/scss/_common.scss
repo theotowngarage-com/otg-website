@@ -14,7 +14,7 @@ body {
   @include desktop{
     top: calc(-$navbar-padding - 22px);
   }
-  @include tablet{
+  @include desktop{
     top: -$navbar-padding;
   }
 }
@@ -40,7 +40,7 @@ body {
 }
 
 .desktop-only {
-  @include tablet{
+  @include desktop{
     display: none!important;
   }
 }
@@ -58,7 +58,7 @@ body {
 }
 
 .mobile-centered {
-  @include tablet{
+  @include desktop{
     width: fit-content;
     margin-left: auto!important;
     margin-right: auto!important;
@@ -68,7 +68,7 @@ body {
 .section-pad {
   padding-top: $section-padding-top;
   padding-bottom: $section-padding-bottom;
-  @include tablet {
+  @include desktop {
     padding-top: $section-padding-mobile-top;
     padding-bottom: $section-padding-mobile-bottom;
   }

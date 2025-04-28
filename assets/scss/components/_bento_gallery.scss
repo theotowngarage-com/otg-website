@@ -5,7 +5,7 @@
     grid-auto-flow: dense;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(2, 12rem);
-    @include tablet {
+    @include desktop {
         grid-template-columns: 2fr;
         grid-template-rows: repeat(6, 12rem);
     }
@@ -26,7 +26,7 @@
             max-width: 90%;
             margin: auto;
             font-size: 32px;
-            @include tablet {
+            @include desktop {
                 font-size: 24px;
             }
         }
@@ -62,7 +62,7 @@
     .grid-1-2 {
         grid-column: span 1;
         grid-row: span 2;
-        @include tablet {
+        @include desktop {
             grid-column: span 2;
             grid-row: span 1;
         }
@@ -71,7 +71,7 @@
     .grid-2-1 {
         grid-column: span 2;
         grid-row: span 1;
-        @include tablet {
+        @include desktop {
             grid-column: span 2;
             grid-row: span 1;
         }

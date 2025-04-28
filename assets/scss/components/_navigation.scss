@@ -53,10 +53,10 @@
       color: $text-color;
       font-weight: inherit;
     }
-    &:last-child{
-      margin-left: auto;
-    }
-    @include tablet{
+    // &:last-child{
+    //   margin-left: auto;
+    // }
+    @include desktop{
       &:last-child{
         margin-left: inherit;
         align-self: inherit;
@@ -64,35 +64,13 @@
     }
   }
 
-  .nav-item-btn {
-    a {
-      color: $white;
-    }
-    &:hover{
-      // Add style when hovering
-      color: $white;
-    }
-    
-    &:visited{
-      // Add style for when the link was already visited
-      color: $white;
-      &:hover {
-        color: $white;
-      }
-    }
-  }
-  
   &.nav-bg{
     padding: 12px 0;
-    @include tablet{
+    @include desktop{
       padding: 15px;
     }
   }
 
-
-  // .navbar-collapse {
-  //   flex-direction: row-reverse;
-  // }
   .navbar-nav {
     width: 100%;
     & ::marker {
@@ -104,26 +82,17 @@
     flex-direction: row;
     // align-items: center;
     margin: auto 0;
+    gap: 14px;
+  }
+  .navbar-right {
+    justify-content: flex-end;
   }
   a {
     text-decoration-line: none;
-    color: $secondary-color;
-    &:hover{
-      // Add style when hovering
-      color: $accent-color-2;
-    }
-    
-    &:visited{
-      // Add style for when the link was already visited
-      color: $secondary-color-2;
-      &:hover {
-        color: $accent-color-2;
-      }
-    }
   }
 
   ///// Mobile
-  @include tablet {
+  @include desktop {
     min-height: 55px;
     padding-top: 5px;
     padding-bottom: 5px;
