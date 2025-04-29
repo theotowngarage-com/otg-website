@@ -5,12 +5,9 @@
 
 Static landing page made with [Hugo] using GitHub Pages.
 
-Learn more about GitLab Pages at https://pages.gitlab.io and the official
-documentation https://docs.gitlab.com/ce/user/project/pages/.
-
 ## GitHub CI
 
-This project's static Pages are built & deployed by [GitHub CI (Actions)][actions], following the steps defined in [`.github/workflows/hugo.yml`](.github/workflows/hugo.yml).
+This project's static Pages are built & deployed by [GitHub CI (Actions)][actions], following the steps defined in [`hugo.yml`].
 
 It can _also_ be built using [GitLab CI][ci], following the steps
 defined in [`.gitlab-ci.yml`](.gitlab-ci.yml).
@@ -23,27 +20,34 @@ Deployment always happen on the latest commit on the master branch.
 
 To work locally with this project, you'll have to follow the steps below:
 
-1. Fork, clone or download this project
 1. Install Hugo (see below)
-1. Preview your project: `hugo server`
-1. Add content. The local preview is rebuilt and refreshed in your browser.
-1. To generate the final static website: `hugo` (optional)
+1. Fork, clone or download this project
+1. Go to the root folder, and run `hugo server`
+1. Preview the website under `localhost:1313/`
+1. Add content, modify the files. The local preview is rebuilt and refreshed in your browser.
+1. commit and push your changes, submit a PR etc :D
+1. (optional) To generate the final static website, simply run `hugo` (see [`hugo.yml`] for deployment optimisations)
 
-Read more at Hugo's [documentation][].
+Read more at Hugo's [documentation].
 
 ### Install Hugo
-<a name="install_hugo">
 
-Install the [extended edition](https://gohugo.io/categories/installation/) of Hugo
+[Install the extended edition] of Hugo (you don't need the extended/deploy edition)
 
-To confirm that it's correctly installed, type `hugo version`.
+To confirm that it's correctly installed, type `hugo version` (only the `+extended` matters).
+
+```
+hugo v0.136.5+extended linux/amd64 BuildDate=unknown VendorInfo=nixpkgs
+```
 
 ### Preview your site
 
-If you clone or download this project to your local computer and run `hugo server`,
-your site can be accessed under `localhost:1313/`.
+Go to the root folder of the project, run `hugo server`,
+and access the website under `localhost:1313/`, or wherever tells you it is.
 
+[`hugo.yml`]: .github/workflows/hugo.yml
 [actions]: https://docs.github.com/en/actions
 [ci]: https://about.gitlab.com/gitlab-ci/
 [hugo]: https://gohugo.io
 [documentation]: https://gohugo.io/overview/introduction/
+[Install the extended edition]: https://gohugo.io/installation/
