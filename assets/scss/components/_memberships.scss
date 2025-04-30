@@ -44,6 +44,7 @@
     flex-direction: row;
     gap: 82px;
     justify-content: center;
+    align-items: center;
     @include desktop {
       flex-direction: column;
     }
