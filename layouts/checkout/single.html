@@ -1,0 +1,93 @@
+{{ define "main" }}
+<section class="signup container">
+    <h1>Sign Up to The O'Town Garage</h1>
+    <form method="POST" class="register-form" id="register-form">
+        <label for="name"><i class="fa fa-user material-icons-name"></i></label>
+        <input type="text" name="name" id="name" required
+            placeholder="Please enter your name">
+
+        <label for="email"><i class="fa fa-envelope"></i></label>
+        <input type="email" name="email" id="email" required
+            placeholder="Your email">
+        <label for="phone"><i class="fa fa-phone"></i></label>
+        <input type="phone" name="phone" id="phone" placeholder="Your phone number">
+        <label for="pass"><i class="fa fa-lock"></i></label>
+        <input type="password" name="pass" id="pass" required
+            placeholder="Password">
+        <label for="repeat_password"><i class="fa fa-lock"></i></label>
+        <input type="password" name="repeat_password" id="re_pass" required
+            placeholder="Repeat your password">
+        <div id="checkboxes">
+            <div class="signup-image-link">
+                <input type="checkbox" name="agree-term1" id="agree-term" class="agree-term">
+                <label for="agree-term" class="label-agree-term"><span><span></span></span>I read <a
+                        href="https://drive.google.com/file/d/1dE5X27IeZYMPg7fpnYREqrXaAmssD8wE/view"
+                        class="term-service">Privacy and Cookie policy of theotowngarage.com
+                        website</a></label>
+            </div>
+            <div class="signup-image-link">
+                <input type="checkbox" name="agree-term2" id="agree-term2" class="agree-term">
+                <label for="agree-term2" class="label-agree-term"><span><span></span></span>I agree with all
+                    statements in <a
+                        href="https://drive.google.com/file/d/1T3F5X2FsVokXx8ktt1WxeB9o0LewlkAt/view"
+                        class="term-service">Terms of membership</a></label>
+            </div>
+            <div class="signup-image-link">
+                <input type="checkbox" name="agree-term3" id="agree-term3" class="agree-term">
+                <label for="agree-term3" class="label-agree-term"><span><span></span></span>I agree and sign
+                    up to the <a
+                        href="https://drive.google.com/file/d/1aVGgF4rSlQ5bLlj5R-N00uTYoIt9U2sY/view"
+                        class="term-service">Liability Waiver</a></label>
+            </div>
+        </div>
+        <button id="checkout-button" class="form-submit">
+            Agree with liability and terms
+        </button>
+    </form>
+</section>
+<script src="https://js.stripe.com/basil/stripe.js"></script>
+<script type="text/javascript">
+    // Create an instance of the Stripe object with your publishable API key
+    const stripe = Stripe('your-publishable-key-here');
+    {{/*  const elements = stripe.elements();
+    const card = elements.create('card');
+    card.mount('#card-element');  */}}
+
+    const form = document.getElementById('registration-form');
+    const errorMessage = document.getElementById('error-message');
+
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        const { token, error } = await stripe.createToken(card);
+
+        if (error) {
+            errorMessage.textContent = error.message;
+        } else {
+            errorMessage.textContent = '';
+            // Send the token and user data to your server
+            fetch('/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password,
+                    stripeToken: token.id
+                })
+            }).then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Registration successful');
+                    } else {
+                        alert('Something went wrong. Please try again.');
+                    }
+                });
+        }
+    });
+</script>
+{{ end }}

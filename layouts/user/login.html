@@ -1,0 +1,166 @@
+<h2 class="login" id="login_word" onclick="openPage('main')">Member login</h2>
+<div id="main">
+
+    <section class="signup">
+        <!--<div class="container"> -->
+        <div class="signup-content">
+            <div class="signup-form">
+                <h2 class="form-title">Log in</h2>
+                <!--<form method="POST" class="register-form" id="register-form">-->
+                <div class="form-group">
+                    <label for="email"><i class="zmdi zmdi-email"></i></label>
+                    <input type="email" name="email" id="email" placeholder="Your member email"
+                        onfocus="this.placeholder = ''">
+                </div>
+                <div class="form-group">
+                    <label for="pass"><i class="zmdi zmdi-lock"></i></label>
+                    <input type="password" name="pass" id="pass" placeholder="Your password"
+                        onfocus="this.placeholder = ''">
+                </div>
+                <div class="form-group form-button">
+                    <button id="checkout-button" class="form-submit">Login</button>
+                    <!--<input type="submit" name="signup" id="checkout-button" class="form-submit" value="Agree with liability and terms & CHECKOUT">
+        -->
+                </div>
+                <!--</form>-->
+            </div>
+            <div class="info_boxes" id="password_recovery" onclick="openPage('main-recover')">Press here if you forgot
+                your password.</div>
+        </div>
+    </section>
+</div>
+<div id="main-recover">
+
+    <section class="signup">
+        <!--<div class="container"> -->
+        <div class="signup-content">
+            <div class="signup-form">
+                <h2 class="form-title">Recover password</h2>
+                <div class="form-group">
+                    <label for="email2"><i class="zmdi zmdi-email"></i></label>
+                    <input type="email2" name="email2" id="email2" placeholder="Enter your member email"
+                        onfocus="this.placeholder = ''">
+                </div>
+                <div class="form-group form-button">
+                    <button id="checkout-button2" class="form-submit">Send new password</button>
+                </div>
+            </div>
+    </section>
+</div>
+<script type="text/javascript">
+    // Create an instance of the Stripe object with your publishable API key
+    /*  const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY); */
+    const stripe = Stripe('your-publishable-key-here');
+    const elements = stripe.elements();
+    const card = elements.create('card');
+    card.mount('#card-element');
+
+    const form = document.getElementById('registration-form');
+    const errorMessage = document.getElementById('error-message');
+
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        const { token, error } = await stripe.createToken(card);
+
+        if (error) {
+            errorMessage.textContent = error.message;
+        } else {
+            errorMessage.textContent = '';
+            // Send the token and user data to your server
+            fetch('/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password,
+                    stripeToken: token.id
+                })
+            }).then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Registration successful');
+                    } else {
+                        alert('Something went wrong. Please try again.');
+                    }
+                });
+        }
+    });
+
+    {{/*  var checkoutButton = document.getElementById('checkout-button');
+    
+    checkoutButton.addEventListener('click', function () {
+        // Create a new Checkout Session using the server-side endpoint you
+        // created in step 3.
+        var inputs = [];
+        var inputs_length = document.getElementsByTagName('input').length;
+        for (i = 0; i < inputs_length; ++i) {
+            inputs.push(document.getElementsByTagName('input')[i].value)
+        }
+        
+        var oldFetch = new XMLHttpRequest();
+        var url = "https://members.theotowngarage.com/login/?"
+        + "email=" + encodeURIComponent(inputs[0])
+        + "&"
+        + "password=" + encodeURIComponent(inputs[1]);
+        oldFetch.open("POST", url);
+        oldFetch.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        oldFetch.send();
+        oldFetch.onreadystatechange = function () {
+            var body;
+            if (oldFetch.readyState === 4 && oldFetch.status === 400) { // readyState 4 is when any status is ready, good as promise
+                body = JSON.parse(oldFetch.response);
+                console.log("body", body.error.details[0].message);
+                window.alert(body.error.details[0].message);
+                return
+            }
+            if (oldFetch.readyState === 4 && oldFetch.status === 200) {
+                return window.location.pathname = "/";
+            }
+        };
+        return
+    });  */}}
+
+
+
+
+    var checkoutButton2 = document.getElementById('checkout-button2');
+    checkoutButton2.addEventListener('click', function () {
+        // Create a new Checkout Session using the server-side endpoint you
+        // created in step 3.
+        var inputs = [];
+        var inputs_length = document.getElementsByTagName('input').length;
+        for (i = 0; i < inputs_length; ++i) {
+            inputs.push(document.getElementsByTagName('input')[i].value)
+        }
+
+        var oldFetch = new XMLHttpRequest();
+        var url = "https://members.theotowngarage.com/login/restore?"
+            + "email=" + encodeURIComponent(inputs[2])
+        oldFetch.open("POST", url);
+        oldFetch.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        oldFetch.send();
+        oldFetch.onreadystatechange = function () {
+            var body;
+            if (oldFetch.readyState === 4 && oldFetch.status === 400) { // readyState 4 is when any status is ready, good as promise
+                body = JSON.parse(oldFetch.response);
+                console.log("body", body.error.details[0].message);
+                window.alert(body.error.details[0].message);
+                return
+            }
+            if (oldFetch.readyState === 4 && oldFetch.status === 200) {
+                //body = oldFetch.response;
+                //console.log(oldFetch.response);
+                //console.log("body", body);
+                window.location.replace("https://members.theotowngarage.com/restoring");
+                //oldFetch.setRequestHeader('Authorization', 'Bearer ' + body.authorization);
+            }
+        };
+        return
+    });
+</script>
