@@ -41,7 +41,8 @@ A shared workshop works best when everyone takes responsibility for keeping it c
 ## Floors & Shared Areas
 - Sweep up dust, shavings, and debris immediately after use.  
 - Do not leave power cords or trip hazards across walkways.  
-- Dispose of waste in the proper bins (general waste, recycling, scrap wood, etc.).  
+- Dispose of waste in the proper bins (metals, plastics, scrap wood, etc.). 
+  > If it does not fit in any category, use the bin labeled "general waste".
 
 ---
 
