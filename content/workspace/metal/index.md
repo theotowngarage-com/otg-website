@@ -36,7 +36,7 @@ draft: false
 - Taps and dies for threading
 - Clamps and C-clamps
 - Measuring tools (calipers, rulers, squares, center punches)
-
+- Wood anvil
 ---
 
 ## Safety Equipment
