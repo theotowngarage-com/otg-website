@@ -1,7 +1,8 @@
 ---
 title: "Woodworking"
-heading: "Woodwork"
+heading: "Woodworking"
 author: "Iustinian Olaru"
+date: 2025-09-08
 logo: logos/wood-workshop.min.svg
 weight: 10
 resources:
