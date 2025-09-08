@@ -6,6 +6,7 @@ enableEmoji   = true
 # Merge sub configs
 _merge = "deep"
 enableRobotsTXT = "true"
+googleAnalytics = "G-2QG0JVPCGE"  # replace with your GA4 Measurement ID
 
 # Site Params
 #   Notes: it seems that, if you need to change 1 value in the params for a language,

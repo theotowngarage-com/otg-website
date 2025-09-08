@@ -4,9 +4,10 @@
 [privacy.disqus]
     disable = true
 [privacy.googleAnalytics]
-    disable = true
-[privacy.instagram]
-    disable = true
+    disable = false
+    anonymizeIP = true           # optional but recommended
+    respectDoNotTrack = true     # optional
+    useSessionStorage = false    # optional, default is fine[privacy.instagram]
 [privacy.twitter]
     disable = true
 [privacy.vimeo]
