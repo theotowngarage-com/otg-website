@@ -1,0 +1,53 @@
+
+svg {
+  .color-primary-fill {
+    fill: $primary-color;
+  }
+  .body-color-fill {
+    fill: $body-color;
+  }
+  .accent-color-fill {
+    fill: $accent-color;
+  }
+  .accent-color-2-fill {
+    fill: $accent-color-2;
+  }
+  .primary-color-fill {
+    fill: $primary-color;
+  }
+  .primary-color-2-fill {
+    fill: $primary-color-2;
+  }
+  .secondary-color-fill {
+    fill: $secondary-color;
+  }
+  .secondary-color-2-fill {
+    fill: $secondary-color-2;
+  }
+
+  .color-primary-stroke {
+    stroke: $primary-color;
+  }
+  .body-color-stroke {
+    stroke: $body-color;
+  }
+  .accent-color-stroke {
+    stroke: $accent-color;
+  }
+  .accent-color-2-stroke {
+    stroke: $accent-color-2;
+  }
+  .primary-color-stroke {
+    stroke: $primary-color;
+  }
+  .primary-color-2-stroke {
+    stroke: $primary-color-2;
+  }
+  .secondary-color-stroke {
+    stroke: $secondary-color;
+  }
+  .secondary-color-2-stroke {
+    stroke: $secondary-color-2;
+  }
+}
+
