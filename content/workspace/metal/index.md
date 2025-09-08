@@ -35,7 +35,7 @@ draft: false
 - Wrenches and spanners
 - Taps and dies for threading
 - Clamps and C-clamps
-- Measuring tools (calipers, rulers, squares, center punches)
+- Measuring tools (calipers, rulers, right angles, speed squares, center punches)
 - Wood anvil
 ---
 
