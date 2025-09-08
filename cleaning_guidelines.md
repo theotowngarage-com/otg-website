@@ -17,18 +17,20 @@ A shared workshop works best when everyone takes responsibility for keeping it c
    Do not wait until the end of your project to start cleaning—wipe, sweep, and organize as you work.
 
 2. **Finish with a reset.**  
-   When you are done, reset the space so that it looks ready for the next member.
+   When you are done, reset the space so that it is ready for the next member to use.
 
 3. **Take personal items home.**  
-   Do not leave projects, scrap, or personal belongings lying around unless you have arranged approved storage.
+   Projects, scrap materials, or personal belongings must be placed in the assigned member box or taken home.
 
 ---
 
 ## Tools & Equipment
 - Return all tools to their **designated storage location**.  
 - **Inspect tools** after use—if something is damaged, label it and notify the group.  
-- Do not leave tools or machines in a state that makes them unsafe or unusable.  
-
+- Do not leave tools or machines in a state that makes them unsafe or unusable.
+- Attach and use vacuum with the tools that have an attachment hole
+- Vacuum the surroundings immediately after finishing work 
+- Use the **appropriately dedicated** workspace for the job (wood in wood workshop; metal in metal workshop etc.)
 ---
 
 ## Workbenches & Surfaces
