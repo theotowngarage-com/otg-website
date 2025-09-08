@@ -66,6 +66,8 @@ A shared workshop works best when everyone takes responsibility for keeping it c
 
 ## Projects in Progress
 - If leaving a project in the shop (with approval), store it neatly in the designated project storage area.  
+- If the project takes multiple days to finish, store it in your member storage. If it does not fit there, then contact a member of the board to agree on a place to store it, and a rough duration for when you plan to finish it.
+- Projects must be labeled with: name, contact information and start date.
 - Clearly **label your project** with your name and date.  
 - Projects left in unauthorized spaces may be moved or discarded.  
 
