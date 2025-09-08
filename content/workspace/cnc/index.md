@@ -1,26 +1,65 @@
 ---
-title: "CnC Router"
-heading: "CnC"
-logo: logos/cnc.svg
-weight: 40
-resources:
-    - name: background_image
-      src: background.jpg
-id: cnc
+title: "CNC Machine"
+author: "Iustinian Olaru"
+date: 2025-09-08
+draft: false
 ---
 
-### The CnC mill will remove the excess material off of a raw piece, usually a block of wood
+## ***Our makerspace is equipped with a **Stepcraft 480 CNC machine**, designed for precision milling, routing, and carving. It’s an excellent tool for creating detailed parts, signs, prototypes, and custom components from a variety of materials.***
 
-<!--more-->
+---
 
-It is more versatile than the laser cutter as it can cut your block at different depth, allowing you a lot of freedom to shape precise pieces. Whether you want to engrave your name, create the landscapes of Mordor or – with the required experience – textured surfaces, ornaments and complex mechanical pieces.
+## Specifications
 
-Supported materials:
-- Wood - various kinds. Maximum cut thickness is about 20mm
-- Plastic - HDPE, PVC. Maximum cut thickness is about 20mm
-- Aluminium - it's only possible to cut thin sheets up to about 4mm
+- **Model:** Stepcraft 480
+- **Work Area:** 420 × 300 mm
+- **Spindle:** Variable speed, compatible with a wide range of bits
+- **Precision:** ±0.1 mm
+- **Control:** PC-driven via CNC software
 
-Machines in makerspace:
-- Small CnC work area: 240 x 180 x 45 mm
-- Medium CnC work area: 591 x 776 x 546 mm Stepcraft 840
+---
 
+## Supported Materials
+
+- Wood and plywood
+- Plastics (e.g., acrylic, polycarbonate)
+- Aluminum (light milling)
+- Composites
+- Foam
+
+---
+
+## Workflow
+
+1. Design your part in CAD software (e.g., Fusion 360, FreeCAD, or SolidWorks).
+2. Create toolpaths in CAM software (e.g., Fusion 360 CAM, VCarve, EstlCAM).
+3. Export G-code for the Stepcraft controller.
+4. Secure your material on the CNC bed with clamps or vacuum hold-down.
+5. Install the correct bit, set zero points, and check clearance.
+6. Run a simulation and test cut before full operation.
+
+---
+
+## Safety & Best Practices
+
+- Always wear safety glasses and ear protection.
+- Make sure material is clamped firmly to avoid shifting.
+- Stand clear of the spindle path during operation.
+- Never leave the machine unattended while running.
+- Clean chips and dust after each session using the vacuum system.
+
+---
+
+## Additional Tools & Equipment
+
+- Collets and bit set (end mills, V-bits, ball nose, etc.)
+- Calipers for measurement
+- Clamps and hold-down fixtures
+- Dust extraction system
+- Lubricant for metal machining (if required)
+
+---
+
+## Getting Started
+
+New members must complete an introduction to the CNC machine before use. This training covers CAD/CAM basics, machine setup, tool changing, and safety procedures.  
