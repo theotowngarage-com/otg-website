@@ -1,5 +1,5 @@
 ---
-title: "Wood workshop"
+title: "Woodworking"
 heading: "Woodwork"
 author: "Iustinian Olaru"
 logo: logos/wood-workshop.min.svg
