@@ -9,7 +9,7 @@ resources:
       src: background.jpg
 id: wood-workshop
 ---
-### Our makerspace is equipped with a dedicated wood workshop designed for both beginners and experienced makers. Whether you’re working on furniture, art pieces, or simple DIY projects, you’ll find the tools and equipment needed to bring your ideas to life.
+## ***Our makerspace is equipped with a dedicated wood workshop designed for both beginners and experienced makers. Whether you’re working on furniture, art pieces, or simple DIY projects, you’ll find the tools and equipment needed to bring your ideas to life.***
 
 ---
 
