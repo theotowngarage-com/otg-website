@@ -73,6 +73,7 @@ A shared workshop works best when everyone takes responsibility for keeping it c
 - Floors swept  
 - Trash emptied if full  
 - Lights off and machines powered down  
+- Back door must be locked
 
 ---
 
