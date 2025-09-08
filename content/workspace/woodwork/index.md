@@ -35,7 +35,7 @@ Please follow all posted safety guidelines and ask an experienced member if you 
 - Cordless drills and drivers
 - Circular saws
 - Jigsaws
-- Random orbital sanders
+- Orbital sanders
 - Angle grinder
 - Heat gun
 
