@@ -4,7 +4,10 @@
       <div class="col-lg-6">
         <!-- See filters for changing the secondary color so they don't blend 
           https://developer.mozilla.org/en-US/docs/Web/SVG/Element/feComponentTransfer -->
-        <div class="site-footer-logo"><a href="{{ .Site.BaseURL }}"><img src="{{ "images/logo-light.svg" | absURL }}" alt="logo-footer"></a></div>
+        <div class="site-footer-logo"><a href="{{ .Site.BaseURL }}">
+          <!-- Inject the SVG element -->
+          {{ readFile "static/images/logo-light.svg" | safeHTML }}
+        </a></div>  
         <h4 class="site-footer-tagline mobile-centered">Your very own makerspace</h4>
         {{ with .Site.Params.footer.social }}
         <ul class="site-footer-social mobile-centered">
