@@ -27,7 +27,7 @@ A shared workshop works best when everyone takes responsibility for keeping it c
 ## Tools & Equipment
 - Return all tools to their **designated storage location**.  
 - **Inspect tools** after use—if something is damaged, label it and notify the group.  
-- Do not leave tools or machines in a state that makes them unsafe or unusable.  
+- Leave tools and machines in a safe and usable state. 
 
 ---
 
