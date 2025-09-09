@@ -49,30 +49,3 @@
 @import "components/values";
 
 @import "components/workspace";
-
-/* Vertical rhythm for Workspace page Markdown content */
-.section-workspace .description {
-  /* Single knob to adjust spacing */
-  --section-gap: 2.5rem;
-
-  /* Headings */
-  h2 { margin-top: calc(var(--section-gap) * 1.2); margin-bottom: 0.75rem; }
-  h3 { margin-top: var(--section-gap);              margin-bottom: 0.5rem; }
-  h4, h5, h6 { margin-top: 1.25rem;                 margin-bottom: 0.5rem; }
-
-  /* Paragraphs, lists, tables, blockquotes */
-  p, ul, ol, table, blockquote {
-    margin-top: 0.75rem;
-    margin-bottom: 0.75rem;
-  }
-
-  /* Optional: a bit of space between list items */
-  li { margin: 0.25rem 0; }
-
-  /* Your Markdown `---` separators */
-  hr {
-    margin-block: var(--section-gap);
-    border: none;
-    border-top: 1px solid rgba(0,0,0,0.15); /* tweak to match your theme */
-  }
-}
