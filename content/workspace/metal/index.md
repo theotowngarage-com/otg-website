@@ -13,7 +13,7 @@ draft: false
 
 - Bench grinder – for sharpening, deburring, and shaping metal
 - Drill press – accurate drilling into a wide range of metals
-- Metal cutting bandsaw – for precise straight and angled cuts
+- pipe-cutting bandsaw – for cutting pipes, aluminum profiles
 - Bench vise – secure hold for cutting, filing, and assembly
 
 ---
