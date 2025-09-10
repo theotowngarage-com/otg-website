@@ -55,7 +55,8 @@ draft: false
 - Collets and bit set (end mills, V-bits, ball nose, etc.)
 - Calipers for measurement
 - Clamps and hold-down fixtures
-- Dust extraction system
+- Vacuum cleaner
+- ```
 - Lubricant for metal machining (if required)
 
 ---
