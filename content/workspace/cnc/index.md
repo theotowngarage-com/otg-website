@@ -34,7 +34,7 @@ draft: false
 1. Design your part in CAD software (e.g., Fusion 360, FreeCAD, or SolidWorks).
 2. Create toolpaths in CAM software (e.g., Fusion 360 CAM, VCarve, EstlCAM).
 3. Export G-code for the Stepcraft controller.
-4. Secure your material on the CNC bed with clamps or vacuum hold-down.
+4. Secure your material on the CNC bed with screws. Make sure that screws do not go through sacrificial fiber-wood board.
 5. Install the correct bit, set zero points, and check clearance.
 6. Run a simulation and test cut before full operation.
 
