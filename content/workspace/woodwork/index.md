@@ -1,6 +1,8 @@
 ---
-title: "Wood workshop"
-heading: "Woodwork"
+title: "Woodworking"
+heading: "Woodworking"
+author: "Iustinian Olaru"
+date: 2025-09-08
 logo: logos/wood-workshop.min.svg
 weight: 10
 resources:
@@ -9,17 +11,10 @@ resources:
 id: wood-workshop
 ---
 
-### Our garage has plenty of room for you and your next wood project.
+**Our makerspace is equipped with a dedicated wood workshop designed for both beginners and experienced makers. Whether you’re working on furniture, art pieces, or simple DIY projects, you’ll find the tools and equipment needed to bring your ideas to life.**
 
-<!--more-->
+### Getting Started
 
-The space can accommodate wood pieces of varying lenght, including oversize. You will find a storage space with plenty of pieces to start with on top, easily accessible. The ventilation system is thought through to evacuate the sawdust. Safety equipment is also available on site.
+New members can request an introduction to the wood workshop during open hours. This ensures you know how to safely and effectively use the equipment.
 
-- Table saw
-- Miter saw
-- Planer
-- Hand held router
-- Table router
-- Plunge saw
-- Drill press
-- bunch of power tools and much more!!
+Please follow all posted safety guidelines and ask an experienced member if you need guidance before using any machine.
