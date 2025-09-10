@@ -26,7 +26,8 @@ A shared workshop works best when everyone takes responsibility for keeping it c
 
 ## Tools & Equipment
 - Return all tools to their **designated storage location**.  
-- **Inspect tools** after use—if something is damaged, label it and notify the group.  
+- If  you **notice damage to a tool**, label it and notify the group on Discord [#ask-for-help](https://discord.com/channels/1330501220959256667/1342501102410534913).
+```1
 - Do not leave tools or machines in a state that makes them unsafe or unusable.
 - Attach and use vacuum with the tools that have an attachment hole
 - Vacuum the surroundings immediately after finishing work 
