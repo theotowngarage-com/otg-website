@@ -24,7 +24,6 @@ draft: false
 - Wood and plywood
 - Plastics (e.g., acrylic, polycarbonate)
 - Aluminum (light milling)
-- Composites
 - Foam
 
 ---
