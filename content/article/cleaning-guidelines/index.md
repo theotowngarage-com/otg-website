@@ -22,12 +22,20 @@ A shared workshop works best when everyone takes responsibility for keeping it c
 ---
 
 ## General Guidelines
-1. **Tidy as you go.**  
+
+1. **Gather your tools**
+   Before starting any work, take stock if all the cleaning supplies and tools are available for the job.   
+
+2. **Tidy as you go.**  
    Do not wait until the end of your project to start cleaning—wipe, sweep, and organize as you work.
 
-2. **Finish with a reset.**  
+3. **Finish with a reset.**  
    When you are done, reset the space so that it is ready for the next member to use.
+   Leave it better than you found it.
+   Think of the next member who will use the space.
 
-3. **Take personal items home.**  
+4. **Take personal items home.**  
    Projects, scrap materials, or personal belongings must be placed in the assigned member box or taken home.
 
+5. **Respect shared resources.**
+   Return all tools to their designated storage location.
