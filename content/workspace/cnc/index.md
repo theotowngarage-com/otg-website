@@ -53,7 +53,7 @@ draft: false
 
 - Collets and bit set (end mills, V-bits, ball nose, etc.)
 - Calipers for measurement
-- Clamps and hold-down fixtures
+- Hold-down fixtures with screws and glue tape
 - Vacuum cleaner
 - ```
 - Lubricant for metal machining (if required)
