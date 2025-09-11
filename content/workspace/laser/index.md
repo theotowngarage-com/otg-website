@@ -41,9 +41,10 @@ id: laser
 
 1. Prepare your design in vector software (e.g., Inkscape, Illustrator, CorelDRAW).
 2. Export to the required file format (usually `.dxf` or `.svg`).
-3. Load material securely on the cutting bed.
-4. Configure power, speed, and focus settings according to the material.
-5. Run a small test cut before starting the full job.
+3. Use the dedicated laptop in the makerspace with Lightburn license to prepare your design for cutting.
+4. Load material securely on the cutting bed.
+5. Configure power, speed, and focus settings according to the material.
+6. Run a small test cut before starting the full job.
 
 ---
 
