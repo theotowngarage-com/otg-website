@@ -2,7 +2,7 @@
 <html lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}en-US{{ end }}">
     {{- partial "header.html" . -}}
     <body>
-        {{- partial "navbar.html" . -}}
+        {{ partial "navbar/navbar.html" . }}
         <main>
             {{- block "main" . }}{{- end }}
         </main>
