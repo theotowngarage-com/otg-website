@@ -54,6 +54,7 @@ id: laser
 - Ensure materials are approved and free of toxic coatings.
 - Keep a fire extinguisher nearby and know where the emergency stop button is.
 - Clean the work area after use.
+- Place leftover scrap materials in the assigned containers, next to the laser cutter.
 
 ---
 
