@@ -1,4 +1,14 @@
-# Workshop Cleanliness Guidelines  
+---
+title: "Cleaning guidelines"
+heading: "Cleaning guidelines"
+logo:
+id: cleaning-guidelines 
+weight: 100
+resources:
+    - src: background.jpg
+---
+
+# Workshop Cleanliness Guidelines
 *Based on the Boy Scout Rule: Leave every space better than you found it.*
 
 A shared workshop works best when everyone takes responsibility for keeping it clean, safe, and ready for the next person. These guidelines ensure that tools, machines, and spaces remain usable for all members.
@@ -25,7 +35,7 @@ A shared workshop works best when everyone takes responsibility for keeping it c
 ---
 
 ## Tools & Equipment
-- Return all tools to their **designated storage location**.  
+- Return all tools to their **designated storage location**.
 - If  you **notice damage to a tool**, label it and notify the group on Discord [#ask-for-help](https://discord.com/channels/1330501220959256667/1342501102410534913).
 ```1
 - Do not leave tools or machines in a state that makes them unsafe or unusable.
