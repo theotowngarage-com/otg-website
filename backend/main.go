@@ -130,20 +130,20 @@ func create_subscription() {
 	fmt.Println("Success! Here is your starter subscription price id: " + starter_price.ID)
 }
 
-func send_mail() {
+func send_mail(to string, subject string, body string) {
 	// Create a new message
 	message := gomail.NewMessage()
 
 	// Set email headers
-	message.SetHeader("From", "youremail@email.com")
-	message.SetHeader("To", "recipient1@email.com")
-	message.SetHeader("Subject", "Hello from the Mailtrap team")
+	message.SetHeader("From", "info@theotowngarage.com")
+	message.SetHeader("To", to)
+	message.SetHeader("Subject", subject)
 
 	// Set email body
-	message.SetBody("text/plain", "This is the Test Body")
+	message.SetBody("text/plain", body)
 
 	// Set up the SMTP dialer
-	dialer := gomail.NewDialer("live.smtp.mailtrap.io", 587, "api", "1a2b3c4d5e6f7g")
+	dialer := gomail.NewDialer("smtppro.zoho.com", 465, "info@theotowngarage.com", "<password>")
 
 	// Send the email
 	if err := dialer.DialAndSend(message); err != nil {
