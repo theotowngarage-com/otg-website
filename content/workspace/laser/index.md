@@ -18,7 +18,7 @@ id: laser
 ## Specifications
 
 - **Type:** CO₂ Laser
-- **Power:** 150 W
+- **Power:** 100 W
 - **Work Area:** 120 × 80 cm
 - **Maximum Speed:** 200 mm/s
 - **Precision:** 0.1 mm
