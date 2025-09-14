@@ -1,0 +1,83 @@
+{{ define "main" }}
+
+<section class="section-workspace">
+  {{ partial "pic_banner.html" 
+    (dict "context" (dict 
+      "img" (.Resources.Get "background.jpg").Permalink
+      "title" .Title
+      "subtitle" "Article"
+      "css_classes" "img-tint"
+    ))
+  }}
+  <div class="section-pad">
+    <div class="flex-row">
+      <div class="description">
+        {{ .Content }}
+      </div>
+      <div class="description-invitation">
+        {{ partial "invitation.html" .Site.Data.sourcing_materials.invitation }}
+      </div>
+    </div>
+    <div class="section-pad">
+      <div class="description-2">
+        {{ with .Resources.Get "sub.png" }}
+          <img class="description-img" src="{{ .Permalink }}"/>
+        {{ end }}
+        <div class="container">
+          <div class="content">
+            {{ with .Resources.Get "sub.md" }}
+              {{ .Content }}
+            {{ end }}
+          </div>
+        </div> 
+      </div>
+    </div>
+
+
+      {{/*  Image gallery  */}}
+      {{/*  {{ with .Resources.Match "images/*" }}
+      <div class="workspace-gallery">
+        {{ range . }}
+        <img src="{{ .Permalink }}" alt="project image">
+        {{ end }}
+      </div>
+      {{ end }}  */}}
+
+      {{ if or .PrevInSection .NextInSection }}
+      <div class="container workspace-other section-pad">
+        {{ with .PrevInSection }}
+        {{$other := .}}
+        {{ with .Resources.Get "background.jpg" }}
+        {{$image := .}}
+        <a href="{{ $other.Permalink}}" 
+          class="img-tint img-gradient img-rounded hover-rm-img-tint workspace-other-section"
+          style="background-image: url({{ $image.Permalink }});">
+          <p>{{$other.Title}}</p>
+        </a>
+        {{ end }}
+        {{ end }}
+        {{ with .NextInSection }}
+        {{$other := .}}
+        {{ with .Resources.Get "background.jpg" }}
+        {{$image := .}}
+        <a href="{{ $other.Permalink}}"
+          class="img-tint img-gradient img-rounded hover-rm-img-tint workspace-other-section"
+          style="background-image: url({{ $image.Permalink }});">
+          <p>{{$other.Title}}</p>
+        </a>
+        {{ end }}
+        {{ end }}
+        <div class="workspace-other-description desktop-only">
+          <h4 class="accent-text-black">Other facilities</h4>
+          <p>Check out other activities you can do at The O'Town Garage</p>
+          <div style="padding: calc(30px - 1rem) 0;">
+            <a class="btn" href=""><span class="btn-area">See other facilities</span></a>
+          </div>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+{{ end }}
