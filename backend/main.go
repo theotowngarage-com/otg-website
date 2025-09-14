@@ -4,11 +4,13 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"net/url"
 
 	"github.com/stripe/stripe-go/v82"
 	"github.com/stripe/stripe-go/v82/checkout/session"
 	"github.com/stripe/stripe-go/v82/price"
 	"github.com/stripe/stripe-go/v82/product"
+	"golang.org/x/crypto/bcrypt"
 	gomail "gopkg.in/mail.v2"
 )
 
@@ -20,30 +22,37 @@ func main() {
 
 	http.Handle("/", http.FileServer(http.Dir("public")))
 	http.HandleFunc("/create-checkout-session", createCheckoutSession)
+	http.HandleFunc("/success", successCheckoutSession)
 	addr := "localhost:4242"
 	log.Printf("Listening on %s", addr)
 	log.Fatal(http.ListenAndServe(addr, nil))
 }
 
 /*
-*
-
-	Add an endpoint on your server that creates a Checkout Session.
-	A Checkout Session controls what your customer sees on the payment page such as line items,
-	the order amount and currency, and acceptable payment methods.
-	Stripe enables cards and other common payment methods for you by default,
-	and you can enable or disable payment methods directly in the Stripe Dashboard.
+Add an endpoint on your server that creates a Checkout Session.
+A Checkout Session controls what your customer sees on the payment page such as line items,
+the order amount and currency, and acceptable payment methods.
+Stripe enables cards and other common payment methods for you by default,
+and you can enable or disable payment methods directly in the Stripe Dashboard.
 */
-func createCheckoutSession(w http.ResponseWriter, response *http.Request) {
-	// domain := "http://localhost:4242"
-	SuccessURL := "http://localhost:1313/checkout/success/?session_id={CHECKOUT_SESSION_ID}"
-	CancelURL := "http://localhost:1313/checkout/cancel/"
-	BillingString := "flexible"
-	BillingMode := stripe.CheckoutSessionSubscriptionDataBillingModeParams{Type: &BillingString}
+func createCheckoutSession(w http.ResponseWriter, request *http.Request) {
+	// log.Print(request)
+	log.Print("received something")
+	if request.ParseForm() != nil || !validateInput(request.Form) {
+		log.Fatal("malformed request") // highlight - potential attack
+		// do not give reason for a failure (on purpose)
+		http.Redirect(w, request, "http://localhost:1313/checkout/", http.StatusSeeOther)
+		return
+	}
+	log.Print("form parsed and validated")
+	// form := &request.Form
+	for key, value := range request.Form {
+		log.Print("%s : %s", key, value)
+	}
 
 	params := &stripe.CheckoutSessionParams{
-		SuccessURL: &SuccessURL,
-		CancelURL:  &CancelURL,
+		SuccessURL: stripe.String("http://localhost:4242/success?session_id={CHECKOUT_SESSION_ID}"),
+		CancelURL:  stripe.String("http://localhost:1313/checkout/cancel/"),
 		Mode:       stripe.String(string(stripe.CheckoutSessionModeSubscription)),
 		LineItems: []*stripe.CheckoutSessionLineItemParams{
 			&stripe.CheckoutSessionLineItemParams{
@@ -53,17 +62,51 @@ func createCheckoutSession(w http.ResponseWriter, response *http.Request) {
 			},
 		},
 		SubscriptionData: &stripe.CheckoutSessionSubscriptionDataParams{
-			BillingMode: &BillingMode,
+			BillingMode: &stripe.CheckoutSessionSubscriptionDataBillingModeParams{Type: stripe.String("flexible")},
 		},
+		CustomerEmail: stripe.String(request.Form.Get("email")),
+	}
+
+	// TODO : Salt the password for proper storage...
+	// FIXME : How do we migrate the existing passwords? tag them with "insecure" and check without salt?
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(request.Form.Get("pass")), bcrypt.DefaultCost)
+	if err != nil {
+		fmt.Println("Encryption failed:", err)
+		http.Redirect(w, request, "http://localhost:1313/checkout/cancel/?reason=failed_crypt", http.StatusSeeOther)
+		return
+	}
+	// Metadata is forwarded to the successful webhook, so we can register the new user in the db
+	params.AddMetadata("password", string(hashedPassword))
+	for _, id := range []string{"email", "name", "phone"} {
+		params.AddMetadata(id, request.Form.Get(id))
 	}
 
 	session, err := session.New(params)
 
 	if err != nil {
 		log.Printf("session.New: %v", err)
+		http.Redirect(w, request, "http://localhost:1313/checkout/cancel/?reason=failed_session", http.StatusSeeOther)
+		return
 	}
+	http.Redirect(w, request, session.URL, http.StatusSeeOther)
+}
 
-	http.Redirect(w, response, session.URL, http.StatusSeeOther)
+func validateInput(form url.Values) bool {
+	for _, id := range []string{"email", "name", "pass"} {
+		if !form.Has(id) {
+			return false
+		}
+	}
+	return true
+}
+
+func successCheckoutSession(w http.ResponseWriter, request *http.Request) {
+	log.Print("Successful subscription")
+	log.Print(request)
+	// TODO: Create a user and push to the database
+	// Redirect to the main site
+	http.Redirect(w, request, "http://localhost:1313/checkout/success/", http.StatusSeeOther)
+	// TODO: Send confirmation mail to the user ?
 }
 
 func create_subscription() {
