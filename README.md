@@ -30,7 +30,7 @@ To work locally with this project, you'll have to follow the steps below:
 
 Read more at Hugo's [documentation].
 
-### Install Hugo
+### Requirements
 
 [Install the extended edition] of Hugo (you don't need the extended/deploy edition)
 
@@ -40,10 +40,20 @@ To confirm that it's correctly installed, type `hugo version` (only the `+extend
 hugo v0.136.5+extended linux/amd64 BuildDate=unknown VendorInfo=nixpkgs
 ```
 
+[Install Go](https://go.dev/doc/install)
+
 ### Preview your site
 
 Go to the root folder of the project, run `hugo server`,
 and access the website under `localhost:1313/`, or wherever tells you it is.
+
+### Backend
+
+To run the backend
+
+```sh
+go run ./main.go
+```
 
 [`hugo.yml`]: .github/workflows/hugo.yml
 [actions]: https://docs.github.com/en/actions

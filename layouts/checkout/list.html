@@ -1,0 +1,18 @@
+{{ define "main" }}
+
+<section>
+    <div class="product">
+        {{ .Content }}
+    <div class="description">
+        <h3>Membership</h3>
+        <h5>300DKK.00</h5>
+    </div>
+    </div>
+    {{ with .Site.Params.backend }}
+        <form action="http://{{.url}}:{{.port}}/create-checkout-session" method="POST">
+    {{ end }}
+    <button type="submit" id="checkout-button">Checkout</button>
+    </form>
+</section>
+
+{{ end }}
