@@ -1,0 +1,8 @@
+// No design guideline on form inputs for now
+input {
+    border: none;
+    // remove border when clicking onto a field
+    outline: none;
+    border-bottom: 1px solid #999;
+    padding: 6px 30px;
+}
