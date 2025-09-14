@@ -1,15 +1,6 @@
 ---
-title: "Building materials in Odense"
-heading: "Building materials in Odense"
-logo: logos/electronics.min.svg
-layout: "sourcing_materials"
-id: electronics
-weight: 20
-resources:
-    - name: background_image
-      src: background.jpg
-feature_image: images/blog/blog-details-image.jpg
+title: "Become a member of the makerspace"
+heading: "Just a few steps "
 ---
 
-
-INDEX
+Enter the login details that you can use log in as a member to the website.

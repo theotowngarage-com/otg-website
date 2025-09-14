@@ -52,6 +52,7 @@ and access the website under `localhost:1313/`, or wherever tells you it is.
 To run the backend
 
 ```sh
+cd backend/
 go run ./main.go
 ```
 
