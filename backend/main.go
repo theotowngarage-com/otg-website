@@ -73,7 +73,7 @@ func createCheckoutSession(w http.ResponseWriter, request *http.Request) {
 	}
 
 	params := &stripe.CheckoutSessionParams{
-		SuccessURL: stripe.String("http://localhost:1313/success?session_id={CHECKOUT_SESSION_ID}"),
+		SuccessURL: stripe.String("http://localhost:1313/checkout/success?session_id={CHECKOUT_SESSION_ID}"),
 		CancelURL:  stripe.String("http://localhost:1313/checkout/cancel/"),
 		Mode:       stripe.String(string(stripe.CheckoutSessionModeSubscription)),
 		LineItems: []*stripe.CheckoutSessionLineItemParams{
