@@ -5,3 +5,5 @@ resources/
 node_modules/
 .tina/__generated__/
 assets/jsconfig.json
+backend/test.db
+backend/production.db
