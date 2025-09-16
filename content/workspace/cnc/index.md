@@ -24,7 +24,6 @@ draft: false
 - Wood and plywood
 - Plastics (e.g., acrylic, polycarbonate)
 - Aluminum (light milling)
-- Foam
 
 ---
 
@@ -55,8 +54,7 @@ draft: false
 - Calipers for measurement
 - Hold-down fixtures with screws and glue tape
 - Vacuum cleaner
-- ```
-- Lubricant for metal machining (if required)
+- Spray bottle for lubricating while cutting metals
 
 ---
 
