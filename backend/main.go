@@ -15,7 +15,6 @@ import (
 	"github.com/stripe/stripe-go/v82/webhook"
 	_ "github.com/tursodatabase/go-libsql"
 	"golang.org/x/crypto/bcrypt"
-	gomail "gopkg.in/mail.v2"
 )
 
 type User struct {
@@ -113,30 +112,6 @@ func validateInput(form url.Values) bool {
 	return true
 }
 
-func sendMail(to string, subject string, body string) {
-	// Create a new message
-	message := gomail.NewMessage()
-
-	// Set email headers
-	message.SetHeader("From", "info@theotowngarage.com")
-	message.SetHeader("To", to)
-	message.SetHeader("Subject", subject)
-
-	// Set email body
-	message.SetBody("text/plain", body)
-
-	// Set up the SMTP dialer
-	dialer := gomail.NewDialer("smtppro.zoho.com", 465, "info@theotowngarage.com", "<password>")
-
-	// Send the email
-	if err := dialer.DialAndSend(message); err != nil {
-		fmt.Println("Error:", err)
-		panic(err)
-	} else {
-		fmt.Println("Email sent successfully!")
-	}
-}
-
 func openDB(isTest bool) (*sql.DB, error) {
 	var filename string
 	if isTest {
@@ -188,6 +163,7 @@ func addUser(user User, isTest bool) error {
 	// no need to specify id, libsql will use an available id, usually an increment over the max
 	_, err = db.Query("INSERT INTO user (email, name, phone , password , active, customer_id) VALUES (?, ?, ?, ?, ?, ?)",
 		user.email, user.name, user.phone, user.password, user.active, user.customer_id)
+	sendMail(user.email, user, Welcome)
 	return err
 }
 
