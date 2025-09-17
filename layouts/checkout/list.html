@@ -3,10 +3,10 @@
 <section>
     <div class="product">
         {{ .Content }}
-    <div class="description">
-        <h3>Membership</h3>
-        <h5>300DKK.00</h5>
-    </div>
+        <div class="description">
+            <h3>Membership</h3>
+            <h5>300 DKK</h5>
+        </div>
     </div>
     {{ with .Site.Params.backend }}
         <form name="myform" action="http://{{.url}}:{{.port}}/create-checkout-session" method="POST">
@@ -41,12 +41,7 @@
             <div class="form-group">
                 <input type="checkbox" name="agree-term3"  required>
                 <label for="agree-term3" class="label-agree-term">I agree and sign up to the <a href="https://drive.google.com/file/d/1aVGgF4rSlQ5bLlj5R-N00uTYoIt9U2sY/view" class="term-service">Liability Waiver</a></label>
-            </div>      
-            <div class="form-group">
-                <input type="checkbox" name="agree-term4" required>
-                <label for="agree-term4" class="label-agree-term">I agree with <a href="https://drive.google.com/file/d/129pH4RxzWA9qoe4Tdyf4O2pspok1lDIh/view" class="term-service">Credit System terms</a></label>
             </div>
-
             <button type="submit" onclick="validate(event);">Checkout</button>
         </form>
     {{ end }}
