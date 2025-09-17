@@ -14,7 +14,7 @@
     weight  = 4
 [[nav_right]]
     name    = "Log in"
-    url     = "https://members.theotowngarage.com"
+    url     = "https://theotowngarage.com/login"
     weight  = 5
     [[nav_right.params]]
         icon    = "user"
@@ -22,4 +22,4 @@
 [[nav_right]]
     name    = "Become a member"
     url     = "/#memberships"
-    weight  = 6
+    weight  = 7
