@@ -42,19 +42,22 @@ hugo v0.136.5+extended linux/amd64 BuildDate=unknown VendorInfo=nixpkgs
 
 [Install Go](https://go.dev/doc/install)
 
-### Preview your site
+### Preview your site without the backend
 
 Go to the root folder of the project, run `hugo server`,
-and access the website under `localhost:1313/`, or wherever tells you it is.
+and access the website under [`localhost:1313/`](http://localhost:1313/), or wherever `hugo server` tells you it is.
 
-### Backend
+### Preview your site with the backend
 
 To run the backend
 
 ```sh
+hugo build -b "http://localhost:4242" # If you change the static site, it needs to be rebuilt
 cd backend/
 go run ./main.go
 ```
+
+Open the browser at [http://localhost:4242/](http://localhost:4242/)
 
 [`hugo.yml`]: .github/workflows/hugo.yml
 [actions]: https://docs.github.com/en/actions
