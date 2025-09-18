@@ -35,12 +35,11 @@ func main() {
 	// Serve the static website built with Hugo
 	http.Handle("/", http.FileServer(http.Dir("../public")))
 	http.HandleFunc("/webhook", handleWebhook) // handle stripe webhooks
-	http.HandleFunc("/create-checkout-session", createCheckoutSession)
+	http.HandleFunc("POST /checkout/", createCheckoutSession)
 
-	http.HandleFunc("/secret", secret)    // sessions.go
-	http.HandleFunc("/logout", logout)    // sessions.go
-	http.HandleFunc("POST /login", login) // sessions.go
-	// http.HandleFunc("/login", logout)  // sessions.go
+	http.HandleFunc("/secret", secret)     // sessions.go
+	http.HandleFunc("/logout", logout)     // sessions.go
+	http.HandleFunc("POST /login/", login) // sessions.go
 
 	log.Printf("Listening on %s", host_addr)
 	err := initDatabase(true)
