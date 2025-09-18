@@ -5,6 +5,6 @@ layout: login
 type: page
 ---
 
-# Login
+## Login
 
 Here you can manage your membership
