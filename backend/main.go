@@ -17,11 +17,13 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+const host_addr string = "localhost:4242"
+
 type User struct {
 	email       string
 	name        string
 	phone       string
-	password    string
+	password    []byte
 	active      bool
 	customer_id string
 }
@@ -30,18 +32,23 @@ func main() {
 	// You can find your test secret API key at https://dashboard.stripe.com/test/apikeys.
 	stripe.Key = "sk_xxx...xxx"
 
-	http.Handle("/", http.FileServer(http.Dir("public")))
+	// Serve the static website built with Hugo
+	http.Handle("/", http.FileServer(http.Dir("../public")))
 	http.HandleFunc("/webhook", handleWebhook) // handle stripe webhooks
 	http.HandleFunc("/create-checkout-session", createCheckoutSession)
-	// http.HandleFunc("/success", successCheckoutSession)
-	addr := "localhost:4242"
-	log.Printf("Listening on %s", addr)
+
+	http.HandleFunc("/secret", secret)    // sessions.go
+	http.HandleFunc("/logout", logout)    // sessions.go
+	http.HandleFunc("POST /login", login) // sessions.go
+	// http.HandleFunc("/login", logout)  // sessions.go
+
+	log.Printf("Listening on %s", host_addr)
 	err := initDatabase(true)
 	if err != nil {
 		log.Fatal("Could not initialise DB ", err)
 		os.Exit(1)
 	}
-	log.Fatal(http.ListenAndServe(addr, nil))
+	log.Fatal(http.ListenAndServe(host_addr, nil))
 }
 
 /*
@@ -56,7 +63,7 @@ func createCheckoutSession(w http.ResponseWriter, request *http.Request) {
 	if request.ParseForm() != nil || !validateInput(request.Form) {
 		log.Fatal("malformed request") // highlight - potential attack
 		// do not give reason for a failure (on purpose)
-		http.Redirect(w, request, "http://localhost:1313/checkout/", http.StatusSeeOther)
+		http.Redirect(w, request, "http://"+host_addr+"/checkout/", http.StatusSeeOther)
 		return
 	}
 	// Only hashing the password at this stage to make sure it doesn't error out after the payment is done
@@ -64,7 +71,7 @@ func createCheckoutSession(w http.ResponseWriter, request *http.Request) {
 	_, err := bcrypt.GenerateFromPassword([]byte(request.Form.Get("pass")), bcrypt.DefaultCost)
 	if err != nil {
 		fmt.Println("Encryption failed:", err)
-		http.Redirect(w, request, "http://localhost:1313/checkout/cancel/?reason=failed_crypt", http.StatusSeeOther)
+		http.Redirect(w, request, "http://"+host_addr+"/checkout/cancel/?reason=failed_crypt", http.StatusSeeOther)
 		return
 	}
 	for key, value := range request.Form {
@@ -72,8 +79,8 @@ func createCheckoutSession(w http.ResponseWriter, request *http.Request) {
 	}
 
 	params := &stripe.CheckoutSessionParams{
-		SuccessURL: stripe.String("http://localhost:1313/checkout/success?session_id={CHECKOUT_SESSION_ID}"),
-		CancelURL:  stripe.String("http://localhost:1313/checkout/cancel/"),
+		SuccessURL: stripe.String("http://" + host_addr + "/checkout/success?session_id={CHECKOUT_SESSION_ID}"),
+		CancelURL:  stripe.String("http://" + host_addr + "/checkout/cancel/"),
 		Mode:       stripe.String(string(stripe.CheckoutSessionModeSubscription)),
 		LineItems: []*stripe.CheckoutSessionLineItemParams{
 			&stripe.CheckoutSessionLineItemParams{
@@ -97,7 +104,7 @@ func createCheckoutSession(w http.ResponseWriter, request *http.Request) {
 
 	if err != nil {
 		log.Printf("session.New: %v", err)
-		http.Redirect(w, request, "http://localhost:1313/checkout/cancel/?reason=failed_session", http.StatusSeeOther)
+		http.Redirect(w, request, "http://"+host_addr+"/checkout/cancel/?reason=failed_session", http.StatusSeeOther)
 		return
 	}
 	http.Redirect(w, request, session.URL, http.StatusSeeOther)
@@ -137,12 +144,12 @@ func initDatabase(isTest bool) error {
 		}
 	}()
 
-	_, dbErr := db.Exec("CREATE TABLE user(id INTEGER PRIMARY KEY, email TEXT, name TEXT, phone TEXT, password TEXT, active INT, customer_id TEXT)")
+	_, dbErr := db.Exec("CREATE TABLE user(id INTEGER PRIMARY KEY, email TEXT, name TEXT, phone TEXT, password BLOB, active INT, customer_id TEXT)")
 	// ignore error if table already exists
 	if dbErr == nil {
 		log.Print("Database created")
 	} else {
-		log.Print("Using existing DB")
+		log.Print("Using existing Database - ", dbErr)
 	}
 	return err
 }
@@ -228,20 +235,19 @@ func FulfillCheckout(checkout_session string) error {
 	// Hashing the password again after the payment to avoid sending the stored hashed pw through the internet pipes
 	// TODO : Salt the password for proper storage...
 	// FIXME : How do we migrate the existing passwords? tag them with "insecure" and check without salt?
-	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(meta["pass"]), bcrypt.DefaultCost)
+	hashedPassword, err := hash_and_salt(meta["pass"])
 	if err != nil {
 		// TODO this should be an absolute failure, because we already tried to encrypt it beforehand
 		log.Fatal("Encryption failed:", err)
 		return err
 	}
 
-	log.Print(session.Customer)
 	user := User{
 		name:        meta["name"],
 		email:       meta["email"],
 		phone:       meta["phone"],
 		active:      true,
-		password:    string(hashedPassword),
+		password:    hashedPassword,
 		customer_id: session.Customer.ID,
 	}
 

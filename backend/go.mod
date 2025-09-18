@@ -4,6 +4,8 @@ go 1.24.6
 
 require (
 	github.com/antlr4-go/antlr/v4 v4.13.0 // indirect
+	github.com/gorilla/securecookie v1.1.2 // indirect
+	github.com/gorilla/sessions v1.4.0 // indirect
 	github.com/libsql/sqlite-antlr4-parser v0.0.0-20240327125255-dbf53b6cbf06 // indirect
 	github.com/stripe/stripe-go/v82 v82.5.0 // indirect
 	github.com/tursodatabase/go-libsql v0.0.0-20250912065916-9dd20bb43d31 // indirect
