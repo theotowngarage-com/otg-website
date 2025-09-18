@@ -6,7 +6,7 @@
 		</div>
 	</div>
 	<div class="container ">
-		<form name="login" action="{{ absURL "/login" }}" method="POST">
+		<form name="login" action="{{ .Permalink }}" method="POST">
 			<div class="form-group">
 				<label for="email"><i class="fa fa-envelope fa-fw"></i></label>
 				<input type="email" name="email" required
