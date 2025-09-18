@@ -23,10 +23,6 @@ enableRobotsTXT = "true"
   # We're using formspree.io for form handling, paste your formspree url below
   formspreeFormUrl  = "https://formspree.io/abcdefgh"
 
-  [params.backend]
-    url   = "localhost"
-    port  = 4242
-
   # Banner Section
   [params.banner]
     logo                  = "images/logo.svg"

@@ -7,8 +7,7 @@
         </div>
     </div>
 
-    {{ with .Site.Params.backend }}
-    <form name="checkout" action="http://{{.url}}:{{.port}}/create-checkout-session" method="POST" class="section-pad">
+    <form name="checkout" action="{{ .Permalink }}" method="POST" class="section-pad">
         <div class="container">
             <div class="description">
                 <h3>Membership</h3>
@@ -56,7 +55,6 @@
             <button class="btn" type="submit" onclick="validate(event);">Proceed</button>
         </div>
     </form>
-    {{ end }}
 
 </section>
 
