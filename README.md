@@ -49,6 +49,9 @@ and access the website under [`localhost:1313/`](http://localhost:1313/), or whe
 
 ### Preview your site with the backend
 
+> Make sure you have the Stripe developer keys for the test instance.
+> The smtp password will not be provided on request. If you want to debug the email functionality, please provide your own
+
 To run the backend
 
 ```sh
