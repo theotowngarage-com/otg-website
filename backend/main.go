@@ -232,8 +232,6 @@ func FulfillCheckout(checkout_session string) error {
 	// Retrieve the metadata injected before the checkout
 	meta := session.Metadata
 	// Hashing the password again after the payment to avoid sending the stored hashed pw through the internet pipes
-	// TODO : Salt the password for proper storage...
-	// FIXME : How do we migrate the existing passwords? tag them with "insecure" and check without salt?
 	hashedPassword, err := hash_and_salt(meta["pass"])
 	if err != nil {
 		// TODO this should be an absolute failure, because we already tried to encrypt it beforehand
