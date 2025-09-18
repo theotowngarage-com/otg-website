@@ -1,18 +1,31 @@
 // No design guideline on form inputs for now
-input {
-    border: none;
-    // remove border when clicking onto a field
-    outline: none;
-    border-bottom: 1px solid #999;
-    padding: 6px 30px;
-}
-
-form {
-    margin-top: 50px;
-    .btn {
-        margin: 50px 0;
+.section-login, .section-checkout{
+    input {
+        border: none;
+        // remove border when clicking onto a field
+        outline: none;
+        border-bottom: 1px solid #999;
+        padding: 6px 30px;
     }
-    .form-group {
-        margin-top: 20px;
+    
+    form {
+        margin-top: 50px;
+        .btn {
+            margin: 50px 0;
+        }
+        .form-group {
+            margin-top: 20px;
+        }
+    }
+
+    .error {
+        background-color: $error-color;
+        border-radius: $border-radius;
+        padding: 5px;
+        margin: 15px;
+        p {
+            color: $text-color;
+            margin: 8px;
+        }
     }
 }
