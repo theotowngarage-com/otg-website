@@ -54,7 +54,7 @@ To run the backend
 ```sh
 hugo build -b "http://localhost:4242" # If you change the static site, it needs to be rebuilt
 cd backend/
-go run ./main.go
+go run .
 ```
 
 Open the browser at [http://localhost:4242/](http://localhost:4242/)
