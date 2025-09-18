@@ -70,7 +70,7 @@ func createCheckoutSession(w http.ResponseWriter, request *http.Request) {
 	_, err := bcrypt.GenerateFromPassword([]byte(request.Form.Get("pass")), bcrypt.DefaultCost)
 	if err != nil {
 		fmt.Println("Encryption failed:", err)
-		http.Redirect(w, request, "http://"+host_addr+"/checkout/cancel/?reason=failed_crypt", http.StatusSeeOther)
+		http.Redirect(w, request, "http://"+host_addr+"/checkout/?reason=failed_crypt", http.StatusSeeOther)
 		return
 	}
 	for key, value := range request.Form {
@@ -79,7 +79,7 @@ func createCheckoutSession(w http.ResponseWriter, request *http.Request) {
 
 	params := &stripe.CheckoutSessionParams{
 		SuccessURL: stripe.String("http://" + host_addr + "/checkout/success?session_id={CHECKOUT_SESSION_ID}"),
-		CancelURL:  stripe.String("http://" + host_addr + "/checkout/cancel/"),
+		CancelURL:  stripe.String("http://" + host_addr + "/checkout/?reason=stripe_cancel"),
 		Mode:       stripe.String(string(stripe.CheckoutSessionModeSubscription)),
 		LineItems: []*stripe.CheckoutSessionLineItemParams{
 			&stripe.CheckoutSessionLineItemParams{
@@ -103,7 +103,7 @@ func createCheckoutSession(w http.ResponseWriter, request *http.Request) {
 
 	if err != nil {
 		log.Printf("session.New: %v", err)
-		http.Redirect(w, request, "http://"+host_addr+"/checkout/cancel/?reason=failed_session", http.StatusSeeOther)
+		http.Redirect(w, request, "http://"+host_addr+"/checkout/?reason=failed_session", http.StatusSeeOther)
 		return
 	}
 	http.Redirect(w, request, session.URL, http.StatusSeeOther)

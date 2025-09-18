@@ -65,7 +65,7 @@ func login(w http.ResponseWriter, request *http.Request) {
 		if err == sql.ErrNoRows {
 			log.Print("User not found")
 			// TODO handle this
-			http.Redirect(crw, request, "http://"+host_addr+"/login/?reason=combo_fail", http.StatusSeeOther)
+			http.Redirect(w, request, "http://"+host_addr+"/login/?reason=combo_fail", http.StatusSeeOther)
 			return
 		}
 		log.Fatal("User not found: ", err)

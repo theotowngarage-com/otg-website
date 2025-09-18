@@ -6,6 +6,7 @@
 		</div>
 	</div>
 	<div class="container ">
+		<div id="error" class="error invisible"><p id="err_message"></p></div>
 		<form name="login" action="{{ .Permalink }}" method="POST">
 			<div class="form-group">
 				<label for="email"><i class="fa fa-envelope fa-fw"></i></label>
@@ -21,9 +22,6 @@
 	</div>
 </section>
 
-<script>
-	function validate(event) {
-	}
-</script>
+<script type="text/javascript" src="/js/sessions.js"></script>
 
 {{ end }}
