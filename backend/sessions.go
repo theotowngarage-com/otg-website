@@ -73,14 +73,9 @@ func login(w http.ResponseWriter, request *http.Request) {
 		return
 	}
 
-	// Only hashing the password at this stage to make sure it doesn't error out after the payment is done
-	// We do not use the result of the hash to avoid sending the final hashed pw through the internet pipes
 	err = bcrypt.CompareHashAndPassword(password, []byte(request.Form.Get("password")))
 	if err == bcrypt.ErrMismatchedHashAndPassword {
-		// Mismatched passwords
 		log.Print("Psw mismatch")
-		// log.Print(hashedPassword)
-		log.Print(password)
 		http.Redirect(w, request, host_addr+"/login/?reason=combo_fail", http.StatusFound)
 		return
 	} else if err != nil {
