@@ -41,7 +41,7 @@ func login(w http.ResponseWriter, request *http.Request) {
 	if request.ParseForm() != nil || !validateSignInInput(request.Form) {
 		log.Fatal("malformed request") // highlight - potential attack
 		// do not give reason for a failure (on purpose)
-		http.Redirect(w, request, host_addr+"/login/?reason=misc", http.StatusSeeOther)
+		http.Redirect(w, request, "http://"+host_addr+"/login/?reason=misc", http.StatusSeeOther)
 		return
 	}
 	// look up user
@@ -65,7 +65,7 @@ func login(w http.ResponseWriter, request *http.Request) {
 		if err == sql.ErrNoRows {
 			log.Print("User not found")
 			// TODO handle this
-			http.Redirect(w, request, host_addr+"/login/?reason=combo_fail", http.StatusFound)
+			http.Redirect(crw, request, "http://"+host_addr+"/login/?reason=combo_fail", http.StatusSeeOther)
 			return
 		}
 		log.Fatal("User not found: ", err)
@@ -76,11 +76,11 @@ func login(w http.ResponseWriter, request *http.Request) {
 	err = bcrypt.CompareHashAndPassword(password, []byte(request.Form.Get("password")))
 	if err == bcrypt.ErrMismatchedHashAndPassword {
 		log.Print("Psw mismatch")
-		http.Redirect(w, request, host_addr+"/login/?reason=combo_fail", http.StatusFound)
+		http.Redirect(w, request, "http://"+host_addr+"/login/?reason=combo_fail", http.StatusFound)
 		return
 	} else if err != nil {
 		fmt.Println("Encryption failed:", err)
-		http.Redirect(w, request, host_addr+"/login/?reason=failed_crypt", http.StatusFound)
+		http.Redirect(w, request, "http://"+host_addr+"/login/?reason=failed_crypt", http.StatusFound)
 		return
 	}
 
@@ -88,7 +88,7 @@ func login(w http.ResponseWriter, request *http.Request) {
 	session.Values["authenticated"] = true
 	session.Save(request, w)
 	log.Print("Auth successful", err)
-	http.Redirect(w, request, host_addr+"/secret", http.StatusSeeOther)
+	http.Redirect(w, request, "http://"+host_addr+"/secret", http.StatusSeeOther)
 }
 
 func logout(w http.ResponseWriter, request *http.Request) {
