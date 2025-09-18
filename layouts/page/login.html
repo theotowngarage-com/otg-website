@@ -1,0 +1,23 @@
+
+{{ define "main" }}
+<section class="section-login">
+  <p>{{ .Content }}</p>
+  <form name="login" action="{{ absURL "/login" }}" method="POST">
+      <div class="form-group">
+          <label for="email"><i class="fa fa-envelope fa-fw"></i></label>
+          <input type="email" name="email" required placeholder="Your email (used for billing and authentication)">
+      </div>
+      <div class="form-group">
+          <label for="password"><i class="fa fa-lock fa-fw"></i></label>
+          <input type="password" name="password" required placeholder="Password">
+      </div>
+      <button type="submit" onclick="validate(event);">Checkout</button>
+  </form>
+</section>
+
+<script>
+    function validate(event) {
+    }
+</script>
+
+{{ end }}

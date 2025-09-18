@@ -18,7 +18,7 @@
     weight  = 5
 [[nav_right]]
     name    = "Log in"
-    url     = "https://theotowngarage.com/login"
+    url     = "/login"
     weight  = 6
     [[nav_right.params]]
         icon    = "user"

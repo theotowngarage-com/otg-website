@@ -9,7 +9,7 @@
         </div>
     </div>
     {{ with .Site.Params.backend }}
-        <form name="myform" action="http://{{.url}}:{{.port}}/create-checkout-session" method="POST">
+        <form name="checkout" action="http://{{.url}}:{{.port}}/create-checkout-session" method="POST">
             <div class="form-group">
                 <label for="name"><i class="fa fa-user fa-fw"></i></label>
                 <input type="text" name="name" required placeholder="Please enter your name">
