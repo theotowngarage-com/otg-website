@@ -18,6 +18,7 @@ import (
 )
 
 const host_addr string = "localhost:4242"
+const host_url string = "http://" + host_addr
 
 type User struct {
 	email       string
@@ -32,17 +33,27 @@ func main() {
 	// You can find your test secret API key at https://dashboard.stripe.com/test/apikeys.
 	stripe.Key = "sk_xxx...xxx"
 
+	db, err := openDB( /* isTest */ true)
+	if err != nil {
+		log.Fatal("Failed to open database - ", err)
+		return
+	}
+	err = initDatabase(db)
+
 	// Serve the static website built with Hugo
 	http.Handle("/", http.FileServer(http.Dir("../public")))
 	http.HandleFunc("/webhook", handleWebhook) // handle stripe webhooks
-	http.HandleFunc("POST /checkout/", createCheckoutSession)
+	http.HandleFunc("POST /checkout/", createCheckoutSession(db))
 
-	http.HandleFunc("/secret", secret)     // sessions.go
-	http.HandleFunc("/logout", logout)     // sessions.go
-	http.HandleFunc("POST /login/", login) // sessions.go
+	http.HandleFunc("/secret", secret)         // sessions.go
+	http.HandleFunc("/logout", logout)         // sessions.go
+	http.HandleFunc("POST /login/", login(db)) // sessions.go
+
+	http.HandleFunc("POST /request-reset", requestPasswordResetHandler(db)) // sessions.go
+	http.HandleFunc("POST /reset-password/", resetPasswordHandler(db))      // sessions.go
+	http.HandleFunc("POST /reset-password", resetPasswordHandler(db))       // sessions.go
 
 	log.Printf("Listening on %s", host_addr)
-	err := initDatabase(true)
 	if err != nil {
 		log.Fatal("Could not initialise DB ", err)
 		os.Exit(1)
@@ -57,56 +68,58 @@ the order amount and currency, and acceptable payment methods.
 Stripe enables cards and other common payment methods for you by default,
 and you can enable or disable payment methods directly in the Stripe Dashboard.
 */
-func createCheckoutSession(w http.ResponseWriter, request *http.Request) {
-	log.Print("New member signup request")
-	if request.ParseForm() != nil || !validateInput(request.Form) {
-		log.Fatal("malformed request") // highlight - potential attack
-		// do not give reason for a failure (on purpose)
-		http.Redirect(w, request, "http://"+host_addr+"/checkout/", http.StatusSeeOther)
-		return
-	}
-	// Only hashing the password at this stage to make sure it doesn't error out after the payment is done
-	// We do not use the result of the hash to avoid sending the final hashed pw through the internet pipes
-	_, err := bcrypt.GenerateFromPassword([]byte(request.Form.Get("pass")), bcrypt.DefaultCost)
-	if err != nil {
-		fmt.Println("Encryption failed:", err)
-		http.Redirect(w, request, "http://"+host_addr+"/checkout/?reason=failed_crypt", http.StatusSeeOther)
-		return
-	}
-	for key, value := range request.Form {
-		log.Print("%s : %s", key, value)
-	}
+func createCheckoutSession(db *sql.DB) http.HandlerFunc {
+	return func(w http.ResponseWriter, request *http.Request) {
+		log.Print("New member signup request")
+		if request.ParseForm() != nil || !validateInput(request.Form) {
+			log.Fatal("malformed request") // highlight - potential attack
+			// do not give reason for a failure (on purpose)
+			http.Redirect(w, request, host_url+"/checkout/", http.StatusSeeOther)
+			return
+		}
+		// Only hashing the password at this stage to make sure it doesn't error out after the payment is done
+		// We do not use the result of the hash to avoid sending the final hashed pw through the internet pipes
+		_, err := bcrypt.GenerateFromPassword([]byte(request.Form.Get("pass")), bcrypt.DefaultCost)
+		if err != nil {
+			fmt.Println("Encryption failed:", err)
+			http.Redirect(w, request, host_url+"/checkout/?reason=failed_crypt", http.StatusSeeOther)
+			return
+		}
+		for key, value := range request.Form {
+			log.Print("%s : %s", key, value)
+		}
 
-	params := &stripe.CheckoutSessionParams{
-		SuccessURL: stripe.String("http://" + host_addr + "/checkout/success?session_id={CHECKOUT_SESSION_ID}"),
-		CancelURL:  stripe.String("http://" + host_addr + "/checkout/?reason=stripe_cancel"),
-		Mode:       stripe.String(string(stripe.CheckoutSessionModeSubscription)),
-		LineItems: []*stripe.CheckoutSessionLineItemParams{
-			&stripe.CheckoutSessionLineItemParams{
-				Price: stripe.String("price_1S79v8EFGoOPzKA9JlFqQE34"),
-				// For usage-based billing, don't pass quantity
-				Quantity: stripe.Int64(1),
+		params := &stripe.CheckoutSessionParams{
+			SuccessURL: stripe.String(host_url + "/checkout/success?session_id={CHECKOUT_SESSION_ID}"),
+			CancelURL:  stripe.String(host_url + "/checkout/?reason=stripe_cancel"),
+			Mode:       stripe.String(string(stripe.CheckoutSessionModeSubscription)),
+			LineItems: []*stripe.CheckoutSessionLineItemParams{
+				&stripe.CheckoutSessionLineItemParams{
+					Price: stripe.String("price_1S79v8EFGoOPzKA9JlFqQE34"),
+					// For usage-based billing, don't pass quantity
+					Quantity: stripe.Int64(1),
+				},
 			},
-		},
-		SubscriptionData: &stripe.CheckoutSessionSubscriptionDataParams{
-			BillingMode: &stripe.CheckoutSessionSubscriptionDataBillingModeParams{Type: stripe.String("flexible")},
-		},
-		CustomerEmail: stripe.String(request.Form.Get("email")),
-	}
+			SubscriptionData: &stripe.CheckoutSessionSubscriptionDataParams{
+				BillingMode: &stripe.CheckoutSessionSubscriptionDataBillingModeParams{Type: stripe.String("flexible")},
+			},
+			CustomerEmail: stripe.String(request.Form.Get("email")),
+		}
 
-	// Metadata is forwarded to the successful webhook, so we can register the new user in the db
-	for _, id := range []string{"email", "name", "phone", "pass"} {
-		params.AddMetadata(id, request.Form.Get(id))
-	}
+		// Metadata is forwarded to the successful webhook, so we can register the new user in the db
+		for _, id := range []string{"email", "name", "phone", "pass"} {
+			params.AddMetadata(id, request.Form.Get(id))
+		}
 
-	session, err := session.New(params)
+		session, err := session.New(params)
 
-	if err != nil {
-		log.Printf("session.New: %v", err)
-		http.Redirect(w, request, "http://"+host_addr+"/checkout/?reason=failed_session", http.StatusSeeOther)
-		return
+		if err != nil {
+			log.Printf("session.New: %v", err)
+			http.Redirect(w, request, host_url+"/checkout/?reason=failed_session", http.StatusSeeOther)
+			return
+		}
+		http.Redirect(w, request, session.URL, http.StatusSeeOther)
 	}
-	http.Redirect(w, request, session.URL, http.StatusSeeOther)
 }
 
 func validateInput(form url.Values) bool {
@@ -128,29 +141,32 @@ func openDB(isTest bool) (*sql.DB, error) {
 	return sql.Open("libsql", "file:./"+filename)
 }
 
-func initDatabase(isTest bool) error {
+func initDatabase(db *sql.DB) error {
 
-	db, err := openDB(isTest)
+	_, err := db.Exec(`CREATE TABLE IF NOT EXISTS user(
+		id INTEGER PRIMARY KEY,
+		email TEXT,
+		name TEXT,
+		phone TEXT,
+		password BLOB,
+		active INT,
+		customer_id TEXT);`)
 	if err != nil {
 		return err
 	}
-	defer func() {
-		if closeError := db.Close(); closeError != nil {
-			fmt.Println("Error closing database", closeError)
-			if err == nil {
-				err = closeError
-			}
-		}
-	}()
-
-	_, dbErr := db.Exec("CREATE TABLE user(id INTEGER PRIMARY KEY, email TEXT, name TEXT, phone TEXT, password BLOB, active INT, customer_id TEXT)")
-	// ignore error if table already exists
-	if dbErr == nil {
-		log.Print("Database created")
-	} else {
-		log.Print("Using existing Database - ", dbErr)
+	// password_reset_tokens table
+	_, err = db.Exec(`CREATE TABLE IF NOT EXISTS password_reset_tokens (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		email TEXT NOT NULL,
+		token TEXT NOT NULL,
+		expires_at DATETIME NOT NULL
+	);`)
+	if err != nil {
+		log.Print("Databases creation failed")
+		return err
 	}
-	return err
+	log.Print("Databases created")
+	return nil
 }
 
 func addUser(user User, isTest bool) error {
@@ -169,8 +185,11 @@ func addUser(user User, isTest bool) error {
 	// no need to specify id, libsql will use an available id, usually an increment over the max
 	_, err = db.Query("INSERT INTO user (email, name, phone , password , active, customer_id) VALUES (?, ?, ?, ?, ?, ?)",
 		user.email, user.name, user.phone, user.password, user.active, user.customer_id)
-	sendMail(user.email, user, Welcome)
-	return err
+	if err != nil {
+		// Alert the user??
+		return err
+	}
+	return sendMail(user.email, user, Welcome, "https://discord.gg/CGBgKNwT")
 }
 
 func handleWebhook(w http.ResponseWriter, request *http.Request) {
