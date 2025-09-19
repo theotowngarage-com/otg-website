@@ -18,12 +18,17 @@ var Welcome Template = Template{
 	subject: "Welcome to The O'Town Garage!",
 }
 
-func sendMail(to string, user User, email_template Template) {
+var resetMail Template = Template{
+	path:    "email_templates/reset.html",
+	subject: "Reset your password",
+}
+
+func sendMail(to string, user User, email_template Template, link string) error {
 	// Parse the template
 	tmpl, err := template.ParseFiles(email_template.path)
 	if err != nil {
 		fmt.Println("Error parsing template:", err)
-		return
+		return err
 	}
 
 	// Execute the template with dynamic data
@@ -31,11 +36,11 @@ func sendMail(to string, user User, email_template Template) {
 	err = tmpl.Execute(&body, struct {
 		Name string
 		Link string
-	}{Name: user.name, Link: "https://discord.gg/CGBgKNwT"})
+	}{Name: user.name, Link: link})
 
 	if err != nil {
 		fmt.Println("error executing template:", err)
-		return
+		return err
 	}
 
 	// Create a new message
@@ -48,8 +53,8 @@ func sendMail(to string, user User, email_template Template) {
 	dialer := gomail.NewDialer("smtppro.zoho.com", 465, "info@theotowngarage.com", "<password>")
 	if err := dialer.DialAndSend(message); err != nil {
 		fmt.Println("Error:", err)
-		panic(err)
 	} else {
 		fmt.Println("Email sent successfully!")
 	}
+	return err
 }
