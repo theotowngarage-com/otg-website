@@ -18,15 +18,10 @@
 				<label for="password"><i class="fa fa-lock fa-fw"></i></label>
 				<input type="password" name="password" required placeholder="Password">
 			</div>
-			<button class="btn" type="submit" onclick="validate(event);">Log in</button>
-		</form>
-		<p>Did you forget your password?</p>
-		<form action="http://localhost:4242/request-reset" method="POST">
-			<div class="form-group">
-				<label for="email"><i class="fa fa-envelope fa-fw"></i></label>
-				<input type="email" name="email" required placeholder="Email">
+			<div class="validate-login">
+				<button class="btn" type="submit" onclick="validate(event);">Log in</button>
+				<a class="btn-discrete" href="{{ absURL "/request-reset" }}">I forgot my password</a>
 			</div>
-			<button class="btn" type="submit" >Send Reset Link</button>
 		</form>
 	</div>
 </section>
