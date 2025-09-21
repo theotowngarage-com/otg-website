@@ -36,9 +36,11 @@ func main() {
 	http.HandleFunc("/webhook", handleWebhook) // handle stripe webhooks
 	http.HandleFunc("POST /checkout/", createCheckoutSession(db))
 
-	http.HandleFunc("/subscriptions", serve_subscriptions(db)) // dashboard.go
-	http.HandleFunc("/logout", logout)                         // sessions.go
-	http.HandleFunc("POST /login/", login(db))                 // sessions.go
+	http.HandleFunc("/subscriptions", serve_subscriptions(db))             // dashboard.go
+	http.HandleFunc("/cancel-subscription", CancelSubscriptionHandler(db)) // dashboard.go
+
+	http.HandleFunc("/logout", logout)         // sessions.go
+	http.HandleFunc("POST /login/", login(db)) // sessions.go
 
 	http.HandleFunc("POST /request-reset", requestPasswordResetHandler(db)) // sessions.go
 	http.HandleFunc("POST /reset-password/", resetPasswordHandler(db))      // sessions.go
