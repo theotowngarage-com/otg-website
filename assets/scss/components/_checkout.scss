@@ -10,7 +10,7 @@
     
     form {
         margin-top: 50px;
-        .btn {
+        .btn,.btn-outline,.btn-discrete {
             margin: 50px 0;
         }
         .form-group {
@@ -27,5 +27,12 @@
             color: $text-color;
             margin: 8px;
         }
+    }
+    .validate-login {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        column-gap: 50px;
+        flex-wrap: wrap;
     }
 }
