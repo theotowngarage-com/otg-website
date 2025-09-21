@@ -1,0 +1,22 @@
+{{ define "main" }}
+<section class="section-reset">
+	<div class="bg-paint">
+		<div class="container section-pad">
+			{{ .Content }}
+		</div>
+	</div>
+	<div class="container ">
+		<div id="error" class="error invisible"><p id="err_message"></p></div>
+		<form action="http://localhost:4242/request-reset" method="POST">
+			<div class="form-group">
+				<label for="email"><i class="fa fa-envelope fa-fw"></i></label>
+				<input type="email" name="email" required placeholder="Email">
+			</div>
+			<button class="btn" type="submit" >Send Reset Link</button>
+		</form>
+	</div>
+</section>
+
+<script type="text/javascript" src="/js/sessions.js"></script>
+
+{{ end }}
