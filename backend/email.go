@@ -36,7 +36,7 @@ func sendMail(to string, user User, email_template Template, link string) error 
 	err = tmpl.Execute(&body, struct {
 		Name string
 		Link string
-	}{Name: user.name, Link: link})
+	}{Name: user.Name, Link: link})
 
 	if err != nil {
 		fmt.Println("error executing template:", err)

@@ -21,23 +21,10 @@ var (
 	store = sessions.NewCookieStore(key)
 )
 
-func secret(w http.ResponseWriter, request *http.Request) {
-	session, _ := store.Get(request, "cookie-name")
-
-	// Check if user is authenticated
-	if auth, ok := session.Values["authenticated"].(bool); !ok || !auth {
-		http.Error(w, "Forbidden", http.StatusForbidden)
-		return
-	}
-
-	// Print secret message
-	fmt.Fprintln(w, "The cake is a lie!")
-}
-
 // Only handles POST requests. GET requests wil serve the plain website
 func login(db *sql.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, request *http.Request) {
-		session, _ := store.Get(request, "cookie-name")
+		session, _ := store.Get(request, "theotowngarage.com")
 
 		// Authentication goes here
 
@@ -64,7 +51,9 @@ func login(db *sql.DB) http.HandlerFunc {
 		}()
 		// no need to specify id, libsql will use an available id, usually an increment over the max
 		var password []byte
-		err = db.QueryRow("SELECT password FROM user WHERE email = ?", request.Form.Get("email")).Scan(&password)
+		var customer_id string
+		email := request.Form.Get("email")
+		err = db.QueryRow("SELECT password, customer_id FROM user WHERE email = ?", email).Scan(&password, &customer_id)
 		if err == sql.ErrNoRows {
 			log.Print("User not found")
 			http.Redirect(w, request, host_url+"/login/?reason=combo_fail", http.StatusSeeOther)
@@ -88,14 +77,16 @@ func login(db *sql.DB) http.HandlerFunc {
 
 		// Set user as authenticated
 		session.Values["authenticated"] = true
+		session.Values["customer_id"] = customer_id
+		session.Values["email"] = email
 		session.Save(request, w)
 		log.Print("Auth successful", err)
-		http.Redirect(w, request, host_url+"/secret", http.StatusSeeOther)
+		http.Redirect(w, request, host_url+"/dashboard", http.StatusSeeOther)
 	}
 }
 
 func logout(w http.ResponseWriter, request *http.Request) {
-	session, _ := store.Get(request, "cookie-name")
+	session, _ := store.Get(request, "theotowngarage.com")
 
 	// Revoke users authentication
 	session.Values["authenticated"] = false

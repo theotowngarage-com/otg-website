@@ -20,15 +20,6 @@ import (
 const host_addr string = "localhost:4242"
 const host_url string = "http://" + host_addr
 
-type User struct {
-	email       string
-	name        string
-	phone       string
-	password    []byte
-	active      bool
-	customer_id string
-}
-
 func main() {
 	// You can find your test secret API key at https://dashboard.stripe.com/test/apikeys.
 	stripe.Key = "sk_xxx...xxx"
@@ -45,15 +36,15 @@ func main() {
 	http.HandleFunc("/webhook", handleWebhook) // handle stripe webhooks
 	http.HandleFunc("POST /checkout/", createCheckoutSession(db))
 
-	http.HandleFunc("/secret", secret)         // sessions.go
-	http.HandleFunc("/logout", logout)         // sessions.go
-	http.HandleFunc("POST /login/", login(db)) // sessions.go
+	http.HandleFunc("/subscriptions", serve_subscriptions(db)) // dashboard.go
+	http.HandleFunc("/logout", logout)                         // sessions.go
+	http.HandleFunc("POST /login/", login(db))                 // sessions.go
 
 	http.HandleFunc("POST /request-reset", requestPasswordResetHandler(db)) // sessions.go
 	http.HandleFunc("POST /reset-password/", resetPasswordHandler(db))      // sessions.go
 	http.HandleFunc("POST /reset-password", resetPasswordHandler(db))       // sessions.go
 
-	log.Printf("Listening on %s", host_addr)
+	log.Printf("Listening on %s", host_url)
 	if err != nil {
 		log.Fatal("Could not initialise DB ", err)
 		os.Exit(1)
@@ -184,12 +175,12 @@ func addUser(user User, isTest bool) error {
 	}()
 	// no need to specify id, libsql will use an available id, usually an increment over the max
 	_, err = db.Query("INSERT INTO user (email, name, phone , password , active, customer_id) VALUES (?, ?, ?, ?, ?, ?)",
-		user.email, user.name, user.phone, user.password, user.active, user.customer_id)
+		user.Email, user.Name, user.Phone, user.Password, user.Active, user.Customer_id)
 	if err != nil {
 		// Alert the user??
 		return err
 	}
-	return sendMail(user.email, user, Welcome, "https://discord.gg/CGBgKNwT")
+	return sendMail(user.Email, user, Welcome, "https://discord.gg/CGBgKNwT")
 }
 
 func handleWebhook(w http.ResponseWriter, request *http.Request) {
@@ -259,12 +250,12 @@ func FulfillCheckout(checkout_session string) error {
 	}
 
 	user := User{
-		name:        meta["name"],
-		email:       meta["email"],
-		phone:       meta["phone"],
-		active:      true,
-		password:    hashedPassword,
-		customer_id: session.Customer.ID,
+		Name:        meta["name"],
+		Email:       meta["email"],
+		Phone:       meta["phone"],
+		Active:      true,
+		Password:    hashedPassword,
+		Customer_id: session.Customer.ID,
 	}
 
 	if dbErr := addUser(user, true); dbErr != nil {
