@@ -1,6 +1,8 @@
 {{ if .User.Active }}
     <p> Your subscription is Active ;-) </p>
     <p> See you at the next Open house meetup - Thursdays at 17:00 </p>
+    <button hx-post="http://localhost:4242/cancel-subscription?sub_id={{ .SubID }}"
+    hx-trigger="click">Cancel membership</button>
 {{ else }}
     <p> You do not seem to have an active subscription :( </p>
 {{ end }}
