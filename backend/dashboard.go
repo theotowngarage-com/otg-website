@@ -25,8 +25,8 @@ func get_subscriptions(customer_id string) *subscription.Iter {
 	return subscription.List(params)
 }
 func render_subscriptions(user User) (bytes.Buffer, error) {
-	log.Print("Getting subs for customer id - ", user.Customer_id)
-	subscriptions := get_subscriptions(user.Customer_id)
+	log.Print("Getting subs for customer id - ", user.CustomerID)
+	subscriptions := get_subscriptions(user.CustomerID)
 	// we only expect at most 1 subscription. If there isn't even one, we can expect there are none
 	user.Active = subscriptions.Next()
 	SubID := ""
