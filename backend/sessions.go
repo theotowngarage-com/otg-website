@@ -1,4 +1,3 @@
-// sessions.go
 package main
 
 import (
@@ -15,11 +14,8 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-var (
-	// key must be 16, 24 or 32 bytes long (AES-128, AES-192 or AES-256)
-	key   = []byte("<secret-cookie-jar-key>")
-	store = sessions.NewCookieStore(key)
-)
+// key must be 16, 24 or 32 bytes long (AES-128, AES-192 or AES-256)
+var store = sessions.NewCookieStore([]byte(config.Backend.CookiePrivateKey))
 
 // Only handles POST requests. GET requests wil serve the plain website
 func login(db *sql.DB) http.HandlerFunc {

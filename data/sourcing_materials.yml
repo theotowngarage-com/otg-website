@@ -35,7 +35,7 @@ table:
     proximity: 4,5 km
     selection: Average
     open_hours:
-      -  "Mon-Fri: 8:00-19:00"
+      - "Mon-Fri: 8:00-19:00"
       - "Sat-Sun: 9:00-19:00"
   - place: Bauhaus
     link:
@@ -49,7 +49,7 @@ table:
     proximity: 4,5 km
     selection: Ok
     open_hours:
-      -  "Mon-Fri: 8:00-20:00"
+      - "Mon-Fri: 8:00-20:00"
       - "Sat-Sun: 9:00-18:00"
   - place: Ståby Savværk
     link:
