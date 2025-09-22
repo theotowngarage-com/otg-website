@@ -71,7 +71,7 @@ output (It will give a link to login to stripe on your first attempt)
 > Ready! You are using Stripe API Version [2020-08-27]. Your webhook signing secret is whsec_xxx...xxx (^C to quit)
 ```
 
-Copy the key and paste it in the code. Keep the process running as long as you need the webhook endpoint for the local website
+Copy the key and paste it in the code. Keep the process running as long as you need the webhook endpoint for the local website (only used for payment checkouts)
 
 In a separate terminal
 
@@ -81,7 +81,7 @@ cd backend/
 go run .
 ```
 
-> To automatically regenerate the static website, use
+> To automatically regenerate the static website, use this in yet another terminal
 > ```
 > find ./assets ./config ./content ./data ./layouts ./static | entr hugo build -b "http://localhost:4242"
 > ```
