@@ -45,12 +45,12 @@ func sendMail(to string, user User, email_template Template, link string) error 
 
 	// Create a new message
 	message := gomail.NewMessage()
-	message.SetHeader("From", "info@theotowngarage.com")
+	message.SetHeader("From", config.Email.User)
 	message.SetHeader("To", to)
 	message.SetHeader("Subject", email_template.subject)
 	message.SetBody("text/html", body.String())
 
-	dialer := gomail.NewDialer("smtppro.zoho.com", 465, "info@theotowngarage.com", "<password>")
+	dialer := gomail.NewDialer(config.Email.Host, config.Email.Port, config.Email.User, config.Email.Password)
 	if err := dialer.DialAndSend(message); err != nil {
 		fmt.Println("Error:", err)
 	} else {
