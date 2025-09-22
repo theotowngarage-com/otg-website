@@ -35,6 +35,7 @@ func main() {
 	http.Handle("/", http.FileServer(http.Dir("../public")))
 	http.HandleFunc("/webhook", handleWebhook) // handle stripe webhooks
 	http.HandleFunc("POST /checkout/", createCheckoutSession(db))
+	http.HandleFunc("/re-checkout", createCheckoutSession(db))
 
 	http.HandleFunc("/subscriptions", serve_subscriptions(db))             // dashboard.go
 	http.HandleFunc("/cancel-subscription", CancelSubscriptionHandler(db)) // dashboard.go
@@ -63,7 +64,25 @@ and you can enable or disable payment methods directly in the Stripe Dashboard.
 */
 func createCheckoutSession(db *sql.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, request *http.Request) {
-		log.Print("New member signup request")
+		session, _ := store.Get(request, "theotowngarage.com")
+
+		log.Print("check if user is logged in")
+		// Check if user is authenticated
+		if auth, ok := session.Values["authenticated"].(bool); !ok || !auth {
+			log.Print("New member signup request")
+		} else if session.Values["active"] != nil && session.Values["active"].(bool) {
+			log.Print(session.Values["email"].(string), " wants to sign up, but they already have an active membership")
+			http.Redirect(w, request, host_url+"/dashboard?error=already_active", http.StatusSeeOther)
+			return
+		} else {
+			log.Print(session.Values["email"].(string), " wants to sign up again?")
+			user := toUser(*session)
+			ServeStripeCheckoutSession(w, request, user)
+			return
+		}
+
+		// Serve checkout session for a brand new Customer
+
 		if request.ParseForm() != nil || !validateInput(request.Form) {
 			log.Fatal("malformed request") // highlight - potential attack
 			// do not give reason for a failure (on purpose)
@@ -79,40 +98,45 @@ func createCheckoutSession(db *sql.DB) http.HandlerFunc {
 			return
 		}
 		for key, value := range request.Form {
-			log.Print("%s : %s", key, value)
+			log.Print(key, " : ", value)
 		}
-
-		params := &stripe.CheckoutSessionParams{
-			SuccessURL: stripe.String(host_url + "/checkout/success?session_id={CHECKOUT_SESSION_ID}"),
-			CancelURL:  stripe.String(host_url + "/checkout/?reason=stripe_cancel"),
-			Mode:       stripe.String(string(stripe.CheckoutSessionModeSubscription)),
-			LineItems: []*stripe.CheckoutSessionLineItemParams{
-				&stripe.CheckoutSessionLineItemParams{
-					Price: stripe.String("price_1S79v8EFGoOPzKA9JlFqQE34"),
-					// For usage-based billing, don't pass quantity
-					Quantity: stripe.Int64(1),
-				},
-			},
-			SubscriptionData: &stripe.CheckoutSessionSubscriptionDataParams{
-				BillingMode: &stripe.CheckoutSessionSubscriptionDataBillingModeParams{Type: stripe.String("flexible")},
-			},
-			CustomerEmail: stripe.String(request.Form.Get("email")),
-		}
-
-		// Metadata is forwarded to the successful webhook, so we can register the new user in the db
-		for _, id := range []string{"email", "name", "phone", "pass"} {
-			params.AddMetadata(id, request.Form.Get(id))
-		}
-
-		session, err := session.New(params)
-
-		if err != nil {
-			log.Printf("session.New: %v", err)
-			http.Redirect(w, request, host_url+"/checkout/?reason=failed_session", http.StatusSeeOther)
-			return
-		}
-		http.Redirect(w, request, session.URL, http.StatusSeeOther)
+		user := FormToUser(request)
+		ServeStripeCheckoutSession(w, request, user)
 	}
+}
+
+func ServeStripeCheckoutSession(w http.ResponseWriter, request *http.Request, user User) {
+	params := &stripe.CheckoutSessionParams{
+		SuccessURL: stripe.String(host_url + "/checkout/success?session_id={CHECKOUT_SESSION_ID}"),
+		CancelURL:  stripe.String(host_url + "/checkout/?reason=stripe_cancel"),
+		Mode:       stripe.String(string(stripe.CheckoutSessionModeSubscription)),
+		LineItems: []*stripe.CheckoutSessionLineItemParams{
+			&stripe.CheckoutSessionLineItemParams{
+				Price: stripe.String("price_1S79v8EFGoOPzKA9JlFqQE34"),
+				// For usage-based billing, don't pass quantity
+				Quantity: stripe.Int64(1),
+			},
+		},
+		SubscriptionData: &stripe.CheckoutSessionSubscriptionDataParams{
+			BillingMode: &stripe.CheckoutSessionSubscriptionDataBillingModeParams{Type: stripe.String("flexible")},
+		},
+	}
+	// "You may only specify one of these parameters: customer, customer_email.
+	if len(user.CustomerID) > 0 {
+		params.Customer = stripe.String(user.CustomerID)
+	} else {
+		params.CustomerEmail = stripe.String(user.Email)
+	}
+
+	// Metadata is forwarded to the successful webhook, so we can register the new user in the db
+	user.AddToStripeMetadata(params)
+	stripeSession, err := session.New(params)
+	if err != nil {
+		log.Printf("session.New: %v", err)
+		http.Redirect(w, request, host_url+"/checkout/?reason=failed_session", http.StatusSeeOther)
+		return
+	}
+	http.Redirect(w, request, stripeSession.URL, http.StatusSeeOther)
 }
 
 func validateInput(form url.Values) bool {
@@ -177,7 +201,7 @@ func addUser(user User, isTest bool) error {
 	}()
 	// no need to specify id, libsql will use an available id, usually an increment over the max
 	_, err = db.Query("INSERT INTO user (email, name, phone , password , active, customer_id) VALUES (?, ?, ?, ?, ?, ?)",
-		user.Email, user.Name, user.Phone, user.Password, user.Active, user.Customer_id)
+		user.Email, user.Name, user.Phone, user.Password, user.Active, user.CustomerID)
 	if err != nil {
 		// Alert the user??
 		return err
@@ -252,12 +276,12 @@ func FulfillCheckout(checkout_session string) error {
 	}
 
 	user := User{
-		Name:        meta["name"],
-		Email:       meta["email"],
-		Phone:       meta["phone"],
-		Active:      true,
-		Password:    hashedPassword,
-		Customer_id: session.Customer.ID,
+		Name:       meta["name"],
+		Email:      meta["email"],
+		Phone:      meta["phone"],
+		Active:     true,
+		Password:   hashedPassword,
+		CustomerID: session.Customer.ID,
 	}
 
 	if dbErr := addUser(user, true); dbErr != nil {
