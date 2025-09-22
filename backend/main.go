@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"strconv"
 
 	"github.com/stripe/stripe-go/v82"
 	"github.com/stripe/stripe-go/v82/checkout/session"
@@ -17,12 +18,12 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-const host_addr string = "localhost:4242"
-const host_url string = "http://" + host_addr
+var host_addr string = config.Backend.Host + ":" + strconv.Itoa(config.Backend.Port)
+var host_url string = config.Backend.Protocol + "://" + host_addr
 
 func main() {
 	// You can find your test secret API key at https://dashboard.stripe.com/test/apikeys.
-	stripe.Key = "sk_xxx...xxx"
+	stripe.Key = config.Stripe.Key
 
 	db, err := openDB( /* isTest */ true)
 	if err != nil {
@@ -224,7 +225,7 @@ func handleWebhook(w http.ResponseWriter, request *http.Request) {
 	// Pass the request body and Stripe-Signature header to ConstructEvent, along with the webhook signing key
 	// Use the secret provided by Stripe CLI for local testing
 	// or your webhook endpoint's secret.
-	endpointSecret := "whsec_xxx...xxx"
+	endpointSecret := config.Stripe.EndpointSecret
 	EventOptions := webhook.ConstructEventOptions{IgnoreAPIVersionMismatch: true}
 	event, err := webhook.ConstructEventWithOptions(body, request.Header.Get("Stripe-Signature"), endpointSecret, EventOptions)
 
