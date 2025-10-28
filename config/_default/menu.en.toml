@@ -13,17 +13,17 @@
     url     = "/#coc"
     weight  = 4
 [[nav]]
-name    = "Cleaning guidelines"
-url     = "article/cleaning-guidelines/"
-weight  = 4
+    name    = "Cleaning guidelines"
+    url     = "article/cleaning-guidelines/"
+    weight  = 5
 [[nav_right]]
     name    = "Log in"
-    url     = "https://members.theotowngarage.com"
-    weight  = 5
+    url     = "/login"
+    weight  = 6
     [[nav_right.params]]
         icon    = "user"
 # The last item is highlighted
 [[nav_right]]
     name    = "Become a member"
     url     = "/#memberships"
-    weight  = 6
+    weight  = 7
