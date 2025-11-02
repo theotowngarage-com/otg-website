@@ -23,6 +23,9 @@
         {{ with .Resources.Get "sub.png" }}
           <img class="description-img" src="{{ .Permalink }}"/>
         {{ end }}
+        {{ with .Resources.Get "sub.jpg" }}
+          <img class="description-img" src="{{ .Permalink }}"/>
+        {{ end }}
         <div class="container">
           <div class="content">
             {{ with .Resources.Get "sub.md" }}
