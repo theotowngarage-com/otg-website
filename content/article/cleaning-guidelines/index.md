@@ -4,8 +4,8 @@ heading: "Cleaning guidelines"
 logo:
 id: cleaning-guidelines 
 weight: 100
-resources:
-    - src: background.jpg
+params:
+  background: background.jpg
 ---
 
 ### ***The Boy Scout Rule: Leave every space better than you found it.***

@@ -1,22 +1,21 @@
 {{ define "main" }}
 
 <section class="section-workspace">
+  {{$img := "" }}
+  {{ with or (.Resources.Get .Params.background) (resources.Get .Params.background) }}
+    {{$img = .RelPermalink }}
+  {{ end }}
   {{ partial "pic_banner.html" 
     (dict "context" (dict 
-      "img" (.Resources.Get "background.jpg").Permalink
+      "img" $img
       "title" .Title
       "subtitle" "Article"
-      "css_classes" "img-tint"
+      "css_classes" ""
     ))
   }}
-  <div class="section-pad">
-    <div class="flex-row">
-      <div class="description">
-        {{ .Content }}
-      </div>
-      <div class="description-invitation">
-        {{ partial "invitation.html" .Site.Data.sourcing_materials.invitation }}
-      </div>
+  <div class="section-pad {{ with .Params.list_decorators }}list-decorators-{{ . }}{{ end }}">
+    <div class="description">
+      {{ .Content }}
     </div>
     <div class="section-pad">
       <div class="description-2">
@@ -50,32 +49,30 @@
       <div class="container workspace-other section-pad">
         {{ with .PrevInSection }}
         {{$other := .}}
-        {{ with .Resources.Get "background.jpg" }}
-        {{$image := .}}
+        {{$image := "" }}
+        {{ with or (.Resources.Get .Params.background) (resources.Get .Params.background) }}
+          {{$image = .RelPermalink }}
+        {{ end }}
         <a href="{{ $other.Permalink}}" 
           class="img-tint img-gradient img-rounded hover-rm-img-tint workspace-other-section"
-          style="background-image: url({{ $image.Permalink }});">
+          style="background-image: url({{ $image }});">
           <p>{{$other.Title}}</p>
         </a>
-        {{ end }}
         {{ end }}
         {{ with .NextInSection }}
         {{$other := .}}
-        {{ with .Resources.Get "background.jpg" }}
-        {{$image := .}}
+        {{$image := "" }}
+        {{ with or (.Resources.Get .Params.background) (resources.Get .Params.background) }}
+          {{$image = .RelPermalink }}
+        {{ end }}
         <a href="{{ $other.Permalink}}"
           class="img-tint img-gradient img-rounded hover-rm-img-tint workspace-other-section"
-          style="background-image: url({{ $image.Permalink }});">
+          style="background-image: url({{ $image }});">
           <p>{{$other.Title}}</p>
         </a>
         {{ end }}
-        {{ end }}
         <div class="workspace-other-description desktop-only">
-          <h4 class="accent-text-black">Other facilities</h4>
-          <p>Check out other activities you can do at The O'Town Garage</p>
-          <div style="padding: calc(30px - 1rem) 0;">
-            <a class="btn" href=""><span class="btn-area">See other facilities</span></a>
-          </div>
+          <h4 class="accent-text-black">Other articles</h4>
         </div>
       </div>
       {{ end }}
