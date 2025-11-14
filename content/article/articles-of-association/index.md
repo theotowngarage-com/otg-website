@@ -34,7 +34,7 @@ params:
 ### 4. General Assemblies
 
 1. The General Assembly is the Association's ultimate authority.
-2. The Annual General Assembly is held annually before the end of the second quarter.
+2. The Annual General Assembly is held annually, between 10 to 14 months from the previous General Assembly.
 3. Notice must be given at least four weeks in advance, stating the agenda for the members.
 4. Right to attend and vote at the General Assembly requires membership of the Association.
 5. Enrollment in the Association must have taken place no later than 7 days before the ordinary General Assemblies.
