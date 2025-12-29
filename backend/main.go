@@ -90,9 +90,18 @@ func createCheckoutSession(db *sql.DB) http.HandlerFunc {
 			http.Redirect(w, request, host_url+"/checkout/", http.StatusSeeOther)
 			return
 		}
+		exists, err := emailExists(request, true)
+		if err != nil {
+			fmt.Println("Failed to check if email exists??:", err)
+			return
+		}
+		if exists {
+			http.Redirect(w, request, host_url+"/checkout/?reason=email_exists", http.StatusSeeOther)
+			return
+		}
 		// Only hashing the password at this stage to make sure it doesn't error out after the payment is done
 		// We do not use the result of the hash to avoid sending the final hashed pw through the internet pipes
-		_, err := bcrypt.GenerateFromPassword([]byte(request.Form.Get("pass")), bcrypt.DefaultCost)
+		_, err = bcrypt.GenerateFromPassword([]byte(request.Form.Get("pass")), bcrypt.DefaultCost)
 		if err != nil {
 			fmt.Println("Encryption failed:", err)
 			http.Redirect(w, request, host_url+"/checkout/?reason=failed_crypt", http.StatusSeeOther)
@@ -163,7 +172,7 @@ func initDatabase(db *sql.DB) error {
 
 	_, err := db.Exec(`CREATE TABLE IF NOT EXISTS user(
 		id INTEGER PRIMARY KEY,
-		email TEXT,
+		email TEXT UNIQUE,
 		name TEXT,
 		phone TEXT,
 		password BLOB,
@@ -187,6 +196,31 @@ func initDatabase(db *sql.DB) error {
 	return nil
 }
 
+func emailExists(request *http.Request, isTest bool) (bool, error) {
+	// exects a form t be parsed
+	email := request.Form.Get("email")
+	db, err := openDB(isTest)
+	if err != nil {
+		return false, err
+	}
+	defer func() {
+		if closeError := db.Close(); closeError != nil {
+			fmt.Println("Error closing database", closeError)
+			if err == nil {
+				err = closeError
+			}
+		}
+	}()
+
+	var exists int
+	err = db.QueryRow("SELECT COUNT(*) FROM user WHERE email = ?", email).Scan(&exists)
+	if err != nil {
+		return false, err
+	}
+
+	return exists > 0, nil
+}
+
 func addUser(user User, isTest bool) error {
 	db, err := openDB(isTest)
 	if err != nil {
@@ -203,6 +237,8 @@ func addUser(user User, isTest bool) error {
 	// no need to specify id, libsql will use an available id, usually an increment over the max
 	_, err = db.Query("INSERT INTO user (email, name, phone , password , active, customer_id) VALUES (?, ?, ?, ?, ?, ?)",
 		user.Email, user.Name, user.Phone, user.Password, user.Active, user.CustomerID)
+	// N.B. libsql does not wrap the error code into the returned error. Therefore we cannot know what went wrong except from parsing the returned message...
+	// Too lazy to analyze if the email is already in use.
 	if err != nil {
 		// Alert the user??
 		return err
@@ -284,9 +320,9 @@ func FulfillCheckout(checkout_session string) error {
 		Password:   hashedPassword,
 		CustomerID: session.Customer.ID,
 	}
-
-	if dbErr := addUser(user, true); dbErr != nil {
-		log.Fatal("Error closing database", dbErr)
+	dbErr := addUser(user, true)
+	if dbErr != nil {
+		log.Fatal("Error while creating the user - ", dbErr)
 		// maybe forward all the Fatal exceptions via email?
 		return dbErr
 	}
