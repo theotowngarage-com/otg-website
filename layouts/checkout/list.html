@@ -1,0 +1,82 @@
+{{ define "main" }}
+
+<section class="section-checkout">
+    <div class="bg-paint">
+        <div class="container section-pad">
+            {{ .Content }}
+        </div>
+    </div>
+
+    <form name="checkout" action="{{ .Permalink }}" method="POST" class="section-pad">
+        <div class="container">
+            <div class="description">
+                <h3>Membership</h3>
+                <h5>300 DKK / month</h5>
+            </div>
+		    <div id="error" class="error invisible"><p id="err_message"></p></div>
+            <div class="form-group">
+                <label for="name"><i class="fa fa-user fa-fw"></i></label>
+                <input type="text" name="name" required placeholder="Name">
+            </div>
+            <div class="form-group">
+                <label for="email"><i class="fa fa-envelope fa-fw"></i></label>
+                <input type="email" name="email" required
+                    placeholder="Email">
+            </div>
+            <div class="form-group">
+                <label for="phone"><i class="fa fa-phone fa-fw"></i></label>
+                <input type="phone" name="phone" placeholder="Phone number (optional)">
+            </div>
+            <div class="form-group">
+                <label for="pass"><i class="fa fa-lock fa-fw"></i></label>
+                <input type="password" name="pass" required placeholder="Password">
+            </div>
+            <div class="form-group">
+                <label for="repeat_password"><i class="fa fa-lock fa-fw"></i></label>
+                <input type="password" name="re_pass" required placeholder="Repeat your password">
+            </div>
+            <div class="form-group">
+                <input type="checkbox" name="agree-term1" required>
+                <label for="agree-term" class="label-agree-term">I have read the <a
+                        href="https://drive.google.com/file/d/1dE5X27IeZYMPg7fpnYREqrXaAmssD8wE/view"
+                        class="term-service">Privacy and Cookie policy</a></label>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" name="agree-term2" required>
+                <label for="agree-term2" class="label-agree-term">I agree with all statements in the <a
+                        href="https://drive.google.com/file/d/1T3F5X2FsVokXx8ktt1WxeB9o0LewlkAt/view"
+                        class="term-service">Terms of membership</a></label>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" name="agree-term3" required>
+                <label for="agree-term3" class="label-agree-term">I agree and sign up to the <a
+                        href="https://drive.google.com/file/d/1aVGgF4rSlQ5bLlj5R-N00uTYoIt9U2sY/view"
+                        class="term-service">Liability Waiver</a></label>
+            </div>
+            <button class="btn" type="submit" onclick="validate(event);">Proceed</button>
+        </div>
+    </form>
+
+</section>
+
+<script>
+    function validate(event) {
+        var x = document.getElementsByName("pass")[0];
+        var y = document.getElementsByName("re_pass")[0];
+        if (x.value.length < 8 || x.value.length > 31) {
+            // 72 bytes is the max for bcrypt. With unicode, let's just reduce that number to a reasonable number
+            alert("The password must be between 8 and 31 characters");
+            event.preventDefault();
+            return;
+        }
+        if (x.value != y.value) {
+            alert("The password fields do not match");
+            // prevent the form being submitted
+            event.preventDefault();
+            return;
+        }
+    }
+</script>
+<script type="text/javascript" src="/js/sessions.js"></script>
+
+{{ end }}
