@@ -10,6 +10,8 @@ function displayErr(type) {
         return "internal error [" + type + "] Please contact administrator (info@theotowngarage.com)";
     } else if (type === "wrong_email") {
         return "Your email is not registered with us";
+    } else if (type === "email_exists") {
+        return "The email already exists. Need to reset your password?";
     } else if (type === "token_invalid") {
         return "Reset token expired or invalid";
     } else {
