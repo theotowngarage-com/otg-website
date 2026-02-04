@@ -4,11 +4,11 @@
       <h2> {{ .title }} </h2>
       <h3 class="coc-subtitle">{{ .subtitle }}</h3>
       <p>{{ .description }}</p>
-      <!-- open in new tab -->
-      <a class="btn" href='{{ absURL .button_url }}'
-      rel="noopener noreferrer" target="_blank">
-        {{ .button }}
-      </a>
+      {{ range .buttons }}
+        <a class="btn" href='{{ absURL .url }}'>
+          {{ .name }}
+        </a>
+      {{ end }}
     </div>
   </section>
 {{ end }}

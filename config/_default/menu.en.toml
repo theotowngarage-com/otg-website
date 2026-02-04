@@ -1,7 +1,7 @@
 # Navbar Menus
 
 [[nav]]
-    name    = "About Us"
+    name    = "About"
     url     = "/#about"
     weight  = 2
 [[nav]]
@@ -9,13 +9,9 @@
     url     = "/#events"
     weight  = 3
 [[nav]]
-    name    = "Code of Conduct"
+    name    = "Rules"
     url     = "/#coc"
     weight  = 4
-[[nav]]
-name    = "Cleaning guidelines"
-url     = "article/cleaning-guidelines/"
-weight  = 4
 [[nav_right]]
     name    = "Log in"
     url     = "https://members.theotowngarage.com"
