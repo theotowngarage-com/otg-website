@@ -19,7 +19,7 @@ window.klaroConfig = {
     cookieExpiresAfterDays: 365,
 
     // Privacy policy URL
-    privacyPolicy: '/privacy-policy',
+    privacyPolicy: '/article/cookies-and-privacy-policy/',
 
     // Default consent state (false = opt-in required)
     default: true,
