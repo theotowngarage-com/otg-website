@@ -5,3 +5,8 @@ resources/
 node_modules/
 .tina/__generated__/
 assets/jsconfig.json
+/.idea/.gitignore
+/.idea/encodings.xml
+/.idea/modules.xml
+/.idea/otg-website.iml
+/.idea/vcs.xml

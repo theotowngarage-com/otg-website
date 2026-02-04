@@ -1,0 +1,38 @@
+{{/* Analytics and Cookie Consent - Klaro + Google Analytics */}}
+{{ with .Site.Params.googleAnalyticsID }}
+{{/* Only load analytics if a Google Analytics ID is configured */}}
+
+{{/* Klaro Cookie Consent Manager - CSS */}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/klaro@0.7.22/dist/klaro.min.css" />
+
+{{/* Klaro Configuration - must load before klaro.js */}}
+{{ $klaroConfig := resources.Get "js/klaro-config.js" }}
+{{ if hugo.IsProduction }}
+  {{ $klaroConfig = $klaroConfig | minify | fingerprint }}
+{{ end }}
+<script src="{{ $klaroConfig.RelPermalink }}"></script>
+
+{{/* Klaro Script - no defer to ensure it initializes with config */}}
+<script src="https://cdn.jsdelivr.net/npm/klaro@0.7.22/dist/klaro.min.js"></script>
+
+{{/* Google Analytics - loaded by Klaro when consent is given */}}
+<script
+    type="text/plain"
+    data-type="application/javascript"
+    data-name="googleAnalytics"
+    async
+    src="https://www.googletagmanager.com/gtag/js?id={{ . }}">
+</script>
+<script
+    type="text/plain"
+    data-type="application/javascript"
+    data-name="googleAnalytics">
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ . }}', {
+        'anonymize_ip': true
+    });
+</script>
+
+{{ end }}

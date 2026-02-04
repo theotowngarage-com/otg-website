@@ -1,0 +1,95 @@
+// Klaro Cookie Consent Banner Customization
+// Matches site branding with accent color (#49C1BD) and font family
+
+.klaro {
+    // Modal and notice styling
+    .cookie-modal,
+    .cookie-notice {
+        font-family: $secondary-font;
+    }
+
+    // Notice bar (bottom banner)
+    .cookie-notice {
+        background-color: $secondary-color;
+        border-radius: $border-radius $border-radius 0 0;
+
+        .cn-body {
+            padding: 1.5rem;
+        }
+
+        .cn-learn-more {
+            color: $accent-color;
+
+            &:hover {
+                color: $accent-color-2;
+            }
+        }
+    }
+
+    // Buttons
+    .cm-btn,
+    .cn-btn {
+        border-radius: $border-radius;
+        font-family: $secondary-font;
+        font-weight: 500;
+        padding: 0.75rem 1.5rem;
+        transition: all 0.3s $site-ease;
+
+        &.cm-btn-success,
+        &.cn-btn-success {
+            background-color: $accent-color;
+            border-color: $accent-color;
+
+            &:hover {
+                background-color: $accent-color-2;
+                border-color: $accent-color-2;
+            }
+        }
+
+        &.cm-btn-danger,
+        &.cn-btn-danger {
+            background-color: transparent;
+            border: 1px solid $white;
+            color: $white;
+
+            &:hover {
+                background-color: rgba($white, 0.1);
+            }
+        }
+    }
+
+    // Modal styling
+    .cookie-modal {
+        .cm-modal {
+            background-color: $secondary-color;
+            border-radius: $border-radius;
+            max-width: 600px;
+        }
+
+        .cm-header {
+            border-bottom-color: rgba($white, 0.2);
+        }
+
+        .cm-footer {
+            border-top-color: rgba($white, 0.2);
+        }
+
+        // Service/app toggles
+        .cm-list-input:checked + .cm-list-label .slider {
+            background-color: $accent-color;
+        }
+
+        .cm-list-title {
+            font-weight: 600;
+        }
+    }
+
+    // Links
+    a {
+        color: $accent-color;
+
+        &:hover {
+            color: $accent-color-2;
+        }
+    }
+}
