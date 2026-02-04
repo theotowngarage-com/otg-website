@@ -3,23 +3,27 @@ subtitle   : Meet the leadership board
 members  :
   - image       : images/team/axel.png
     name        : Axel Soll
-    designation : Chairman | Event Coordinator
-    # medium      : https://www.medium.com/
+    designation : Treasurer
     linkedin    : https://www.linkedin.com/in/axel-soll/
     github      : https://github.com/amrsoll
     gitlab      : https://gitlab.com/alexloss
-    # instagram   : https://www.instagram.com/
 
-  - image       : images/team/iustinian.jpg
+  - image       : images/team/justin.jpg
     name        : Iustinian Olaru  
-    designation : Treasurer | Public Relations
-    github: https://github.com/iustin94
-    # medium      : https://www.medium.com/
-    linkedin    : https://www.linkedin.com/in/olaru-iustinian-276a3276/
-    # instagram   : https://www.instagram.com/
+    designation : Chairman | Public Relations
+    github      : https://github.com/iustin94
+    linkedin    : https://www.linkedin.com/in/iustinian-olaru-b73a87387/?locale=da_DK
 
   - image       : images/team/michal.png
     name        : Michał Miłkowski
     designation : Maintenance
     linkedin    : https://www.linkedin.com/in/michalmilkowski/
     github      : https://github.com/myinternetofthings
+
+  - image       : images/team/oscar.jpg
+    name        : Oscar Schofield
+    designation : Maintenance | Event Coordinator
+
+  - image       : images/team/svend.jpg
+    name        : Svend Linhus
+    designation : Maintenance
