@@ -18,8 +18,8 @@ enableRobotsTXT = "true"
   # Meta data
   description = ""
   author = "Axel Soll"
-  # Google Analitycs
-  googleAnalitycsID = "Your ID"
+  # Google Analytics
+  googleAnalyticsID = "G-2QG0JVPCGE"
   # We're using formspree.io for form handling, paste your formspree url below
   formspreeFormUrl  = "https://formspree.io/abcdefgh"
 
