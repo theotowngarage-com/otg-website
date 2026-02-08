@@ -44,9 +44,10 @@ func render_subscriptions(user User) (bytes.Buffer, error) {
 	// Execute the template with dynamic data
 	var subscriptionsHTML bytes.Buffer
 	err := templ.Execute(&subscriptionsHTML, struct {
-		User  User
-		SubID string
-	}{User: user, SubID: SubID})
+		User    User
+		SubID   string
+		HostUrl string
+	}{User: user, SubID: SubID, HostUrl: host_url})
 
 	if err != nil {
 		fmt.Println("error executing template: ", err)
