@@ -122,7 +122,7 @@ func generateToken() (string, error) {
 
 func sendResetEmail(toEmail, token string) error {
 	resetLink := fmt.Sprintf(host_url+"/reset-password?token=%s", token)
-	return sendMail(toEmail, User{}, resetMail, resetLink)
+	return sendMail(toEmail, User{}, resetMail, resetLink, struct{}{})
 }
 
 func requestPasswordResetHandler(db *sql.DB) http.HandlerFunc {
