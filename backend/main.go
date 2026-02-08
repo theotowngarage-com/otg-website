@@ -246,6 +246,29 @@ func addUser(user User, isTest bool) error {
 	return sendMail(user.Email, user, Welcome, "https://discord.gg/CGBgKNwT", struct{}{})
 }
 
+func getNumberOfUsers(isTest bool) (int, error) {
+
+	db, err := openDB(isTest)
+	if err != nil {
+		return 0, err
+	}
+	defer func() {
+		if closeError := db.Close(); closeError != nil {
+			fmt.Println("Error closing database", closeError)
+			if err == nil {
+				err = closeError
+			}
+		}
+	}()
+	var number_active_users int
+	err = db.QueryRow("SELECT COUNT(*) FROM user WHERE active = 1").Scan(&number_active_users)
+	if err != nil {
+		log.Printf("Error querying database: %v\n", err)
+		return 0, err
+	}
+	return number_active_users, nil
+}
+
 func handleWebhook(w http.ResponseWriter, request *http.Request) {
 
 	const MaxBodyBytes = int64(65536)
@@ -342,8 +365,76 @@ func FulfillCheckout(checkout_session string) error {
 		// maybe forward all the Fatal exceptions via email?
 		return dbErr
 	}
+	// Send email to our ourselves
+	nbUsers, err := getNumberOfUsers(true)
+	if err != nil {
+		log.Printf("Couldn't read db: %v\n", err)
+		return err
+	}
+	err = sendMail(defaultConfig.Email.User, user, NewMember, "", struct{ Number int }{Number: nbUsers})
 
 	// Redirect to the main site
 	// TODO: Send confirmation mail to the user ?
+	return err
+}
+
+// getUserByCustomerID retrieves a user from the database by their Stripe customer ID
+func getUserByCustomerID(customerID string, isTest bool) (User, error) {
+	db, err := openDB(isTest)
+	if err != nil {
+		return User{}, err
+	}
+	defer db.Close()
+
+	var user User
+	err = db.QueryRow("SELECT email, name, phone, password, active, customer_id FROM user WHERE customer_id = ?", customerID).
+		Scan(&user.Email, &user.Name, &user.Phone, &user.Password, &user.Active, &user.CustomerID)
+	if err != nil {
+		return User{}, err
+	}
+
+	return user, nil
+}
+
+func handleSubscriptionEnded(subscription stripe.Subscription) error {
+	var err error
+	// Update user's active status in database
+	db, err := openDB(true)
+	if err != nil {
+		log.Printf("Error opening database: %v\n", err)
+		return err
+	}
+	defer db.Close()
+
+	_, err = db.Exec("UPDATE user SET active = ? WHERE customer_id = ?", false, subscription.Customer.ID)
+	user, err := getUserByCustomerID(subscription.Customer.ID, true)
+	if err != nil {
+		log.Printf("Error updating database: %v\n", err)
+		return err
+	}
+	var number_active_users int
+	err = db.QueryRow("SELECT COUNT(*) FROM user WHERE active = 1").Scan(&number_active_users)
+	if err != nil {
+		log.Printf("Error querying database: %v\n", err)
+		return err
+	}
+	// Send email to our ourselves
+	nbUsers, err := getNumberOfUsers(true)
+	if err != nil {
+		log.Printf("Couldn't read db: %v\n", err)
+		return err
+	}
+	err = sendMail(defaultConfig.Email.User, user, Unsubscription, "", struct{ Number int }{Number: nbUsers})
+	if err != nil {
+		log.Printf("Couldn't send email: %v\n", err)
+		return err
+	}
+	// Send email to the user
+	err = sendMail(user.Email, user, Goodbye, "https://discord.gg/CGBgKNwT", struct{}{})
+	if err != nil {
+		log.Printf("Couldn't send email: %v\n", err)
+		return err
+	}
+	log.Printf("Registered event: Subscription ended")
 	return err
 }
