@@ -33,6 +33,11 @@ var Unsubscription Template = Template{
 	subject: "Canceled subscription",
 }
 
+var NewMember Template = Template{
+	path:    "email_templates/notify_new_member.html",
+	subject: "New member!",
+}
+
 func sendMail(to string, user User, email_template Template, link string, data any) error {
 	// Parse the template
 	tmpl, err := template.ParseFiles(email_template.path)
