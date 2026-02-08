@@ -61,6 +61,9 @@ and access the website under [`localhost:1313/`](http://localhost:1313/), or whe
 To run the backend
 
 ```sh
+# You will be prompted to login in the browser
+# Make sure that you are loging into the correct account, that is the "sandbox" mode!
+stripe login --api-key sk_test_xxxxxxxxxxxxxxxxxxx
 # Create an endpoint for the stripe webhook using stripe-cli
 stripe listen --forward-to localhost:4242/webhook
 ```
