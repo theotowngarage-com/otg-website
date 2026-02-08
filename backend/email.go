@@ -18,12 +18,22 @@ var Welcome Template = Template{
 	subject: "Welcome to The O'Town Garage!",
 }
 
+var Goodbye Template = Template{
+	path:    "email_templates/goodbye.html",
+	subject: "See you again soon!",
+}
+
 var resetMail Template = Template{
 	path:    "email_templates/reset.html",
 	subject: "Reset your password",
 }
 
-func sendMail(to string, user User, email_template Template, link string) error {
+var Unsubscription Template = Template{
+	path:    "email_templates/unsubscription.html",
+	subject: "Canceled subscription",
+}
+
+func sendMail(to string, user User, email_template Template, link string, data any) error {
 	// Parse the template
 	tmpl, err := template.ParseFiles(email_template.path)
 	if err != nil {
@@ -34,9 +44,11 @@ func sendMail(to string, user User, email_template Template, link string) error 
 	// Execute the template with dynamic data
 	var body bytes.Buffer
 	err = tmpl.Execute(&body, struct {
-		Name string
-		Link string
-	}{Name: user.Name, Link: link})
+		Name  string
+		Link  string
+		Email string
+		Data  any
+	}{Name: user.Name, Link: link, Email: user.Email, Data: data})
 
 	if err != nil {
 		fmt.Println("error executing template:", err)

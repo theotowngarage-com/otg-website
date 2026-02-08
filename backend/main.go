@@ -38,8 +38,8 @@ func main() {
 	http.HandleFunc("POST /checkout/", createCheckoutSession(db))
 	http.HandleFunc("/re-checkout", createCheckoutSession(db))
 
-	http.HandleFunc("/subscriptions", serve_subscriptions(db))             // dashboard.go
-	http.HandleFunc("/cancel-subscription", CancelSubscriptionHandler(db)) // dashboard.go
+	http.HandleFunc("/subscriptions", serve_subscriptions(db))           // dashboard.go
+	http.HandleFunc("/cancel-subscription", CancelSubscriptionHandler()) // dashboard.go
 
 	http.HandleFunc("/logout", logout)         // sessions.go
 	http.HandleFunc("POST /login/", login(db)) // sessions.go
@@ -243,7 +243,7 @@ func addUser(user User, isTest bool) error {
 		// Alert the user??
 		return err
 	}
-	return sendMail(user.Email, user, Welcome, "https://discord.gg/CGBgKNwT")
+	return sendMail(user.Email, user, Welcome, "https://discord.gg/CGBgKNwT", struct{}{})
 }
 
 func handleWebhook(w http.ResponseWriter, request *http.Request) {
@@ -286,8 +286,24 @@ func handleWebhook(w http.ResponseWriter, request *http.Request) {
 			w.WriteHeader(http.StatusBadRequest) // Return a 400 error on a bad signature
 			return
 		}
+	} else if event.Type == stripe.EventTypeCustomerSubscriptionDeleted {
+		var subscription stripe.Subscription
+		err := json.Unmarshal(event.Data.Raw, &subscription)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "Error parsing webhook JSON: %v\n", err)
+			w.WriteHeader(http.StatusBadRequest)
+			return
+		}
 
+		err = handleSubscriptionEnded(subscription)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "Error updating user status: %v\n", err)
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		return
 	}
+	w.WriteHeader(http.StatusOK)
 }
 
 func FulfillCheckout(checkout_session string) error {
