@@ -1,10 +1,11 @@
 {{ if .User.Active }}
-    <p> Your subscription is Active ;-) </p>
     <p> See you at the next Open house meetup - Thursdays at 17:00 </p>
-    <button class="btn"  hx-post="http://localhost:4242/cancel-subscription?sub_id={{ .SubID }}"
+    <button class="btn-discrete"  hx-post="http://localhost:4242/cancel-subscription?sub_id={{ .SubID }}"
     hx-trigger="click">Cancel membership</button>
 {{ else }}
     <p> You do not seem to have an active subscription :( </p>
 
-    <a class="btn" href="http://localhost:4242/re-checkout" >Become a member again!</button>
+    <p><a class="btn btn-warn" href="http://localhost:4242/re-checkout" >Become a member again!</a></p>
 {{ end }}
+
+    <p><br/><br/> <a class="btn" href="http://localhost:4242/logout" >Log out</a> </p>

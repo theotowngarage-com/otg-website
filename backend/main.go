@@ -41,8 +41,10 @@ func main() {
 	http.HandleFunc("/subscriptions", serve_subscriptions(db))           // dashboard.go
 	http.HandleFunc("/cancel-subscription", CancelSubscriptionHandler()) // dashboard.go
 
-	http.HandleFunc("/logout", logout)         // sessions.go
-	http.HandleFunc("POST /login/", login(db)) // sessions.go
+	http.HandleFunc("/logout", logout) // sessions.go
+	// override request in order to serve /dashboard if user already logged in
+	http.HandleFunc("GET /login/", request_login) // sessions.go
+	http.HandleFunc("POST /login/", login(db))    // sessions.go
 
 	http.HandleFunc("POST /request-reset", requestPasswordResetHandler(db)) // sessions.go
 	http.HandleFunc("POST /reset-password/", resetPasswordHandler(db))      // sessions.go

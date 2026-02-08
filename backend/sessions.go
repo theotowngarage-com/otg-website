@@ -17,6 +17,17 @@ import (
 // key must be 16, 24 or 32 bytes long (AES-128, AES-192 or AES-256)
 var store = sessions.NewCookieStore([]byte(config.Backend.CookiePrivateKey))
 
+func request_login(w http.ResponseWriter, request *http.Request) {
+	session, _ := store.Get(request, "theotowngarage.com")
+	// Check if user is authenticated
+	if auth, ok := session.Values["authenticated"].(bool); ok && auth {
+		http.Redirect(w, request, host_url+"/dashboard", http.StatusSeeOther)
+	} else {
+		// otherwise serve the normal login page
+		http.FileServer(http.Dir("../public")).ServeHTTP(w, request)
+	}
+}
+
 // Only handles POST requests. GET requests wil serve the plain website
 func login(db *sql.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, request *http.Request) {

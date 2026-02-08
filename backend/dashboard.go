@@ -61,6 +61,7 @@ func serve_subscriptions(db *sql.DB) http.HandlerFunc {
 
 		// Check if user is authenticated
 		if auth, ok := session.Values["authenticated"].(bool); !ok || !auth {
+			w.Header().Add("HX-Redirect", "/login")
 			http.Error(w, "Forbidden", http.StatusForbidden)
 			return
 		}
