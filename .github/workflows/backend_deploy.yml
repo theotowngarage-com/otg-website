@@ -1,0 +1,58 @@
+name: Deploy Hugo site to Pages
+
+on:
+  # Only run on main branch, to minimise the risk of leaking API keys through non-approved PRs
+  push:
+    branches: 
+      - main
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "deployment"
+  cancel-in-progress: false
+
+# Default to bash
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  deploy:
+    environment:
+      # Only run on environment "deploy", which has the secrets.
+      # To minimise the risk of leaking API keys through non-approved PRs, 
+      # the "deploy" environment can only be run on main
+      name: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install go
+        run: |
+          sudo apt update
+          sudo apt install golang
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Build
+        env:
+          SITE_RELEASE: release
+        run: |
+          cd backend
+          go build .
+      - name: Deploy to server
+        id: deployment
+        env:
+          # Actually not using STRIPE_KEY for anything atm, because we are not querying stripe directly
+          # STRIPE_KEY: ${{ secrets.StripeKey }}
+          STRIPE_WEBSOCK_KEY: ${{ secrets.STRIPE_WEBSOCK_KEY }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+        run: |
+          # sed -i "s/{{STRIPE_KEY}}/$STRIPE_KEY/" config/_default/config.toml
+          # Using the websocket to receive events from stripe, such as subscriptions started/stopped
+          sed -i "s/{{STRIPE_WEBSOCK_KEY}}/$STRIPE_WEBSOCK_KEY/" config/_default/config.toml
+          sed -i "s/{{EMAIL_PASSWORD}}/$EMAIL_PASSWORD/" config/_default/config.toml
+          echo "TODO - deploy binary + config. Or just the binary?"
