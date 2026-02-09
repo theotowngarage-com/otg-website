@@ -7,6 +7,9 @@
     .cookie-modal,
     .cookie-notice:not(.cookie-modal-notice) {
         font-family: $secondary-font;
+        h1,p,label {
+            color: $text-color-dark;
+        }
     }
 
     // Notice bar (bottom banner)
@@ -30,7 +33,7 @@
     // Modal styling
     .cookie-modal {
         .cm-modal.cm-klaro {
-            background-color: $secondary-color;
+            background-color: $primary-color;
             border-radius: $border-radius;
             max-width: 600px;
         }
@@ -51,7 +54,7 @@
             padding: 0.75rem 1.5rem;
             transition: all 0.3s $site-ease;
 
-            &.cm-btn-success {
+            &.cm-btn-accept-all {
                 background-color: $accent-color;
                 border-color: $accent-color;
 
@@ -61,13 +64,13 @@
                 }
             }
 
-            &.cm-btn-danger {
+            &.cm-btn-danger, &.cm-btn-info {
                 background-color: transparent;
-                border: 1px solid $white;
-                color: $white;
+                border: 1px solid $text-color-dark;
+                color: $text-color-dark;
 
                 &:hover {
-                    background-color: rgba($white, 0.1);
+                    background-color: rgba($secondary-color-2, 0.1);
                 }
             }
         }
