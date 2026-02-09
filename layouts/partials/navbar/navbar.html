@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand-md site-navigation">
+  <div class="container">
+    <a class="navbar-brand" href="{{ .Site.BaseURL }}">
+      {{ if strings.HasSuffix .Site.Params.logo "svg" }}
+        <!-- Inject the SVG element -->
+        {{ readFile "static/images/logo.svg" | safeHTML }}
+      {{ else }}
+        <img class="avatar-img" src="{{ .Site.Params.logo | absURL }}" alt="{{ .Site.Title }}" />
+      {{ end }}
+    </a>
+
+      {{ partial "navbar/navbar-mobile.html" . }}
+      {{ partial "navbar/navbar-desktop.html" . }}
+  </div>
+</nav>
+
+<script>
+  // Scrolling will trigger logo animation
+  window.addEventListener('scroll', () => {
+    document.body.style.setProperty('--scroll', window.scrollY / (document.body.offsetHeight - window.innerHeight));
+  }, false);
+</script>
+{{ if not .Params.no_nav_offset }}
+<div class="nav-offset"></div>
+{{ end }}
