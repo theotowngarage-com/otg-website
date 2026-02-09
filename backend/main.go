@@ -20,12 +20,19 @@ import (
 
 var host_addr string = config.Backend.Host + ":" + strconv.Itoa(config.Backend.Port)
 var host_url string = config.Backend.Protocol + "://" + host_addr
+var isTest bool
 
 func main() {
-	// You can find your test secret API key at https://dashboard.stripe.com/test/apikeys.
-	stripe.Key = config.Stripe.Key
+	// environement variable only needs to be present. Value does not matter
+	_, isRelease := os.LookupEnv("SITE_RELEASE")
+	isTest = !isRelease
+	if isTest {
+		log.Printf("Starting TEST backend")
+	} else {
+		log.Printf("Starting RELEASE backend")
+	}
 
-	db, err := openDB( /* isTest */ true)
+	db, err := openDB(isTest)
 	if err != nil {
 		log.Fatal("Failed to open database - ", err)
 		return
@@ -93,7 +100,7 @@ func createCheckoutSession(db *sql.DB) http.HandlerFunc {
 			http.Redirect(w, request, host_url+"/checkout/", http.StatusSeeOther)
 			return
 		}
-		exists, err := emailExists(request, true)
+		exists, err := emailExists(request, isTest)
 		if err != nil {
 			fmt.Println("Failed to check if email exists??:", err)
 			return
@@ -362,14 +369,14 @@ func FulfillCheckout(checkout_session string) error {
 		Password:   hashedPassword,
 		CustomerID: session.Customer.ID,
 	}
-	dbErr := addUser(user, true)
+	dbErr := addUser(user, isTest)
 	if dbErr != nil {
 		log.Fatal("Error while creating the user - ", dbErr)
 		// maybe forward all the Fatal exceptions via email?
 		return dbErr
 	}
 	// Send email to our ourselves
-	nbUsers, err := getNumberOfUsers(true)
+	nbUsers, err := getNumberOfUsers(isTest)
 	if err != nil {
 		log.Printf("Couldn't read db: %v\n", err)
 		return err
@@ -402,7 +409,7 @@ func getUserByCustomerID(customerID string, isTest bool) (User, error) {
 func handleSubscriptionEnded(subscription stripe.Subscription) error {
 	var err error
 	// Update user's active status in database
-	db, err := openDB(true)
+	db, err := openDB(isTest)
 	if err != nil {
 		log.Printf("Error opening database: %v\n", err)
 		return err
@@ -410,7 +417,7 @@ func handleSubscriptionEnded(subscription stripe.Subscription) error {
 	defer db.Close()
 
 	_, err = db.Exec("UPDATE user SET active = ? WHERE customer_id = ?", false, subscription.Customer.ID)
-	user, err := getUserByCustomerID(subscription.Customer.ID, true)
+	user, err := getUserByCustomerID(subscription.Customer.ID, isTest)
 	if err != nil {
 		log.Printf("Error updating database: %v\n", err)
 		return err
@@ -422,7 +429,7 @@ func handleSubscriptionEnded(subscription stripe.Subscription) error {
 		return err
 	}
 	// Send email to our ourselves
-	nbUsers, err := getNumberOfUsers(true)
+	nbUsers, err := getNumberOfUsers(isTest)
 	if err != nil {
 		log.Printf("Couldn't read db: %v\n", err)
 		return err
