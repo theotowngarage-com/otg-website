@@ -12,8 +12,18 @@
   {{ end }}
   {{ hugo.Generator }}
 
+  {{/* Klaro Cookie Consent Manager - self-hosted and renamed to avoid ad blocker filter lists.
+       CSS loaded before site styles so _klaro.scss overrides win */}}
+  {{ with .Site.Params.googleAnalyticsID }}
+  {{ $klaroCss := resources.Get "css/consent-manager.css" }}
+  {{ if hugo.IsProduction }}
+    {{ $klaroCss = $klaroCss | minify | fingerprint }}
+  {{ end }}
+  <link rel="stylesheet" href="{{ $klaroCss.RelPermalink }}" />
+  {{ end }}
+
   {{/*  (resources.Get "css/bootstrap.css")  */}}
-  {{/*  The final css file is under css/ folder, because fontawesome requires it's own css file to 
+  {{/*  The final css file is under css/ folder, because fontawesome requires it's own css file to
         be in a subfolder, so the pathinf to `../fonts/*` works correctly   */}}
   {{/*  {{ $opts := (dict "targetPath" "css/style.css" "enableSourceMap" true ) }}  */}}
   {{ $opts := (dict "enableSourceMap" true ) }}
@@ -51,4 +61,7 @@
   <!--Favicon-->
   <link rel="shortcut icon" href="{{ "images/favicon.png" | absURL }}" type="image/x-icon" />
   <link rel="icon" href="{{ "images/favicon.png" | absURL }}" type="image/x-icon" />
+
+  {{/* Cookie Consent & Analytics */}}
+  {{- partial "analytics.html" . -}}
 </head>

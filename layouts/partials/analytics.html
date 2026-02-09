@@ -1,0 +1,41 @@
+{{/* Analytics and Cookie Consent - Klaro + Google Analytics */}}
+{{ with .Site.Params.googleAnalyticsID }}
+{{/* Only load analytics if a Google Analytics ID is configured */}}
+
+{{/* Klaro Configuration - must load before klaro.js */}}
+{{ $klaroConfig := resources.Get "js/klaro-config.js" }}
+{{ if hugo.IsProduction }}
+  {{ $klaroConfig = $klaroConfig | minify | fingerprint }}
+{{ end }}
+<script src="{{ $klaroConfig.RelPermalink }}"></script>
+
+{{/* Klaro Script - self-hosted and renamed to avoid ad blocker filter lists.
+     Using no-css variant so the JS doesn't inject its own <style> tag,
+     allowing our _klaro.scss overrides to take effect */}}
+{{ $klaroJs := resources.Get "js/consent-manager.js" }}
+{{ if hugo.IsProduction }}
+  {{ $klaroJs = $klaroJs | minify | fingerprint }}
+{{ end }}
+<script src="{{ $klaroJs.RelPermalink }}"></script>
+
+{{/* Google Analytics - loaded by Klaro when consent is given */}}
+<script
+    type="text/plain"
+    data-type="application/javascript"
+    data-name="googleAnalytics"
+    async
+    src="https://www.googletagmanager.com/gtag/js?id={{ . }}">
+</script>
+<script
+    type="text/plain"
+    data-type="application/javascript"
+    data-name="googleAnalytics">
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ . }}', {
+        'anonymize_ip': true
+    });
+</script>
+
+{{ end }}
