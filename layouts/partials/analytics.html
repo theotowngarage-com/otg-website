@@ -18,24 +18,13 @@
 {{ end }}
 <script src="{{ $klaroJs.RelPermalink }}"></script>
 
-{{/* Google Analytics - loaded by Klaro when consent is given */}}
-<script
-    type="text/plain"
-    data-type="application/javascript"
-    data-name="googleAnalytics"
-    async
-    src="https://www.googletagmanager.com/gtag/js?id={{ . }}">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}">
 </script>
-<script
-    type="text/plain"
-    data-type="application/javascript"
-    data-name="googleAnalytics">
-    window.dataLayer = window.dataLayer || [];
+<script>
+     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', '{{ . }}', {
-        'anonymize_ip': true
-    });
-</script>
 
-{{ end }}
+    gtag('config', '{{ . }}');
+</script>{{ end }}
