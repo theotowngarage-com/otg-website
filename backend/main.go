@@ -34,7 +34,8 @@ func main() {
 
 	// Serve the static website built with Hugo
 	http.Handle("/", http.FileServer(http.Dir("../public")))
-	http.HandleFunc("/webhook", handleWebhook) // handle stripe webhooks
+	http.HandleFunc("/webhook", handleWebhook)                                  // handle stripe webhooks
+	http.HandleFunc("GET /checkout/", redirect_to_when_logged_in("/dashboard")) // sessions.go
 	http.HandleFunc("POST /checkout/", createCheckoutSession(db))
 	http.HandleFunc("/re-checkout", createCheckoutSession(db))
 
@@ -43,8 +44,8 @@ func main() {
 
 	http.HandleFunc("/logout", logout) // sessions.go
 	// override request in order to serve /dashboard if user already logged in
-	http.HandleFunc("GET /login/", request_login) // sessions.go
-	http.HandleFunc("POST /login/", login(db))    // sessions.go
+	http.HandleFunc("GET /login/", redirect_to_when_logged_in("/dashboard")) // sessions.go
+	http.HandleFunc("POST /login/", login(db))                               // sessions.go
 
 	http.HandleFunc("POST /request-reset", requestPasswordResetHandler(db)) // sessions.go
 	http.HandleFunc("POST /reset-password/", resetPasswordHandler(db))      // sessions.go
