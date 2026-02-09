@@ -46,7 +46,7 @@ func login(db *sql.DB) http.HandlerFunc {
 		}
 		// look up user
 
-		db, err := openDB(true)
+		db, err := openDB(isTest)
 		if err != nil {
 			return
 		}
