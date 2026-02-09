@@ -9,9 +9,14 @@
 {{ end }}
 <script src="{{ $klaroConfig.RelPermalink }}"></script>
 
-{{/* Klaro Script - using no-css variant so the JS doesn't inject its own <style> tag,
+{{/* Klaro Script - self-hosted and renamed to avoid ad blocker filter lists.
+     Using no-css variant so the JS doesn't inject its own <style> tag,
      allowing our _klaro.scss overrides to take effect */}}
-<script src="https://cdn.jsdelivr.net/npm/klaro@0.7.22/dist/klaro-no-css.js"></script>
+{{ $klaroJs := resources.Get "js/consent-manager.js" }}
+{{ if hugo.IsProduction }}
+  {{ $klaroJs = $klaroJs | minify | fingerprint }}
+{{ end }}
+<script src="{{ $klaroJs.RelPermalink }}"></script>
 
 {{/* Google Analytics - loaded by Klaro when consent is given */}}
 <script

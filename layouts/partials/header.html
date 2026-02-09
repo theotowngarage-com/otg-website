@@ -12,9 +12,14 @@
   {{ end }}
   {{ hugo.Generator }}
 
-  {{/* Klaro Cookie Consent Manager - CSS loaded before site styles so _klaro.scss overrides win */}}
+  {{/* Klaro Cookie Consent Manager - self-hosted and renamed to avoid ad blocker filter lists.
+       CSS loaded before site styles so _klaro.scss overrides win */}}
   {{ with .Site.Params.googleAnalyticsID }}
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/klaro@0.7.22/dist/klaro.min.css" />
+  {{ $klaroCss := resources.Get "css/consent-manager.css" }}
+  {{ if hugo.IsProduction }}
+    {{ $klaroCss = $klaroCss | minify | fingerprint }}
+  {{ end }}
+  <link rel="stylesheet" href="{{ $klaroCss.RelPermalink }}" />
   {{ end }}
 
   {{/*  (resources.Get "css/bootstrap.css")  */}}
