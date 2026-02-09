@@ -1,15 +1,16 @@
 // Klaro Cookie Consent Banner Customization
 // Matches site branding with accent color (#49C1BD) and font family
+// Selectors must match or exceed the specificity of klaro.min.css
 
 .klaro {
     // Modal and notice styling
     .cookie-modal,
-    .cookie-notice {
+    .cookie-notice:not(.cookie-modal-notice) {
         font-family: $secondary-font;
     }
 
     // Notice bar (bottom banner)
-    .cookie-notice {
+    .cookie-notice:not(.cookie-modal-notice) {
         background-color: $secondary-color;
         border-radius: $border-radius $border-radius 0 0;
 
@@ -26,41 +27,9 @@
         }
     }
 
-    // Buttons
-    .cm-btn,
-    .cn-btn {
-        border-radius: $border-radius;
-        font-family: $secondary-font;
-        font-weight: 500;
-        padding: 0.75rem 1.5rem;
-        transition: all 0.3s $site-ease;
-
-        &.cm-btn-success,
-        &.cn-btn-success {
-            background-color: $accent-color;
-            border-color: $accent-color;
-
-            &:hover {
-                background-color: $accent-color-2;
-                border-color: $accent-color-2;
-            }
-        }
-
-        &.cm-btn-danger,
-        &.cn-btn-danger {
-            background-color: transparent;
-            border: 1px solid $white;
-            color: $white;
-
-            &:hover {
-                background-color: rgba($white, 0.1);
-            }
-        }
-    }
-
     // Modal styling
     .cookie-modal {
-        .cm-modal {
+        .cm-modal.cm-klaro {
             background-color: $secondary-color;
             border-radius: $border-radius;
             max-width: 600px;
@@ -72,6 +41,35 @@
 
         .cm-footer {
             border-top-color: rgba($white, 0.2);
+        }
+
+        // Buttons
+        .cm-btn {
+            border-radius: $border-radius;
+            font-family: $secondary-font;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            transition: all 0.3s $site-ease;
+
+            &.cm-btn-success {
+                background-color: $accent-color;
+                border-color: $accent-color;
+
+                &:hover {
+                    background-color: $accent-color-2;
+                    border-color: $accent-color-2;
+                }
+            }
+
+            &.cm-btn-danger {
+                background-color: transparent;
+                border: 1px solid $white;
+                color: $white;
+
+                &:hover {
+                    background-color: rgba($white, 0.1);
+                }
+            }
         }
 
         // Service/app toggles

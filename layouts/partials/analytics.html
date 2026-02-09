@@ -2,9 +2,6 @@
 {{ with .Site.Params.googleAnalyticsID }}
 {{/* Only load analytics if a Google Analytics ID is configured */}}
 
-{{/* Klaro Cookie Consent Manager - CSS */}}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/klaro@0.7.22/dist/klaro.min.css" />
-
 {{/* Klaro Configuration - must load before klaro.js */}}
 {{ $klaroConfig := resources.Get "js/klaro-config.js" }}
 {{ if hugo.IsProduction }}
@@ -12,8 +9,9 @@
 {{ end }}
 <script src="{{ $klaroConfig.RelPermalink }}"></script>
 
-{{/* Klaro Script - no defer to ensure it initializes with config */}}
-<script src="https://cdn.jsdelivr.net/npm/klaro@0.7.22/dist/klaro.min.js"></script>
+{{/* Klaro Script - using no-css variant so the JS doesn't inject its own <style> tag,
+     allowing our _klaro.scss overrides to take effect */}}
+<script src="https://cdn.jsdelivr.net/npm/klaro@0.7.22/dist/klaro-no-css.js"></script>
 
 {{/* Google Analytics - loaded by Klaro when consent is given */}}
 <script
