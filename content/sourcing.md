@@ -2,7 +2,8 @@
 title: "Building materials in Odense"
 heading: "Building materials in Odense"
 logo: logos/electronics.min.svg
-layout: "sourcing_materials"
+layout: sourcing_materials
+type: page
 id: electronics
 weight: 20
 resources:
