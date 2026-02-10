@@ -1,4 +1,4 @@
-name: Deploy Hugo site to Pages
+name: Deploy Backend
 
 on:
   # Only run on main branch, to minimise the risk of leaking API keys through non-approved PRs
