@@ -8,9 +8,9 @@ _merge = "deep"
 enableRobotsTXT = "true"
 
 [backend]
-  host =             "localhost"
-  protocol =         "http"
-  port =             4242
+  host =             "0.0.0.0"
+  protocol =         "https"
+  port =             443
   cookiePrivateKey = "{{COOKIE_STORE_KEY}}"
 [stripe]
   key =            "{{STRIPE_KEY}}" # sk_test_xxxx
