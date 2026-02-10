@@ -30,7 +30,9 @@ To work locally with this project, you'll have to follow the steps below:
 
 Read more at Hugo's [documentation].
 
-### Install Hugo
+### Requirements
+
+#### Only front-end requirements
 
 [Install the extended edition] of Hugo (you don't need the extended/deploy edition)
 
@@ -40,10 +42,54 @@ To confirm that it's correctly installed, type `hugo version` (only the `+extend
 hugo v0.136.5+extended linux/amd64 BuildDate=unknown VendorInfo=nixpkgs
 ```
 
-### Preview your site
+#### Additional (running the backend)
+
+[Install Go](https://go.dev/doc/install)
+
+[Install `stripe-cli`](https://docs.stripe.com/stripe-cli)
+
+### Preview your site without the backend
 
 Go to the root folder of the project, run `hugo server`,
-and access the website under `localhost:1313/`, or wherever tells you it is.
+and access the website under [`localhost:1313/`](http://localhost:1313/), or wherever `hugo server` tells you it is.
+
+### Preview your site with the backend
+
+> Make sure you have the Stripe developer keys for the test instance.
+> The smtp password will not be provided on request. If you want to debug the email functionality, please provide your own
+
+To run the backend
+
+```sh
+# You will be prompted to login in the browser
+# Make sure that you are loging into the correct account, that is the "sandbox" mode!
+stripe login --api-key sk_test_xxxxxxxxxxxxxxxxxxx
+# Create an endpoint for the stripe webhook using stripe-cli
+stripe listen --forward-to localhost:4242/webhook
+```
+
+output (It will give a link to login to stripe on your first attempt)
+
+```
+> Ready! You are using Stripe API Version [2020-08-27]. Your webhook signing secret is whsec_xxx...xxx (^C to quit)
+```
+
+Copy the key and paste it in the code. Keep the process running as long as you need the webhook endpoint for the local website (only used for payment checkouts)
+
+In a separate terminal
+
+```sh
+hugo build -b "http://localhost:4242" # If you change the static site, it needs to be rebuilt
+cd backend/
+go run .
+```
+
+> To automatically regenerate the static website, use this in yet another terminal
+> ```
+> find ./assets ./config ./content ./data ./layouts ./static | entr hugo build -b "http://localhost:4242"
+> ```
+
+Open the browser at [http://localhost:4242/](http://localhost:4242/)
 
 [`hugo.yml`]: .github/workflows/hugo.yml
 [actions]: https://docs.github.com/en/actions

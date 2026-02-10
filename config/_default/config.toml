@@ -7,6 +7,20 @@ enableEmoji   = true
 _merge = "deep"
 enableRobotsTXT = "true"
 
+[backend]
+  host =             "0.0.0.0"
+  protocol =         "https"
+  port =             443
+  cookiePrivateKey = "{{COOKIE_STORE_KEY}}"
+[stripe]
+  key =            "{{STRIPE_KEY}}" # sk_test_xxxx
+  endpointSecret = "{{STRIPE_WEBSOCK_KEY}}" # whsec_xxxx
+[email]
+  user=      "info@theotowngarage.com"
+  host=      "smtppro.zoho.com"
+  port=      465
+  password = "{{EMAIL_PASSWORD}}"
+
 # Site Params
 #   Notes: it seems that, if you need to change 1 value in the params for a language,
 #          then you have to define all the values in the [params.X], including 

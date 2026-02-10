@@ -1,0 +1,29 @@
+name: Test-build Backend
+
+on:
+  pull_request:
+    branches:
+      - main
+
+# Default to bash
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  # Build job
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install go
+        run: |
+          sudo apt update
+          sudo apt install golang
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Build
+        run: |
+          cd backend
+          go build .
