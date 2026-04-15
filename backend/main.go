@@ -175,7 +175,7 @@ func openDB(isTest bool) (*sql.DB, error) {
 	} else {
 		filename = "production.db"
 	}
-	return sql.Open("libsql", "file:./"+filename)
+	return sql.Open("libsql", "file:../db/"+filename)
 }
 
 func initDatabase(db *sql.DB) error {
