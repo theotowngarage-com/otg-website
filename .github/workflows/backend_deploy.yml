@@ -42,7 +42,7 @@ jobs:
           SITE_RELEASE: release
         run: |
           cd backend
-          go build .
+          go build . -o main 
       - name: Deploy to server
         id: deployment
         env:
