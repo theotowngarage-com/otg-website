@@ -1,0 +1,16 @@
+{{ if .User.Active }}
+    <p> See you at the next Open house meetup - Thursdays at 17:00 </p>
+    <button 
+        class="btn-discrete"
+        hx-post="{{ .HostUrl }}/cancel-subscription?sub_id={{ .SubID }}"
+        hx-trigger="click"
+        hx-confirm="Are you sure you wish to cancel your membership? You will also need to pick up your belongings stored at the makerspace."
+    >
+        Cancel membership</button>
+{{ else }}
+    <p> You do not seem to have an active subscription :( </p>
+
+    <p><a class="btn btn-warn" href="{{ .HostUrl }}/re-checkout" >Become a member again!</a></p>
+{{ end }}
+
+    <p><br/><br/> <a class="btn" href="{{ .HostUrl }}/logout" >Log out</a> </p>

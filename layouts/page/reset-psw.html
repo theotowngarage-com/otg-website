@@ -1,0 +1,56 @@
+{{ define "main" }}
+<section class="section-reset">
+	<div class="bg-paint">
+		<div class="container section-pad">
+			{{ .Content }}
+		</div>
+	</div>
+	<div class="container ">
+		<div id="error" class="error invisible"><p id="err_message"></p></div>
+		<form name="reset" id="reset" action="{{ .Permalink }}" method="POST">
+			<div class="form-group">
+				<label for="password"><i class="fa fa-lock fa-fw"></i></label>
+				<input type="password" name="password" required placeholder="New Password">
+			</div>
+			<div class="form-group">
+				<label for="re_password"><i class="fa fa-lock fa-fw"></i></label>
+				<input type="password" name="re_password" required placeholder="Repeat Password">
+			</div>
+			<button class="btn" type="submit" onclick="validate(event);">Reset password</button>
+		</form>
+	</div>
+</section>
+
+<script type="text/javascript">
+	const urlParams = new URLSearchParams(window.location.search);
+	if(!urlParams.has("token")) {
+		alert("Your link does not include a reset token. Click again on the link from your emails. Sory for the inconveniance :)");
+	}
+	document.getElementById("reset").addEventListener("submit", function(event) {
+		event.preventDefault();
+		const form = event.target;
+		// inject the token into the form target
+		form.action += "?token=" + urlParams.get("token");
+		form.submit(); // Submit manually with new action
+	});
+    function validate(event) {
+        var x = document.getElementsByName("password")[0];
+        var y = document.getElementsByName("re_password")[0];
+        if (x.value.length < 8 || x.value.length > 31) {
+            // 72 bytes is the max for bcrypt. With unicode, let's just reduce that number to a reasonable number
+            alert("The password must be between 8 and 31 characters");
+            // prevent the form being submitted
+            event.preventDefault();
+            return;
+        }
+        if (x.value != y.value) {
+            alert("The password fields do not match");
+            event.preventDefault();
+            return;
+        }
+		return
+    }
+</script>
+<script type="text/javascript" src="/js/sessions.js"></script>
+
+{{ end }}

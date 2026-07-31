@@ -1,0 +1,11 @@
+services:
+  backend:
+    build: .
+    container_name: otg-backend
+    ports:
+      - "443:443"
+    environment:
+      - SITE_RELEASE=1
+    volumes:
+      - ./db:/app/db
+      - ./config:/app/config
